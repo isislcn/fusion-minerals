@@ -101,12 +101,17 @@ const SOURCES = [
 
 const riskRows = [
   { id: 'W-MINE-01', material: 'Tungsten', stage: 'Mine', risk: 'Conflict finance', location: 'Eastern DR Congo', confidence: 'reported', sourceIds: ['unsc-2025a'], type: 'conflict finance' },
+  { id: 'W-MINE-02', material: 'Tungsten', stage: 'Mine', risk: 'Worker deaths', location: 'Rubaya, North Kivu', confidence: 'reported', sourceIds: ['reuters-2026', 'ap-2026', 'unsc-2025a'], type: 'worker safety' },
   { id: 'W-REF-01', material: 'Tungsten', stage: 'Refining', risk: 'Supply concentration', location: 'China', confidence: 'documented', sourceIds: ['usgs-2026'], type: 'supply concentration' },
   { id: 'REE-MINE-01', material: 'Rare earths', stage: 'Mine', risk: 'Pollution', location: 'Kachin State, Myanmar', confidence: 'reported', sourceIds: ['gw-2024'], type: 'pollution' },
+  { id: 'REE-MINE-02', material: 'Rare earths', stage: 'Mine', risk: 'Health and land rights', location: 'Kachin Special Region 1', confidence: 'reported', sourceIds: ['gw-2024'], type: 'health' },
   { id: 'REE-REF-01', material: 'Rare earths', stage: 'Refining', risk: 'Traceability gap', location: 'China', confidence: 'inferred', sourceIds: [], type: 'traceability gap' },
+  { id: 'LI-MINE-01', material: 'Lithium', stage: 'Mine', risk: 'Water and Indigenous rights', location: 'High Andean salt flats', confidence: 'reported', sourceIds: ['oc-2025'], type: 'land and water' },
+  { id: 'LI-MINE-02', material: 'Lithium', stage: 'Mine', risk: 'Indigenous rights', location: 'High Andean salt flats', confidence: 'reported', sourceIds: ['oc-2025'], type: 'Indigenous rights' },
   { id: 'LI-REF-01', material: 'Lithium', stage: 'Refining', risk: 'Supply concentration', location: 'Global', confidence: 'inferred', sourceIds: [], type: 'supply concentration' },
   { id: 'LI-PLANT-01', material: 'Lithium', stage: 'Plant', risk: 'Regulatory gap', location: 'Fusion market', confidence: 'inferred', sourceIds: [], type: 'regulatory gap' },
   { id: 'BE-COMP-01', material: 'Beryllium', stage: 'Components', risk: 'Occupational health', location: 'United States', confidence: 'documented', sourceIds: ['atsdr-2008'], type: 'health' },
+  { id: 'BE-COMP-02', material: 'Beryllium', stage: 'Components', risk: 'Occupational disease', location: 'US plants', confidence: 'documented', sourceIds: ['atsdr-2008'], type: 'worker safety' },
   { id: 'W-COMP-01', material: 'Tungsten', stage: 'Components', risk: 'Regulatory gap', location: 'Global components', confidence: 'inferred', sourceIds: [], type: 'regulatory gap' },
   { id: 'REE-COMP-01', material: 'Rare earths', stage: 'Components', risk: 'Traceability gap', location: 'Magnet manufacturing', confidence: 'inferred', sourceIds: [], type: 'traceability gap' },
   { id: 'LI-COMP-01', material: 'Lithium', stage: 'Components', risk: 'Supply concentration', location: 'Strategic manufacturing', confidence: 'inferred', sourceIds: [], type: 'supply concentration' }

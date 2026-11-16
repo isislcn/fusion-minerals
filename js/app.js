@@ -17,6 +17,12 @@ const affectedPanel = document.getElementById('affected-panel');
 const evidencePanel = document.getElementById('evidence-panel');
 const ladderSteps = document.querySelectorAll('.ladder-step');
 const ladderDetail = document.getElementById('ladder-detail');
+const harmCaseByStage = {
+  'tungsten-mine': 'rubaya',
+  'ree-mine': 'kachin',
+  'lithium-mine': 'andes',
+  'beryllium-components': 'beryllium'
+};
 
 function cite(ids) {
   const sourceIds = Array.isArray(ids) ? ids : String(ids || '').split(',').map((id) => id.trim()).filter(Boolean);
@@ -344,6 +350,7 @@ function renderStageDetail(material, stage) {
   if (!stage) return;
   const targetHash = `#chain-${stage.id}`;
   const stageSources = stage.sourceIds?.length ? cite(stage.sourceIds) : 'Project analysis';
+  const harmCase = harmCaseByStage[stage.id];
   stageDetail.innerHTML = `
     <div class="detail-header">
       <h3>${material.label}: ${stage.stage}</h3>
@@ -353,6 +360,7 @@ function renderStageDetail(material, stage) {
     <p><strong>Risk:</strong> ${stage.risk}</p>
     <p><strong>Confidence:</strong> ${stage.confidence}</p>
     <p><strong>Evidence:</strong> ${stage.evidence} ${stageSources}</p>
+    ${harmCase ? `<p><a class="harm-link" href="#human-cost-${harmCase}">Harm documented →</a></p>` : ''}
     <p><a href="#risks">View the evidence register</a></p>
   `;
 

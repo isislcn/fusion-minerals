@@ -394,6 +394,27 @@ select { background: var(--surface); color: var(--text); border: 1px solid rgba(
 .brief-actions { display: flex; gap: 8px; flex-wrap: wrap; }
 .brief-summary { background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.08); border-radius: 14px; padding: 18px; margin: 18px 0; }
 .brief-summary ol { margin: 10px 0 0 18px; }
+.human-cost .lede { max-width: 760px; }
+.human-dimensions { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); margin: 28px 0 44px; border: 1px solid rgba(212,110,76,0.5); }
+.human-dimensions article { padding: 18px; border-right: 1px solid rgba(212,110,76,0.35); }
+.human-dimensions article:last-child { border-right: 0; }
+.human-dimensions article > span:first-child { color: var(--rust); font: 0.72rem "Geist Mono", monospace; text-transform: uppercase; }
+.human-dimensions strong { display: block; font: 2rem "Newsreader", Georgia, serif; margin: 8px 0; }
+.human-dimensions p { margin: 0 0 8px; color: var(--muted); font-size: 0.9rem; }
+.case-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; }
+.case-card { border: 1px solid var(--rust); border-radius: 14px; padding: 22px; background: var(--surface); transition: outline 0.2s ease, background 0.2s ease; scroll-margin-top: 100px; }
+.case-card blockquote { margin: 18px 0; padding-left: 16px; border-left: 3px solid var(--rust); font: italic 1.2rem "Newsreader", Georgia, serif; }
+.case-card blockquote cite { display: block; color: var(--muted); font: 0.8rem "Geist", Arial, sans-serif; }
+.case-place, .case-note { color: var(--muted); }
+.case-note { border-left: 2px solid var(--rust); padding-left: 10px; }
+.material-chip { display: inline-block; padding: 0.15rem 0.55rem; margin-right: 8px; border-radius: 999px; font-size: 0.8rem; }
+.material-chip.tungsten { color: var(--tungsten); border: 1px solid var(--tungsten); }
+.material-chip.ree { color: var(--ree); border: 1px solid var(--ree); }
+.material-chip.lithium { color: var(--lithium); border: 1px solid var(--lithium); }
+.material-chip.beryllium { color: var(--beryllium); border: 1px solid var(--beryllium); }
+.confidence { display: inline-block; color: var(--muted); font: 0.72rem "Geist Mono", monospace; text-transform: uppercase; }
+.data-gap { margin: 30px 0; padding: 20px; border: 1px dashed var(--muted); border-radius: 12px; }
+.harm-link { color: var(--rust); font-weight: 600; }
 
 .site-footer {
   border-top: 1px solid rgba(255,255,255,0.08);
@@ -418,8 +439,11 @@ select { background: var(--surface); color: var(--text); border: 1px solid rgba(
 }
 
 @media (max-width: 980px) {
-  .fusion-grid, .cutaway-wrap, .chain-layout, .company-grid, .brief-grid, .route-grid, .stats-grid, .scenario-grid, .demand-grid { grid-template-columns: 1fr; }
+  .fusion-grid, .cutaway-wrap, .chain-layout, .company-grid, .brief-grid, .route-grid, .stats-grid, .scenario-grid, .demand-grid, .case-grid { grid-template-columns: 1fr; }
   .reactor-supply .mineral-stack { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .human-dimensions { grid-template-columns: 1fr; }
+  .human-dimensions article { border-right: 0; border-bottom: 1px solid rgba(212,110,76,0.35); }
+  .human-dimensions article:last-child { border-bottom: 0; }
   .brief-header { flex-direction: column; }
   .date-stamp { display: none; }
 }

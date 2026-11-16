@@ -16,6 +16,7 @@
           <a href="#overview">Overview</a>
           <a href="#primer">Fusion primer</a>
           <a href="#chain">Supply chain</a>
+          <a href="#human-cost">Human cost</a>
           <a href="#why-now">Why now</a>
           <div class="nav-group">
             <button class="nav-button" aria-expanded="false">Evidence <span>▾</span></button>
@@ -91,14 +92,14 @@
                 <div class="meta"><strong>Tungsten</strong> · first wall and divertor</div>
                 <div class="row-figure"><span>79%</span> China, mining <span data-cite="usgs-2026"></span></div>
                 <div class="bar"><span style="width:79%; background: var(--tungsten);"></span></div>
-                <small class="hotspot">3T conflict-finance reporting context: eastern DR Congo</small>
+                <a class="hotspot" href="#human-cost-rubaya">3T conflict-finance context: Rubaya, eastern DR Congo →</a>
                 <a href="#chain-tungsten-mine">Explore tungsten evidence</a>
               </div>
               <div class="miner-row">
                 <div class="meta"><strong>Rare earths</strong> · some magnet designs</div>
                 <div class="row-figure"><span>80%</span> China, refining <span data-cite="scsp-2025"></span></div>
                 <div class="bar"><span style="width:80%; background: var(--ree);"></span></div>
-                <small class="hotspot">Reported mining-related pollution: Kachin State, Myanmar</small>
+                <a class="hotspot" href="#human-cost-kachin">Reported mining-related pollution: Kachin State, Myanmar →</a>
                 <a href="#chain-ree-mine">Explore rare-earth evidence</a>
               </div>
               <div class="miner-row hatched">
@@ -345,7 +346,75 @@
             <span>Limitations</span>
             <p>Exposure, not wrongdoing. <a href="#methodology">Read the limitations →</a></p>
           </div>
-          <div class="pager"><a href="#overview">Previous</a><a href="#why-now">Next</a></div>
+          <div class="pager"><a href="#reactor-supply">← Overview</a><a href="#human-cost">Human cost →</a></div>
+        </div>
+      </section>
+
+      <section id="human-cost" class="section human-cost">
+        <div class="container">
+          <p class="eyebrow">Human cost</p>
+          <h2>Who pays for fusion’s minerals</h2>
+          <p class="lede">The mines and refineries that will supply fusion already carry a human cost. These are the documented cases, by material. They show who is exposed, not who is to blame.</p>
+
+          <div class="human-dimensions" aria-label="Five dimensions of human cost">
+            <article><span>Lives</span><strong>200+</strong><p>killed in a Rubaya mine collapse, early 2026</p><span data-cite="reuters-2026"></span></article>
+            <article><span>Children</span><strong>15</strong><p>age of a Kachin miner who died after leaving work</p><span data-cite="gw-2024"></span></article>
+            <article><span>Health</span><strong>134,000</strong><p>US workers estimated to be exposed to beryllium</p><span data-cite="atsdr-2008"></span></article>
+            <article><span>Conflict</span><strong>$800k</strong><p>a month to M23 rebels from Rubaya mining taxes</p><span data-cite="unsc-2025a"></span></article>
+            <article><span>Water</span><strong>10 m+</strong><p>fall in groundwater in 15 years, Salar de Atacama</p><span data-cite="oc-2025"></span></article>
+          </div>
+
+          <h3>Case files</h3>
+          <div class="case-grid">
+            <article class="case-card" id="human-cost-rubaya">
+              <span class="material-chip tungsten">Tungsten · 3T</span><span class="confidence">Documented</span>
+              <h3>Rubaya, North Kivu</h3><p class="case-place">DR Congo · controlled by M23 since 2024</p>
+              <p>Miners dig by hand for a few dollars a day. Two collapses in early 2026 were each reported to kill about 200 people; victims of the first included children and market women. M23 disputes the second toll. UN experts report that M23 runs a parallel administration over Rubaya, earns at least $800,000 a month from taxing coltan, and smuggles 3T minerals into Rwanda. Rubaya supplies more than 15% of the world’s tantalum.</p>
+              <p><strong>Who is affected:</strong> Artisanal miners and their families; communities under armed-group administration.</p>
+              <p class="case-note">Most evidence concerns coltan; tungsten volumes from Rubaya are not quantified.</p>
+              <p><span data-cite="reuters-2026,ap-2026,unsc-2025a"></span></p>
+              <a href="#chain-tungsten-mine">Trace this stage →</a>
+            </article>
+            <article class="case-card" id="human-cost-kachin">
+              <span class="material-chip ree">Rare earths</span><span class="confidence">Reported</span>
+              <h3>Kachin Special Region 1</h3><p class="case-place">Myanmar · territory of junta-aligned militias</p>
+              <p>Mining sites rose by more than 40% from 2021 to 2023, to over 300. Leaching chemicals are pumped into hillsides; Myanmar’s imports of ammonium sulphate from China reached 1.5 million tonnes in 2023, up from 93,000 tonnes in 2015. Streams test highly acidic with elevated arsenic. Workers report coughing, numbness, skin conditions and kidney problems, and two miners died after leaving work, one aged 15. Residents say militias use coercion and payoffs to take land for mining.</p>
+              <blockquote>“There are no longer fish in the waters.” <cite>— resident of Chipwe</cite></blockquote>
+              <p><strong>Who is affected:</strong> Miners, farming and fishing communities, and residents displaced from riverbanks.</p>
+              <p><span data-cite="gw-2024,gw-2022"></span></p>
+              <a href="#chain-ree-mine">Trace this stage →</a>
+            </article>
+            <article class="case-card" id="human-cost-andes">
+              <span class="material-chip lithium">Lithium</span><span class="confidence">Reported</span>
+              <h3>High Andean salt flats</h3><p class="case-place">Argentina, Bolivia and Chile</p>
+              <p>Brine extraction in open evaporation ponds causes an irreversible loss of water from aquifers. In Chile’s Salar de Atacama, groundwater has fallen by more than 10 metres in 15 years and the salt flat is sinking 1 to 2 cm a year. At least 200 Indigenous communities live around the salt flats; most lithium operations went ahead without free, prior and informed consent.</p>
+              <p><strong>Who is affected:</strong> Indigenous communities whose water, grazing and livelihoods depend on the salt flats.</p>
+              <p class="case-note">Fusion needs lithium enriched in lithium-6; the extraction stage is shared with battery lithium.</p>
+              <p><span data-cite="oc-2025"></span></p>
+              <a href="#chain-lithium-mine">Trace this stage →</a>
+            </article>
+            <article class="case-card" id="human-cost-beryllium">
+              <span class="material-chip beryllium">Beryllium</span><span class="confidence">Documented</span>
+              <h3>Beryllium workers</h3><p class="case-place">Beryllium processing and machining plants</p>
+              <p>Inhaling small beryllium particles can sensitise workers, and 6–8% of sensitised people develop chronic beryllium disease each year, a lung disease. At least 134,000 current US workers are estimated to be exposed, and sensitisation is found in 1–16% of exposed workers tested. Families of workers and people living near plants have also become ill.</p>
+              <p><strong>Who is affected:</strong> Machinists, process and lab workers, and their families.</p>
+              <p class="case-note">These figures are from the United States; the global beryllium chain is not yet mapped.</p>
+              <p><span data-cite="atsdr-2008"></span></p>
+              <a href="#chain-beryllium-components">Trace this stage →</a>
+            </article>
+          </div>
+
+          <aside class="data-gap">
+            <h3>What we don’t know yet</h3>
+            <ul>
+              <li>No public data links harm to tungsten mining specifically; most Great Lakes evidence concerns coltan.</li>
+              <li>Mining communities in China, where most tungsten and rare earths are mined and refined, are not yet researched.</li>
+              <li>Beryllium mining and processing sites outside the US are not mapped.</li>
+              <li>No fusion-specific procurement data exists to trace any case to a fusion buyer.</li>
+            </ul>
+          </aside>
+          <div class="ctas"><a class="button" href="#remedy">Why remedy, not exit →</a><a class="button button-secondary" href="#brief-eu">What regulators can do →</a></div>
+          <div class="pager"><a href="#chain">← Supply chain</a><a href="#why-now">Why now →</a></div>
         </div>
       </section>
 
