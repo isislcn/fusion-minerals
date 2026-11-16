@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Fusion Minerals prototype</title>
+    <style>
+      :root {
+        --bg: #262624;
+        --surface: #302F2C;
+        --surface-2: #3A3935;
+        --text: #ECE8E0;
+        --muted: #A8A39A;
+        --soft: #7F7A72;
+        --gold: #D1AC55;
+        --rust: #D46E4C;
+        --tungsten: #93A8BC;
+        --lithium: #B196CC;
+        --beryllium: #74B8AA;
+        --ree: #CF9A5E;
+      }
+      body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+        background: var(--bg);
+        color: var(--text);
+      }
+      .shell { max-width: 1100px; margin: 0 auto; padding: 24px; }
+      nav { display: flex; flex-wrap: wrap; gap: 12px; }
+      .pill { border: 1px solid var(--gold); padding: 8px 12px; color: var(--text); text-decoration: none; }
+      section { margin: 40px 0; padding: 24px; background: var(--surface); border: 1px solid rgba(255,255,255,0.06); }
+      h1, h2, h3 { font-family: Georgia, serif; }
+      .hero { display: grid; grid-template-columns: 1.4fr 1fr; gap: 24px; }
+      .grid { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 16px; }
+      .stat { border: 1px solid rgba(255,255,255,0.08); padding: 18px; background: var(--surface-2); }
+      .label { color: var(--muted); font-size: 12px; text-transform: uppercase; letter-spacing: 0.08em; }
+      .bar { height: 12px; border-radius: 999px; background: rgba(255,255,255,0.08); overflow: hidden; margin-top: 8px; }
+      .bar > span { display: block; height: 100%; background: var(--gold); }
+      .badge { display: inline-block; padding: 4px 8px; border: 1px solid var(--gold); color: var(--gold); } 
+      .muted { color: var(--muted); }
+      a { color: var(--gold); }
+      table { width: 100%; border-collapse: collapse; }
+      th, td { text-align: left; padding: 10px 12px; border-bottom: 1px solid rgba(255,255,255,0.08); }
+      .warning { color: var(--rust); }
+      code { font-family: Consolas, monospace; }
+    </style>
+  </head>
+  <body>
+    <div class="shell">
+      <nav>
+        <a class="pill" href="#overview">Overview</a>
+        <a class="pill" href="#primer">Fusion primer</a>
+        <a class="pill" href="#chain">Supply chain</a>
+        <a class="pill" href="#why-now">Why now</a>
+        <a class="pill" href="#risks">Risk register</a>
+        <a class="pill" href="#governance">Governance gaps</a>
+        <a class="pill" href="#demand">Demand</a>
+        <a class="pill" href="#remedy">Remedy first</a>
+      </nav>
+
+      <section id="overview">
+        <div class="hero">
+          <div>
+            <div class="label">Fusion energy · supply chains · human rights</div>
+            <h1>Fusion promises clean power. <span style="color: var(--gold);">Its minerals</span> come from some of the world's hardest places.</h1>
+            <p class="muted">This prototype captures the core framing for the project: fusion needs materials with concentrated supply and uneven governance, and the problem is visible before scale-up.</p>
+            <div>
+              <a class="pill" href="#chain">Trace the supply chain →</a>
+              <a class="pill" href="#why-now">Why act now</a>
+            </div>
+          </div>
+          <div>
+            <h3>Inside a reactor: who controls the supply</h3>
+            <div>
+              <div class="stat">
+                <strong>Tungsten</strong> · first wall and divertor<br />
+                <span class="muted">79%, China, mining</span>
+                <div class="bar"><span style="width:79%; background: var(--tungsten);"></span></div>
+                <small class="warning">Harm hotspot: eastern DR Congo</small>
+              </div>
+              <div class="stat">
+                <strong>Rare earths</strong> · superconducting magnets<br />
+                <span class="muted">80%, China, refining</span>
+                <div class="bar"><span style="width:80%; background: var(--ree);"></span></div>
+                <small class="warning">Harm hotspot: Kachin State, Myanmar</small>
+              </div>
+              <div class="stat">
+                <strong>Lithium-6</strong> · breeding blanket<br />
+                <span class="muted">No commercial supply</span>
+                <div class="bar"><span style="width:15%; background: var(--lithium);"></span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h2>Key figures</h2>
+        <div class="grid">
+          <div class="stat"><strong>~79%</strong><br />China tungsten mining</div>
+          <div class="stat"><strong>$800k a month</strong><br />armed-group taxes at one 3T mining area</div>
+          <div class="stat"><strong>2,700+</strong><br />leaching pools in Kachin</div>
+          <div class="stat"><strong>~0</strong><br />lithium-6 supply</div>
+        </div>
+      </section>
+
+      <section id="primer">
+        <h2>Fusion primer</h2>
+        <p>Fusion combines light atoms such as deuterium and tritium at temperatures around 150 million °C, releasing energy. Fission splits heavy atoms instead.</p>
+        <p>Benefits: no carbon emissions in operation, much less long-lived radioactive waste than fission, but it is extremely hard to sustain.</p>
+      </section>
+
+      <section id="chain">
+        <h2>Supply chain</h2>
+        <p>Material switcher, chain focus mode, evidence tabs and the stage detail panel will live here in the final site.</p>
+        <table>
+          <thead>
+            <tr><th>Material</th><th>Stage</th><th>Confidence</th><th>Location</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Tungsten</td><td>Mine</td><td>reported</td><td>Eastern DR Congo</td></tr>
+            <tr><td>Rare earths</td><td>Mine</td><td>reported</td><td>Kachin State, Myanmar</td></tr>
+            <tr><td>Lithium-6</td><td>Refining</td><td>inferred</td><td>Global / no commercial supply</td></tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section id="why-now">
+        <h2>Why now</h2>
+        <p>The issue matters before the first commercial plants are procured. The project models an early governance window.</p>
+      </section>
+
+      <section id="risks">
+        <h2>Risk register</h2>
+        <table>
+          <thead>
+            <tr><th>ID</th><th>Material</th><th>Stage</th><th>Risk</th><th>Location</th><th>Confidence</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>W-MINE-01</td><td>Tungsten</td><td>Mine</td><td>Conflict finance</td><td>Eastern DR Congo</td><td>reported</td></tr>
+            <tr><td>REE-MINE-01</td><td>Rare earths</td><td>Mine</td><td>Pollution</td><td>Kachin State, Myanmar</td><td>reported</td></tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section id="governance">
+        <h2>Governance gaps</h2>
+        <table>
+          <thead>
+            <tr><th>Material</th><th>EU Conflict Minerals Regulation</th><th>US Dodd-Frank</th><th>Batteries Regulation</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Tungsten</td><td>Covered</td><td>Covered</td><td>Not covered</td></tr>
+            <tr><td>Lithium</td><td>Not covered</td><td>Not covered</td><td>Partly</td></tr>
+            <tr><td>Lithium-6</td><td>Not covered</td><td>Not covered</td><td>Not covered</td></tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section id="demand">
+        <h2>Demand</h2>
+        <p>Known: lithium-6 demand for a pilot breeding blanket is in the order of tens of tonnes, but current supply is effectively zero.</p>
+        <p>Gap: tungsten, beryllium and rare earth tonnage per plant remains a pending estimate. <code>[TODO: source needed]</code></p>
+      </section>
+
+      <section id="remedy">
+        <h2>Remedy first</h2>
+        <ol>
+          <li>Identify</li>
+          <li>Engage</li>
+          <li>Improve on a deadline</li>
+          <li>Suspend temporarily</li>
+          <li>Exit responsibly</li>
+        </ol>
+      </section>
+
+      <section>
+        <h2>Prototype data notes</h2>
+        <script>
+          const STRATA = [
+            { name: 'Tungsten', detail: 'first wall and divertor', share: '79%', source: 'China', risk: 'eastern DR Congo' },
+            { name: 'Rare earths', detail: 'superconducting magnets', share: '80%', source: 'China', risk: 'Kachin State, Myanmar' },
+            { name: 'Lithium-6', detail: 'breeding blanket', share: 'No commercial supply', source: 'Global', risk: 'supply bottleneck' },
+            { name: 'Beryllium', detail: 'neutron multiplier', share: 'Mostly US', source: 'US', risk: 'data gap' }
+          ];
+          const STATS = [
+            { label: 'China tungsten mining', value: '~79%' },
+            { label: 'Armed-group taxes', value: '$800k a month' },
+            { label: 'Leaching pools in Kachin', value: '2,700+' },
+            { label: 'Lithium-6 supply', value: '~0' }
+          ];
+          console.log('Prototype skeleton loaded');
+        </script>
+      </section>
+    </div>
+  </body>
+</html>

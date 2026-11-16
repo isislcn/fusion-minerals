@@ -1,0 +1,736 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Fusion Minerals</title>
+    <meta name="description" content="Fusion Minerals — supply chain risk in fusion minerals." />
+    <link rel="stylesheet" href="css/styles.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="container topbar">
+        <a href="#overview" class="brand">Fusion Minerals</a>
+        <div class="header-tools" aria-label="Quick navigation tools">
+          <a href="#methodology" class="header-tool" title="Methodology" aria-label="Methodology">⚙️</a>
+          <a href="#limitations" class="header-tool" title="Limitations" aria-label="Limitations">⚠️</a>
+          <a href="#about" class="header-tool" title="About" aria-label="About">ℹ️</a>
+          <a href="https://github.com/isislcn/fusion-minerals" target="_blank" rel="noreferrer" class="header-tool" title="GitHub repo" aria-label="GitHub repo">🐙</a>
+        </div>
+        <button class="nav-toggle" aria-expanded="false" aria-controls="main-nav">Menu</button>
+        <nav id="main-nav" class="main-nav" aria-label="Main navigation">
+          <a href="#overview">Overview</a>
+          <a href="#primer">Fusion primer</a>
+          <a href="#chain">Supply chain</a>
+          <a href="#why-now">Why now</a>
+          <div class="nav-group">
+            <button class="nav-button" aria-expanded="false">Evidence <span>▾</span></button>
+            <div class="nav-panel" role="menu">
+              <a href="#risks">Risk register</a>
+              <a href="#governance">Governance gaps</a>
+              <a href="#demand">Demand</a>
+            </div>
+          </div>
+          <a href="#remedy">Remedy first</a>
+          <div class="nav-group">
+            <button class="nav-button" aria-expanded="false">Briefs <span>▾</span></button>
+            <div class="nav-panel" role="menu">
+              <a href="#brief-investors">Investors</a>
+              <a href="#brief-eu">European Union</a>
+              <a href="#brief-un">UN Task Force</a>
+            </div>
+          </div>
+          <a href="#sources">Sources</a>
+          <a href="#limitations" class="button button-outline">Limitations</a>
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <section id="overview" class="section">
+        <div class="container hero-grid">
+          <div>
+            <p class="eyebrow">Fusion energy · supply chains · human rights</p>
+            <h1>Fusion could provide low-carbon power. Its material supply chains still warrant scrutiny.</h1>
+            <p class="lede">Fusion reactor designs may rely on tungsten, lithium-6, beryllium and rare earths. Their supply chains vary in concentration, traceability and documented social or environmental risk. This research maps those exposure points without inferring that a named fusion company has sourced from them.</p>
+            <div class="ctas">
+              <a href="#chain" class="button">Trace the supply chain →</a>
+              <a href="#why-now" class="button button-secondary">Why act now</a>
+            </div>
+          </div>
+          <aside class="panel">
+            <h2>Inside a reactor: who controls the supply</h2>
+            <div class="mineral-stack">
+              <div class="miner-row">
+                <div class="meta"><strong>Tungsten</strong> · first wall and divertor</div>
+                <div class="row-figure"><span>79%</span> China, mining</div>
+                <div class="bar"><span style="width:79%; background: var(--tungsten);"></span></div>
+                <small class="hotspot">3T conflict-finance reporting context: eastern DR Congo</small>
+                <a href="#chain-tungsten-mine">Explore tungsten evidence</a>
+              </div>
+              <div class="miner-row">
+                <div class="meta"><strong>Rare earths</strong> · some magnet designs</div>
+                <div class="row-figure"><span>80%</span> China, refining</div>
+                <div class="bar"><span style="width:80%; background: var(--ree);"></span></div>
+                <small class="hotspot">Reported mining-related pollution: Kachin State, Myanmar</small>
+                <a href="#chain-ree-mine">Explore rare-earth evidence</a>
+              </div>
+              <div class="miner-row hatched">
+                <div class="meta"><strong>Lithium-6</strong> · breeding blanket</div>
+                <div class="row-figure"><span class="dim">No established supply at fusion scale</span></div>
+                <div class="bar hatched"><span style="width:18%; background: var(--lithium);"></span></div>
+              </div>
+              <div class="miner-row hatched">
+                <div class="meta"><strong>Beryllium</strong> · neutron multiplier</div>
+                <div class="row-figure"><span class="dim">Concentrated supply</span></div>
+                <div class="bar hatched"><span style="width:36%; background: var(--beryllium);"></span></div>
+              </div>
+            </div>
+            <p class="caption">Bars indicate the estimated share attributed to the leading country at the stage shown; they are not directly comparable across different materials or stages. Hatched bars indicate that a comparable estimate is unavailable. Highlighted locations identify reported upstream risks, not evidence of a link to a particular fusion buyer.</p>
+          </aside>
+        </div>
+      </section>
+
+      <section class="section section-compact">
+        <div class="container">
+          <h2>Key figures</h2>
+          <div class="stats-grid">
+            <article class="stat-card">
+              <strong>~79%</strong>
+              <span>China tungsten mining</span>
+              <a href="#sources">Source</a>
+            </article>
+            <article class="stat-card">
+              <strong>$800k a month</strong>
+              <span>reported armed-group taxation at one 3T mining area</span>
+              <a href="#sources">Source</a>
+            </article>
+            <article class="stat-card">
+              <strong>2,700+</strong>
+              <span>reported rare-earth leaching pools in Kachin</span>
+              <a href="#sources">Source</a>
+            </article>
+            <article class="stat-card">
+              <strong>~0</strong>
+              <span>lithium-6 supply</span>
+              <a href="#sources">Source</a>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section section-compact">
+        <div class="container">
+          <h2>Research snapshot</h2>
+          <div class="stats-grid">
+            <article class="stat-card">
+              <strong>~79%</strong>
+              <span>China tungsten mining; a highly concentrated upstream stage.</span>
+              <a href="#sources">USGS / supply evidence</a>
+            </article>
+            <article class="stat-card">
+              <strong>~80%</strong>
+              <span>China rare earth refining; strong concentration risk in magnet inputs.</span>
+              <a href="#sources">USGS / refining evidence</a>
+            </article>
+            <article class="stat-card">
+              <strong>~0</strong>
+              <span>No established commercial supply at the scale some fusion blanket concepts may require.</span>
+              <a href="#demand">Demand note</a>
+            </article>
+            <article class="stat-card">
+              <strong>Mostly US</strong>
+              <span>Supply and fusion-specific procurement data are limited; some blanket concepts include beryllium.</span>
+              <a href="#sources">Beryllium evidence</a>
+            </article>
+          </div>
+          <p class="caption">This project does not claim that named fusion companies have used conflict-sourced material. It shows exposure through shared supply chains and the governance conditions that could still be shaped before commercial procurement.</p>
+        </div>
+      </section>
+
+      <section class="section section-compact">
+        <div class="container">
+          <h2>Choose your brief</h2>
+          <div class="brief-grid">
+            <a class="brief-card" href="#brief-investors">
+              <span class="tag">For fusion investors</span>
+              <p>Assess material supply and sourcing risks before procurement decisions become difficult to change.</p>
+            </a>
+            <a class="brief-card" href="#brief-eu">
+              <span class="tag">For the EU</span>
+              <p>Consider how existing EU due-diligence tools could address fusion-related supply chains.</p>
+            </a>
+            <a class="brief-card" href="#brief-un">
+              <span class="tag">For the UN Task Force</span>
+              <p>Consider fusion materials in critical-minerals traceability discussions.</p>
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <section class="section section-compact">
+        <div class="container narrow">
+          <h2>A route through the evidence</h2>
+          <div class="route-grid">
+            <div class="route-card"><span>1</span><h3>Primer</h3><p>Understand the technology and why minerals matter.</p></div>
+            <div class="route-card"><span>2</span><h3>Supply chain</h3><p>Map where risk sits across mine, trade and refining.</p></div>
+            <div class="route-card"><span>3</span><h3>Why now</h3><p>See the governance window before procurement hardens.</p></div>
+            <div class="route-card"><span>4</span><h3>Evidence</h3><p>Read the risk register, governance gaps and demand view.</p></div>
+            <div class="route-card"><span>5</span><h3>Remedy first</h3><p>Learn the escalation ladder and safeguards.</p></div>
+            <div class="route-card"><span>6</span><h3>Briefs</h3><p>Use the investor, EU or UN versions to act.</p></div>
+            <div class="route-card"><span>7</span><h3>Sources</h3><p>Follow the evidence and confidence labels.</p></div>
+            <div class="route-card"><span>8</span><h3>Limitations</h3><p>Know what remains uncertain or unproven.</p></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section section-compact">
+        <div class="container narrow">
+          <h2>Glossary</h2>
+          <div class="glossary-list">
+            <details open>
+              <summary>CAHRA</summary>
+              <p>Conflict-affected and high-risk area.</p>
+            </details>
+            <details>
+              <summary>Tokamak</summary>
+              <p>A magnetic confinement device designed to hold a hot plasma long enough for fusion to happen.</p>
+            </details>
+            <details>
+              <summary>Stellarator</summary>
+              <p>An alternative magnetic confinement design that uses twisted field geometry rather than a toroidal tokamak arrangement.</p>
+            </details>
+            <details>
+              <summary>Power purchase agreement</summary>
+              <p>A contract in which a buyer agrees to purchase electricity from a project, often for a fixed term.</p>
+            </details>
+            <details>
+              <summary>Remedy</summary>
+              <p>Measures to address harm, including corrective action, support and just transition for affected workers and communities.</p>
+            </details>
+            <details>
+              <summary>3T</summary>
+              <p>Tin, tungsten and tantalum, the minerals often covered by conflict-minerals due diligence rules.</p>
+            </details>
+            <details>
+              <summary>APT</summary>
+              <p>Ammonium paratungstate, a commonly traded tungsten intermediate.</p>
+            </details>
+            <details>
+              <summary>Rare earths</summary>
+              <p>Minerals used in magnets and components, including heavy and light rare earths.</p>
+            </details>
+          </div>
+        </div>
+      </section>
+
+      <section id="primer" class="section">
+        <div class="container narrow">
+          <h2>What is fusion</h2>
+          <div class="fusion-grid">
+            <div class="diagram-box">
+              <div class="fusion-vs">
+                <div class="fusion-box">
+                  <h3>Fusion</h3>
+                  <div class="atom atom-merge"></div>
+                  <p>Two small nuclei merge. Helium and a neutron are produced.</p>
+                </div>
+                <div class="fission-box">
+                  <h3>Fission</h3>
+                  <div class="atom atom-split"></div>
+                  <p>A large nucleus splits into smaller parts.</p>
+                </div>
+              </div>
+            </div>
+            <div>
+              <p>In the deuterium-tritium reaction used in many magnetic-confinement designs, light nuclei fuse at temperatures on the order of 150 million °C, producing helium, a neutron and energy. Fission instead splits heavy nuclei. Other fusion concepts may use different fuel cycles and operating conditions.</p>
+              <ul>
+                <li>The fusion reaction itself does not emit carbon dioxide; the full lifecycle footprint also depends on construction, materials and energy inputs.</li>
+                <li>Waste characteristics differ from fission and depend on material choices and neutron exposure.</li>
+                <li>Commercial, sustained electricity production has not yet been demonstrated.</li>
+              </ul>
+            </div>
+          </div>
+
+          <h2>Exploded cutaway</h2>
+          <div class="cutaway-wrap">
+            <div class="cutaway" aria-label="Generic cutaway of a fusion reactor">
+              <div class="layer plasma" tabindex="0" data-material="deuterium-tritium" data-link="#chain-lithium">Plasma</div>
+              <div class="layer first-wall" tabindex="0" data-material="tungsten" data-link="#chain-tungsten">First wall</div>
+              <div class="layer divertor" tabindex="0" data-material="tungsten" data-link="#chain-tungsten">Divertor</div>
+              <div class="layer blanket" tabindex="0" data-material="lithium" data-link="#chain-lithium">Breeding blanket</div>
+              <div class="layer shield" tabindex="0" data-material="tungsten" data-link="#chain-tungsten">Shield</div>
+              <div class="layer vessel" tabindex="0" data-material="steel" data-link="#chain-beryllium">Vacuum vessel</div>
+              <div class="layer magnet" tabindex="0" data-material="rare-earths" data-link="#chain-ree">Magnets</div>
+              <div class="layer cryostat" tabindex="0" data-material="steel" data-link="#chain-ree">Cryostat</div>
+            </div>
+            <div class="cutaway-card" id="cutaway-detail">
+              <h3>Layer detail</h3>
+              <p>Select a layer to inspect the material risk.</p>
+            </div>
+          </div>
+          <table class="accessible-table">
+            <thead>
+              <tr><th>Layer</th><th>Role</th><th>Materials</th><th>Key supply risk</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Plasma</td><td>Fuel burns here</td><td>Deuterium, tritium</td><td>Fuel supply and isotopic separation</td></tr>
+              <tr><td>First wall</td><td>Faces the plasma</td><td>Design-dependent; may include tungsten or beryllium</td><td>Material choice, concentration and traceability vary by design</td></tr>
+              <tr><td>Divertor</td><td>Removes heat and exhaust</td><td>Tungsten</td><td>Concentrated refining and governance gaps</td></tr>
+              <tr><td>Breeding blanket</td><td>Makes new tritium, captures heat</td><td>Lithium (lithium-6), beryllium or lead</td><td>Lithium-6 supply is effectively zero</td></tr>
+              <tr><td>Shield</td><td>Protects the magnets</td><td>Tungsten carbide, steel</td><td>Material concentration and processing bottlenecks</td></tr>
+              <tr><td>Vacuum vessel</td><td>Sealed chamber</td><td>Steel</td><td>Industrial supply chain, not the main risk theme</td></tr>
+              <tr><td>Magnets</td><td>Confine the plasma</td><td>Superconductors vary by design, including REBCO or niobium-tin</td><td>Material demand and upstream exposure depend on magnet architecture</td></tr>
+              <tr><td>Cryostat</td><td>Keeps magnets cold</td><td>Steel, helium</td><td>Industrial supply chain and gas logistics</td></tr>
+            </tbody>
+          </table>
+
+          <h2>Who is building it</h2>
+          <div class="company-grid">
+            <div class="company-card"><h3>Tokamak</h3><p>Commonwealth Fusion Systems; Tokamak Energy; ITER.</p><span>Backers include Google and Nvidia.</span></div>
+            <div class="company-card"><h3>Stellarator</h3><p>Proxima Fusion; Thea Energy.</p><span>Backed by Google.</span></div>
+            <div class="company-card"><h3>Field-reversed / pulsed</h3><p>Helion; TAE Technologies.</p><span>Microsoft will buy at least 50 MW from Helion by 2028.</span></div>
+            <div class="company-card"><h3>Magnetised target</h3><p>General Fusion.</p><span>Listed on Nasdaq in 2026.</span></div>
+            <div class="company-card"><h3>Inertial / laser</h3><p>Inertia; Focused Energy; Marvel Fusion; Pacific Fusion.</p><span>Backed by Google.</span></div>
+          </div>
+
+          <h2>Why it matters now</h2>
+          <p>$4.48 billion was raised in the 12 months to July 2026, the highest on record, and $14.24 billion since 2021 across 56 companies. IEA projects global data centre electricity demand of about 945 TWh by 2030. Big Tech power deals tie AI demand to fusion.</p>
+
+          <p class="bridge">Material requirements vary by reactor design, and each design draws on industrial supply chains. <a href="#chain">Trace the materials →</a></p>
+        </div>
+      </section>
+
+      <section id="chain" class="section">
+        <div class="container">
+          <h2>Supply chain</h2>
+          <div class="material-switcher" id="material-switcher">
+            <button class="material-button active" data-material="tungsten">Tungsten</button>
+            <button class="material-button" data-material="lithium">Lithium</button>
+            <button class="material-button" data-material="beryllium">Beryllium</button>
+            <button class="material-button" data-material="ree">Rare earths</button>
+          </div>
+          <div class="audience-lens-wrap">
+            <p>Audience lens</p>
+            <div class="audience-lens" id="audience-lens">
+              <button class="lens active" data-lens="all">All</button>
+              <button class="lens" data-lens="investors">Investors</button>
+              <button class="lens" data-lens="eu">EU</button>
+              <button class="lens" data-lens="un">UN</button>
+            </div>
+          </div>
+          <div class="chain-layout">
+            <div class="chain-panel">
+              <h3>Supply chain map</h3>
+              <div class="chain-flow" id="chain-flow"></div>
+              <div class="legend">
+                <span><i class="dot mine"></i> Mine</span>
+                <span><i class="dot trade"></i> Trade</span>
+                <span><i class="dot refine"></i> Refining</span>
+                <span><i class="dot component"></i> Components</span>
+                <span><i class="dot plant"></i> Plant</span>
+              </div>
+            </div>
+            <aside class="detail-panel" id="stage-detail">
+              <div class="detail-header"><h3>Stage detail</h3><button class="copy-detail">Copy link to this stage</button></div>
+              <p>Select a stage to view the material risks.</p>
+            </aside>
+          </div>
+          <div class="tabs">
+            <button class="tab-button active" data-tab="where">Where</button>
+            <button class="tab-button" data-tab="affected">Who's affected</button>
+            <button class="tab-button" data-tab="evidence">Evidence</button>
+          </div>
+          <div class="tab-panel active" id="where-panel"></div>
+          <div class="tab-panel" id="affected-panel"></div>
+          <div class="tab-panel" id="evidence-panel"></div>
+          <div class="limits-strip">
+            <span>Limitations</span>
+            <p>Evidence points to exposure through shared supply chains, not that named fusion companies have used conflict-sourced material.</p>
+          </div>
+          <div class="pager"><a href="#overview">Previous</a><a href="#why-now">Next</a></div>
+        </div>
+      </section>
+
+      <section id="why-now" class="section">
+        <div class="container">
+          <h2>Why now</h2>
+          <div class="timeline-filters">
+            <button class="filter active" data-filter="all">All</button>
+            <button class="filter" data-filter="investors">Investors</button>
+            <button class="filter" data-filter="eu">EU</button>
+            <button class="filter" data-filter="un">UN</button>
+          </div>
+          <div class="why-grid">
+            <article class="reason-card"><h3>1. Procurement choices are still developing</h3><p>Many fusion projects have not reached commercial-scale procurement, leaving an opportunity to ask how traceability and remedy could be incorporated into purchasing decisions.</p></article>
+            <article class="reason-card"><h3>2. Some supply stages are concentrated</h3><p>Available estimates indicate substantial concentration in parts of tungsten and rare-earth supply chains. The figures refer to different materials and processing stages and should not be read as a single market measure.</p></article>
+            <article class="reason-card"><h3>3. Early requirements can shape practice</h3><p>Contractual and reporting expectations established before large-scale procurement may be easier to implement than requirements introduced after supply relationships are established.</p></article>
+          </div>
+          <div class="rail-wrap">
+            <div class="rail-labels"><span>Cheap</span><span>Costly</span><span>Locked-in</span></div>
+            <div class="rail">
+              <div class="today-marker" id="today-marker">Today</div>
+              <div class="rail-fork"></div>
+            </div>
+          </div>
+          <div class="timeline-events">
+            <ol>
+              <li>Map material use, suppliers and known risks as designs and procurement plans develop.</li>
+              <li>Investors and prospective offtakers can ask about sourcing expectations through financing and power-purchase discussions.</li>
+              <li>Project procurement can specify how identified risks are assessed, addressed and reported.</li>
+            </ol>
+          </div>
+          <p class="caption">Indicative timeline. The “Today” marker is set from the current date.</p>
+          <div class="pager"><a href="#chain">Previous</a><a href="#risks">Next</a></div>
+        </div>
+      </section>
+
+      <section id="risks" class="section">
+        <div class="container">
+          <h2>Evidence: risk register</h2>
+          <div class="controls-row">
+            <select id="risk-material-filter"><option value="all">Material: all</option></select>
+            <select id="risk-stage-filter"><option value="all">Stage: all</option></select>
+            <select id="risk-type-filter"><option value="all">Risk type: all</option></select>
+            <select id="risk-confidence-filter"><option value="all">Confidence: all</option></select>
+            <button id="download-csv" class="button button-secondary">Download CSV</button>
+          </div>
+          <p id="risk-count" class="count-line"></p>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>Material</th>
+                  <th>Stage</th>
+                  <th>Risk</th>
+                  <th>Location</th>
+                  <th>Confidence</th>
+                  <th>Source</th>
+                </tr>
+              </thead>
+              <tbody id="risk-body"></tbody>
+            </table>
+          </div>
+          <div class="pager"><a href="#why-now">Previous</a><a href="#governance">Next</a></div>
+        </div>
+      </section>
+
+      <section id="governance" class="section">
+        <div class="container">
+          <h2>Evidence: governance gaps</h2>
+          <div class="matrix-wrap">
+            <table class="matrix-table">
+              <thead>
+                <tr>
+                  <th>Material</th>
+                  <th>EU Conflict Minerals Regulation (2017/821)</th>
+                  <th>US Dodd-Frank §1502</th>
+                  <th>EU Batteries Regulation due diligence</th>
+                  <th>EU CSDDD</th>
+                  <th>OECD Due Diligence Guidance</th>
+                  <th>UN Panel principles (2024)</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><td>Tungsten</td><td><span class="state covered">Covered</span> Raw ore and metal imports are covered; finished components are not.</td><td><span class="state covered">Covered</span> 3TG, DRC and adjoining countries.</td><td><span class="state not">Not covered</span></td><td><span class="state partly">Partly</span> Voluntary or company threshold rules apply.</td><td><span class="state partly">Partly</span> Voluntary guidance.</td><td><span class="state partly">Partly</span> Voluntary, examples include rare earths.</td></tr>
+                <tr><td>Lithium</td><td><span class="state not">Not covered</span></td><td><span class="state not">Not covered</span></td><td><span class="state partly">Partly</span> Only when used in batteries.</td><td><span class="state partly">Partly</span> Only large firms above thresholds.</td><td><span class="state partly">Partly</span> Voluntary guidance.</td><td><span class="state partly">Partly</span> Examples include lithium, but not fusion-specific treatment.</td></tr>
+                <tr><td>Lithium-6</td><td><span class="state not">Not covered</span></td><td><span class="state not">Not covered</span></td><td><span class="state not">Not covered</span></td><td><span class="state partly">Partly</span> Only large firms and general due diligence.</td><td><span class="state partly">Partly</span> Voluntary guidance.</td><td><span class="state partly">Partly</span> Not named explicitly.</td></tr>
+                <tr><td>Beryllium</td><td><span class="state not">Not covered</span></td><td><span class="state not">Not covered</span></td><td><span class="state not">Not covered</span></td><td><span class="state partly">Partly</span> General company due diligence only.</td><td><span class="state partly">Partly</span> Voluntary guidance.</td><td><span class="state partly">Partly</span> Not named explicitly.</td></tr>
+                <tr><td>Rare earths</td><td><span class="state not">Not covered</span></td><td><span class="state not">Not covered</span></td><td><span class="state not">Not covered</span></td><td><span class="state partly">Partly</span> General company due diligence only.</td><td><span class="state partly">Partly</span> Voluntary guidance.</td><td><span class="state partly">Partly</span> Not named explicitly.</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="gap-summary">
+            <h3>What the gaps mean</h3>
+            <p>The instruments summarized here do not create a fusion-specific due-diligence regime for lithium-6, beryllium or rare earths. Their general or product-specific requirements may still apply depending on the company, activity and market. The EU Conflict Minerals Regulation focuses on specified 3TG imports and does not cover every downstream product or component. These limits leave questions about how emerging fusion supply chains will be addressed; they do not mean that no relevant law or guidance applies.</p>
+            <p><a href="#brief-eu">See the EU brief</a> or <a href="#brief-un">UN brief</a>.</p>
+          </div>
+          <div class="pager"><a href="#risks">Previous</a><a href="#demand">Next</a></div>
+        </div>
+      </section>
+
+      <section id="demand" class="section">
+        <div class="container narrow">
+          <h2>Evidence: demand</h2>
+          <p>Published estimates cited in this project put lithium-6 requirements for some pilot-plant blanket concepts in the tens-of-tonnes range. Commercial availability at that scale is not established. Historical production at Oak Ridge’s Y-12 plant is not a measure of present-day commercial supply.</p>
+          <h3>Known and pending</h3>
+          <div class="demand-grid">
+            <article class="demand-card known">
+              <h4>Lithium-6</h4>
+              <p>Needed per pilot plant: order of tens of tonnes.</p>
+              <p>Commercial supply at fusion-relevant scale: not established.</p>
+            </article>
+            <article class="demand-card pending">
+              <h4>Tungsten</h4>
+              <p>It is a major structural material for the first wall and divertor, but plant-level tonnage estimates remain highly design-specific.</p>
+              <p>Public reporting is stronger on concentration risk than on the exact per-reactor material bill.</p>
+            </article>
+            <article class="demand-card pending">
+              <h4>Beryllium</h4>
+              <p>Design choices vary across blanket and multiplier concepts, so the tonnage picture is still preliminary and architecture-dependent.</p>
+              <p>The key issue is not just supply volume; it is the narrowness of public, fusion-specific procurement visibility.</p>
+            </article>
+            <article class="demand-card pending">
+              <h4>Rare earths</h4>
+              <p>High-field magnets can rely on rare-earth-containing superconducting technologies, but plant demand remains uncertain across reactor designs.</p>
+              <p>That uncertainty matters because refining concentration is already one of the most visible bottlenecks in the market.</p>
+            </article>
+          </div>
+          <div class="tiny-chart">
+            <h3>Lithium-6 comparison</h3>
+            <div class="li-chart">
+              <div><span>Needed per pilot plant</span><strong>tens of tonnes</strong></div>
+              <div><span>Available today</span><strong>effectively zero</strong></div>
+            </div>
+          </div>
+          <p>Method note: This site does not provide a complete material-demand forecast. Reactor and blanket designs differ, and public, comparable material inventories are limited. Any future estimate should state its design assumptions, system boundary and uncertainty range.</p>
+          <div class="pager"><a href="#governance">Previous</a><a href="#remedy">Next</a></div>
+        </div>
+      </section>
+
+      <section id="remedy" class="section">
+        <div class="container narrow">
+          <h2>Remedy-first framework</h2>
+          <p>Where a supplier relationship can responsibly continue, an identified risk should trigger assessment and corrective action rather than automatic disengagement. Severe impacts may require suspension or termination.</p>
+          <div class="ladder" id="ladder">
+            <button class="ladder-step active" data-step="0">1. Identify</button>
+            <button class="ladder-step" data-step="1">2. Engage</button>
+            <button class="ladder-step" data-step="2">3. Improve on a deadline</button>
+            <button class="ladder-step" data-step="3">4. Suspend temporarily</button>
+            <button class="ladder-step" data-step="4">5. Exit responsibly</button>
+          </div>
+          <div class="ladder-detail" id="ladder-detail">
+            <h3>Identify</h3>
+            <p>Mapping or audit finds a risk. The first response is to understand the exposure and agree what evidence is missing.</p>
+          </div>
+          <div class="guardrails">
+            <h3>Three guardrails</h3>
+            <ul>
+              <li>No blanket regional exclusion.</li>
+              <li>Report outcomes, not just avoidance.</li>
+              <li>Fund remedy.</li>
+            </ul>
+          </div>
+          <div class="ditch-run">
+            <h3>Why it matters: the ditch-and-run problem</h3>
+            <p>A September 2026 Reuters report on forced-labour enforcement describes persistent shortcomings in social audits, including concerns about audit duration, worker participation and the possibility that assessments can be managed by the audited company. It also reports an estimate of 27.6 million people in forced labour and discusses the EU’s product-ban approach. These are claims reported in that article, not findings specific to fusion supply chains.</p>
+            <p>The report is relevant here as a governance analogy, not proof that market-access penalties will work in every sector. If buyers respond to risk only by switching suppliers, they may transfer the costs to workers and communities while leaving the underlying conditions unaddressed. A responsible response should combine credible evidence, worker-informed assessment, time-bound corrective action and remedy; suspension or exit may be necessary when severe harm persists or engagement cannot reduce it.</p>
+            <p>Reuters also cites a study by the Global Accountability Project that found a 22-percentage-point reduction in audit failures when businesses faced a threat of lost business. That result supports examining the role of commercial consequences, but it does not establish a causal effect for fusion procurement or demonstrate that product bans alone deliver remedy.</p>
+          </div>
+          <h3>What happens if…</h3>
+          <div class="scenario-grid">
+            <article class="scenario-card"><h4>Audit finds child labour</h4><p>Escalate through the ladder: engage, establish a corrective action plan and support monitoring.</p></article>
+            <article class="scenario-card"><h4>Smelter cannot document origin</h4><p>Pause new orders while engagement continues and insist on traceability evidence.</p></article>
+            <article class="scenario-card"><h4>Supplier is financing armed groups</h4><p>Immediate exit with notice and a transition period, while assessing the impact on workers.</p></article>
+          </div>
+          <p>This framework is built into all three briefs.</p>
+          <div class="pager"><a href="#demand">Previous</a><a href="#brief-investors">Next</a></div>
+        </div>
+      </section>
+
+      <section id="brief-investors" class="section">
+        <div class="container narrow">
+          <div class="brief-header">
+            <h2>Materials risk is project risk. Manage it before it delays your plant.</h2>
+            <div class="brief-actions"><button class="copy-link">Copy link</button><button class="print-btn">Print or save as PDF</button></div>
+          </div>
+          <div class="brief-summary">
+            <p><strong>Ask:</strong> Require a remedy-first sourcing policy in every fusion-offtake and project-finance contract.</p>
+            <ol>
+              <li>Map tungsten, lithium-6, beryllium and rare earths to smelter level before major procurement.</li>
+              <li>Put remedy-first escalation in the term sheet.</li>
+              <li>Report outcomes and supplier milestones every year.</li>
+            </ol>
+            <p><strong>Why now:</strong> many projects remain pre-commercial, so procurement expectations can be considered while designs, financing and supplier relationships are still developing.</p>
+          </div>
+          <h3>Why it matters to you</h3>
+          <p>Supply, regulatory, offtake, reputational and financing risk are all part of project risk. Big Tech involvement creates leverage through contracts and equity, not direct control of the mineral chain.</p>
+          <table>
+            <thead><tr><th>Risk</th><th>What it means</th></tr></thead>
+            <tbody>
+              <tr><td>Supply</td><td>Concentration in some tungsten-processing stages and the lack of established commercial lithium-6 supply at fusion-relevant scale may create procurement constraints.</td></tr>
+              <tr><td>Regulatory</td><td>Due diligence rules may extend to fusion materials as the sector grows.</td></tr>
+              <tr><td>Offtake</td><td>Buyers can add sourcing conditions to power contracts.</td></tr>
+              <tr><td>Reputational</td><td>Unaddressed sourcing risks may conflict with a project’s public commitments and stakeholder expectations.</td></tr>
+              <tr><td>Financing</td><td>Investors and lenders can assess whether sourcing risks are material to project plans and controls.</td></tr>
+            </tbody>
+          </table>
+          <h3>Actions in detail</h3>
+          <div class="copy-block">
+            <h4>Responsible fusion offtake clause</h4>
+            <p>“The buyer will implement an OECD-aligned sourcing policy within 12 months, requiring mapping of tungsten, lithium-6, beryllium and rare earths to smelter level before major procurement, audited smelters or a plan to audit, a grievance mechanism and a remedy-first escalation ladder rather than automatic termination.”</p>
+            <button class="copy-button">Copy</button>
+          </div>
+          <div class="copy-block">
+            <h4>KPI pack</h4>
+            <p>“Track the share of volume mapped to smelter level, the share of smelters audited, issues found and resolved, and grievances received and closed.”</p>
+            <button class="copy-button">Copy</button>
+          </div>
+          <p><a href="#remedy">Read the remedy-first framework</a>.</p>
+          <h3>Evidence</h3>
+          <ul>
+            <li><a href="#chain-tungsten">Tungsten supply chain</a></li>
+            <li><a href="#chain-lithium">Lithium supply chain</a></li>
+            <li><a href="#governance">Governance gaps</a></li>
+          </ul>
+          <p><strong>Limits and next steps:</strong> This brief does not claim that a named company has used conflict-sourced material. The next decision point is the next major offtake or term-sheet negotiation.</p>
+          <div class="pager"><a href="#remedy">Previous</a><a href="#brief-eu">Next</a></div>
+        </div>
+      </section>
+
+      <section id="brief-eu" class="section">
+        <div class="container narrow">
+          <div class="brief-header">
+            <h2>Address fusion materials in EU due-diligence policy before procurement scales.</h2>
+            <div class="brief-actions"><button class="copy-link">Copy link</button><button class="print-btn">Print or save as PDF</button></div>
+          </div>
+          <div class="brief-summary">
+            <p><strong>Ask:</strong> Add fusion materials to the due-diligence and funding conditions now, before major EU-backed projects lock in procurement.</p>
+            <ol>
+              <li>Condition public funding on OECD-aligned due diligence and reporting.</li>
+              <li>Review the Conflict Minerals Regulation and name fusion-related materials.</li>
+              <li>Require remedy-first clauses in Fusion for Energy procurement and licensing rules.</li>
+            </ol>
+            <p><strong>Why now:</strong> Euratom 2026–27 committed €222 million to fusion, and the sector is still early enough to align standards before supplier relationships harden.</p>
+          </div>
+          <h3>Why it matters to you</h3>
+          <p>Fusion could contribute to lower-carbon energy systems, but that potential does not remove the need to examine material sourcing. This brief asks whether EU funding and procurement mechanisms can encourage proportionate due diligence and remediation without implying that EU fusion projects currently use conflict-affected sources.</p>
+          <h3>Actions in detail</h3>
+          <div class="copy-block">
+            <h4>Funding condition</h4>
+            <p>“EU funding for fusion projects shall require OECD-aligned due diligence for tungsten, lithium-6, beryllium and rare earths; a grievance mechanism; a remedy-first escalation ladder; and annual reporting on corrective actions and remediation outcomes.”</p>
+            <button class="copy-button">Copy</button>
+          </div>
+          <div class="copy-block">
+            <h4>Regulation review</h4>
+            <p>“The EU should commit in the 2026–27 review of the Conflict Minerals Regulation to extend coverage beyond raw tungsten to tungsten components and assess beryllium and rare earths in fusion supply chains, while making clear that blanket avoidance is not compliance.”</p>
+            <button class="copy-button">Copy</button>
+          </div>
+          <div class="copy-block">
+            <h4>Licensing condition</h4>
+            <p>“The EU should model a fusion licensing rule on the Batteries Regulation: a verified due diligence policy as a condition of permission, remedy-first escalation as a binding requirement, and public reporting on what was remediated and what remains unresolved.”</p>
+            <button class="copy-button">Copy</button>
+          </div>
+          <p><a href="#governance">Review the governance gaps</a>.</p>
+          <p><strong>Limits and next steps:</strong> This brief does not claim that EU fusion projects source conflict-affected minerals. Its recommendations are policy proposals, not descriptions of current legal requirements. Their relevance should be assessed against applicable law and any subsequent amendments.</p>
+          <div class="pager"><a href="#brief-investors">Previous</a><a href="#brief-un">Next</a></div>
+        </div>
+      </section>
+
+      <section id="brief-un" class="section">
+        <div class="container narrow">
+          <div class="brief-header">
+            <h2>Consider fusion materials in critical-minerals traceability discussions.</h2>
+            <div class="brief-actions"><button class="copy-link">Copy link</button><button class="print-btn">Print or save as PDF</button></div>
+          </div>
+          <div class="brief-summary">
+            <p><strong>Ask:</strong> Add fusion-relevant materials to the UN traceability and accountability agenda and embed remedy-first principles before the market scales.</p>
+            <ol>
+              <li>Add tungsten, lithium-6, beryllium and rare earths to the task-force scope.</li>
+              <li>Adopt remedy-first as a principle, not just disclosure of risk.</li>
+              <li>Recognise remediation funds and grievance mechanisms as part of accountability.</li>
+            </ol>
+            <p><strong>Why now:</strong> UN critical-energy-transition-minerals work offers a forum to examine how traceability and accountability approaches relate to emerging energy technologies, including fusion.</p>
+          </div>
+          <h3>Why it matters to you</h3>
+          <p>Fusion-specific material requirements and supply-chain evidence remain limited in the public record. The task force can clarify where existing critical-minerals work applies and where further analysis may be useful.</p>
+          <h3>Actions in detail</h3>
+          <div class="copy-block">
+            <h4>Scope language</h4>
+            <p>“The framework should explicitly include fusion-relevant minerals, including tungsten, lithium-6, beryllium and rare earths, and should treat them as materials of concern where concentrated supply chains, traceability gaps or human-rights risk intersect with emerging energy technology demand.”</p>
+            <button class="copy-button">Copy</button>
+          </div>
+          <div class="copy-block">
+            <h4>Remedy-first language</h4>
+            <p>“The framework should require a remedy-first approach: engagement, corrective action, measurable milestones, support for affected communities and workers, and a disciplined exit only after earlier steps fail or where the abuse is most severe.”</p>
+            <button class="copy-button">Copy</button>
+          </div>
+          <p>Other relevant forums include UNEA, the Security Council and the UN Forum on Business and Human Rights in Geneva.</p>
+          <p><strong>Limits and next steps:</strong> This brief does not claim direct use of conflict-sourced material by named fusion companies. The next decision point is the UN Task Force analytical study and expert discussions in 2027.</p>
+          <div class="pager"><a href="#brief-eu">Previous</a><a href="#methodology">Next</a></div>
+        </div>
+      </section>
+
+      <section id="methodology" class="section">
+        <div class="container narrow">
+          <h2>Methodology</h2>
+          <p><strong>Research questions:</strong> Which stages of selected fusion-material supply chains are concentrated or difficult to trace? What social and environmental risks are reported in relevant producing regions? How do existing due-diligence instruments apply to those materials and downstream products?</p>
+          <p><strong>Scope:</strong> five materials — tungsten, lithium, lithium-6, beryllium and rare earths — considered across five stages: mine, trade, refining, components and plant. Lithium and lithium-6 are treated separately where isotopic separation changes the supply-chain analysis.</p>
+          <p><strong>Sources and tools:</strong> The research draws on USGS commodity information, UN materials, NGO and investigative reporting, policy instruments, industry publications and public company disclosures. Sayari and web-search tools were used for discovery and supply-chain research; they do not independently verify every relationship presented.</p>
+          <p><strong>Evidence handling:</strong> Claims are categorized as documented, reported or inferred. “Documented” indicates support in a primary record or directly available data; “reported” identifies claims attributed to an external source; “inferred” marks the project’s interpretation of available evidence. These labels describe evidentiary status, not the severity of a risk.</p>
+          <p><strong>Naming policy:</strong> A location-level or material-level risk is not evidence that a named fusion company is exposed to a specific source. Company names are included for sector context only; the site does not allege that any named company has used conflict-sourced material.</p>
+          <p><strong>AI-use disclosure:</strong> AI tools assisted with research and drafting. The author is responsible for reviewing the content and should verify claims against the cited source documents before relying on them.</p>
+          <table>
+            <thead><tr><th>Update</th><th>When</th><th>What changed</th></tr></thead>
+            <tbody>
+              <tr><td>Version 1</td><td>November 2026</td><td>Initial site build and content structure.</td></tr>
+            </tbody>
+          </table>
+          <div class="pager"><a href="#brief-un">Previous</a><a href="#limitations">Next</a></div>
+        </div>
+      </section>
+
+      <section id="limitations" class="section">
+        <div class="container narrow">
+          <h2>Limitations</h2>
+          <p>Public information on fusion-specific material demand and procurement is limited. Estimates for lithium-6, beryllium, tungsten and rare earths depend on reactor design, material substitutions and system boundaries; this site does not provide a complete bill of materials or a plant-level demand forecast.</p>
+          <p>Supply-chain concentration and reports of harm in a producing region do not establish that a particular fusion project purchases from that region. Publicly available trade and company data may also be aggregated, incomplete or difficult to connect to specific components.</p>
+          <p>Legal coverage depends on the instrument’s scope, the product, the company and the relevant jurisdiction. The governance matrix is a high-level comparison, not legal advice. Claims and estimates should be checked against the underlying source and its publication date.</p>
+          <div class="pager"><a href="#methodology">Previous</a><a href="#sources">Next</a></div>
+        </div>
+      </section>
+
+      <section id="sources" class="section">
+        <div class="container narrow">
+          <h2>Sources</h2>
+          <p>The evidence base combines commodity statistics, primary policy texts, UN materials, NGO and investigative reporting, and industry publications. These source types answer different questions and have different limitations; a reported risk should not be read as proof of a link to a fusion buyer.</p>
+          <ul>
+            <li>USGS mineral commodity summaries and commodity-specific pages for tungsten, rare earths, lithium and beryllium.</li>
+            <li>UN reporting on the DRC, Myanmar and critical minerals governance, including reporting on mineral-linked harm and traceability gaps.</li>
+            <li>NGO reporting and reporting partnerships on Kachin, eastern DR Congo and supply-chain exposure in critical minerals.</li>
+            <li>EU Regulation 2017/821 on conflict minerals supply chain due diligence.</li>
+            <li>EU Regulation 2023/1542 on batteries and waste batteries.</li>
+            <li>OECD Due Diligence Guidance for Responsible Supply Chains of Minerals from Conflict-Affected and High-Risk Areas.</li>
+            <li>Fusion Industry Association 2026 financing data and public company filings.</li>
+            <li>IEA market data on electricity demand and energy systems.</li>
+            <li>Reuters, “Forced labour: Will the EU’s threat of product bans succeed where supply-chain audits failed?” (September 2026), for reporting on social audits and product-ban enforcement. The article is used as a policy analogy, not as evidence about fusion supply chains.</li>
+          </ul>
+          <p>Source labels in the risk register identify the evidence category used for each entry. They are signposts rather than substitutes for consulting the underlying reports, data and legal texts. The confidence labels used here are documented, reported and inferred.</p>
+          <div class="pager"><a href="#limitations">Previous</a><a href="#about">Next</a></div>
+        </div>
+      </section>
+
+      <section id="about" class="section">
+        <div class="container narrow">
+          <h2>About</h2>
+          <p>This student research project examines how mineral sourcing, supply-chain governance and human-rights due diligence intersect with emerging fusion technologies. It is intended as a research and policy discussion resource, not a finding about the sourcing practices of any specific fusion company.</p>
+          <h3>Iteration log</h3>
+          <p>Planned reader testing will ask investors, EU-policy readers and UN or NGO practitioners whether the evidence, uncertainties and proposed actions are clear and decision-relevant.</p>
+          <p>Version 1 presents an initial evidence map and policy framing. It should be updated as source data, fusion designs and regulatory requirements change.</p>
+          <div class="pager"><a href="#sources">Previous</a><a href="#overview">Top</a></div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container footer-row">
+        <div>
+          <strong>Fusion Minerals</strong>
+          <p>Updated November 2026</p>
+        </div>
+        <div>
+          <a href="#methodology">Methodology</a>
+          <a href="#limitations">Limitations</a>
+          <a href="#about">About</a>
+          <a href="https://github.com/isislcn/fusion-minerals" target="_blank" rel="noreferrer">GitHub repo</a>
+        </div>
+      </div>
+    </footer>
+
+    <div class="date-stamp">November 2026</div>
+
+    <script src="js/data.js"></script>
+    <script src="js/app.js"></script>
+  </body>
+</html>
