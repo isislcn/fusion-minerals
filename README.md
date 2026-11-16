@@ -20,4 +20,4 @@ See [Methodology](./index.html#methodology), [Limitations](./index.html#limitati
 
 ## Publishing
 
-Pushes to `main` deploy the root directory to GitHub Pages using the workflow in `.github/workflows/pages.yml`.
+Pushes to `main` deploy the root directory to GitHub Pages using the workflow in `.github/workflows/pages.yml`. The workflow enables Pages during its first deployment.
