@@ -18,6 +18,77 @@ const evidencePanel = document.getElementById('evidence-panel');
 const ladderSteps = document.querySelectorAll('.ladder-step');
 const ladderDetail = document.getElementById('ladder-detail');
 
+function cite(ids) {
+  const sourceIds = Array.isArray(ids) ? ids : String(ids || '').split(',').map((id) => id.trim()).filter(Boolean);
+  const references = sourceIds
+    .map((id) => SOURCES.find((source) => source.id === id))
+    .filter(Boolean);
+  if (!references.length) return '';
+  return `<span class="citation">(${references.map((source) => `${source.verify ? '<!-- VERIFY -->' : ''}<a href="#src-${source.id}">${source.cite}</a>`).join('; ')})</span>`;
+}
+
+function renderCitations(root = document) {
+  root.querySelectorAll('[data-cite]').forEach((element) => {
+    element.innerHTML = cite(element.dataset.cite);
+  });
+}
+
+function renderSources() {
+  const list = document.getElementById('source-list');
+  if (!list) return;
+  const sourceTypes = ['all', 'un', 'eu-law', 'us-uk', 'ngo', 'research', 'industry', 'news'];
+  const filterLabels = { all: 'All', un: 'UN', 'eu-law': 'EU law', 'us-uk': 'US and UK', ngo: 'NGO', research: 'Research', industry: 'Industry', news: 'News' };
+  const filters = document.getElementById('source-filters');
+  filters.innerHTML = sourceTypes.map((type) => `
+    <button class="filter source-filter${type === 'all' ? ' active' : ''}" type="button" data-source-type="${type}" aria-pressed="${type === 'all'}">${filterLabels[type]}</button>
+  `).join('');
+  const alphabeticalSources = [...SOURCES].sort((a, b) => a.apa.localeCompare(b.apa));
+  list.innerHTML = alphabeticalSources.map((source) => `
+    ${source.verify ? '<!-- VERIFY -->' : ''}
+    <li id="src-${source.id}" data-source-type="${source.type}">
+      <span>${source.apa}</span>
+      ${source.url ? `<a class="source-url" href="${source.url}" target="_blank" rel="noopener">${source.url}</a>` : '<span class="pending">URL to verify</span>'}
+      <button class="copy-source" type="button" data-source-id="${source.id}">Copy APA reference</button>
+      ${source.verify ? '<span class="verify-flag">Verify reference</span>' : ''}
+    </li>
+  `).join('');
+  renderCitations(document.getElementById('sources'));
+}
+
+function setupSources() {
+  const filters = document.getElementById('source-filters');
+  filters?.addEventListener('click', (event) => {
+    const button = event.target.closest('.source-filter');
+    if (!button) return;
+    filters.querySelectorAll('.source-filter').forEach((item) => {
+      const active = item === button;
+      item.classList.toggle('active', active);
+      item.setAttribute('aria-pressed', String(active));
+    });
+    document.querySelectorAll('#source-list li').forEach((item) => {
+      item.hidden = button.dataset.sourceType !== 'all' && item.dataset.sourceType !== button.dataset.sourceType;
+    });
+  });
+  document.getElementById('source-list')?.addEventListener('click', async (event) => {
+    const button = event.target.closest('.copy-source');
+    if (!button) return;
+    const source = SOURCES.find((item) => item.id === button.dataset.sourceId);
+    if (!source) return;
+    await navigator.clipboard.writeText(source.apa.replace(/<[^>]+>/g, ''));
+    button.textContent = 'Copied';
+  });
+  document.getElementById('download-references')?.addEventListener('click', () => {
+    const text = [...SOURCES].sort((a, b) => a.apa.localeCompare(b.apa))
+      .map((source) => `${source.apa.replace(/<[^>]+>/g, '')}${source.url ? ` ${source.url}` : ''}`).join('\n\n');
+    const url = URL.createObjectURL(new Blob([text], { type: 'text/plain;charset=utf-8' }));
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = 'fusion-minerals-references.txt';
+    link.click();
+    URL.revokeObjectURL(url);
+  });
+}
+
 const ladderStates = [
   { title: 'Identify', text: 'Mapping or audit finds a risk. The first response is to understand the exposure and agree what evidence is missing.' },
   { title: 'Engage', text: 'Raise the issue with the supplier and agree a corrective action plan with measurable milestones.' },
@@ -127,6 +198,13 @@ function setupPageTabs() {
     });
 
     if (resetScroll) window.scrollTo({ top: 0, behavior: 'smooth' });
+    if (id.startsWith('src-') || id.startsWith('human-cost-')) {
+      requestAnimationFrame(() => {
+        target?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        target?.classList.add('highlighted');
+        window.setTimeout(() => target?.classList.remove('highlighted'), 1800);
+      });
+    }
   }
 
   document.addEventListener('click', (event) => {
@@ -218,7 +296,7 @@ function renderRiskTable() {
       <td>${row.risk}</td>
       <td>${row.location}</td>
       <td>${row.confidence}</td>
-      <td>${row.source}</td>
+      <td>${row.sourceIds.length ? cite(row.sourceIds) : 'Project analysis'}</td>
     </tr>
   `;
   }).join('');
@@ -352,7 +430,7 @@ function setupRiskFilters() {
   document.getElementById('download-csv').addEventListener('click', () => {
     const csvRows = [
       ['ID', 'Material', 'Stage', 'Risk', 'Location', 'Confidence', 'Source', 'Risk type'],
-      ...riskRows.map((row) => [row.id, row.material, row.stage, row.risk, row.location, row.confidence, row.source, row.type])
+      ...riskRows.map((row) => [row.id, row.material, row.stage, row.risk, row.location, row.confidence, row.sourceIds.map((id) => SOURCES.find((source) => source.id === id)?.apa.replace(/<[^>]+>/g, '')).filter(Boolean).join('; ') || 'Project analysis', row.type])
     ];
     const csv = csvRows.map((row) => row.map((cell) => `"${String(cell).replace(/"/g, '""')}"`).join(',')).join('\n');
     const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
@@ -417,6 +495,9 @@ function setupLayerCards() {
 function init() {
   initNav();
   setupPageTabs();
+  renderSources();
+  setupSources();
+  renderCitations();
   renderFilters();
   renderRiskTable();
   const initialRoute = getChainRoute(window.location.hash);

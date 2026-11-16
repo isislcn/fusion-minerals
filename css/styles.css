@@ -357,6 +357,16 @@ th { color: var(--muted); font-size: 0.7rem; letter-spacing: 0.08em; text-transf
 select { background: var(--surface); color: var(--text); border: 1px solid rgba(255,255,255,0.08); border-radius: 10px; padding: 0.7rem 0.9rem; }
 .table-wrap { overflow-x: auto; }
 .count-line { color: var(--muted); }
+.citation { color: var(--muted); font-size: 0.9em; }
+.citation a { white-space: nowrap; }
+.source-list { padding-left: 2em; }
+.source-list li { padding: 14px 0; text-indent: -2em; overflow-wrap: anywhere; transition: background 0.2s ease; }
+.source-list li > * { text-indent: 0; }
+.source-list .source-url { display: block; margin: 4px 0 8px; }
+.source-list .copy-source { margin-right: 8px; }
+.verify-flag { color: var(--rust); font: 0.7rem "Geist Mono", monospace; text-transform: uppercase; }
+.source-list li.highlighted, .highlighted { outline: 2px solid var(--gold); outline-offset: 4px; background: rgba(209,172,85,0.12); }
+.source-filter[aria-pressed="true"] { border-color: var(--gold); color: var(--gold); }
 
 .state { display: inline-block; padding: 0.18rem 0.5rem; border-radius: 999px; font-size: 0.8rem; border: 1px solid; }
 .state.covered { color: #a4dec5; border-color: #a4dec5; }
