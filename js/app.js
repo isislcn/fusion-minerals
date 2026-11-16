@@ -54,19 +54,6 @@ function selectChainStage(stageId) {
   });
 }
 
-function handleChainHash() {
-  const route = getChainRoute(window.location.hash);
-  if (!route) return false;
-
-  materialButtons.forEach((button) => {
-    button.classList.toggle('active', button.dataset.material === route.materialKey);
-  });
-  buildChain(route.materialKey);
-  if (route.stageId) selectChainStage(route.stageId);
-  document.getElementById('chain').scrollIntoView({ behavior: 'smooth', block: 'start' });
-  return true;
-}
-
 function initNav() {
   navToggle.addEventListener('click', () => {
     const isOpen = mainNav.classList.toggle('open');
@@ -84,11 +71,87 @@ function initNav() {
   });
 }
 
-function setupSectionLinks() {
-  document.querySelectorAll('a[href^="#"]').forEach((link) => {
-    link.target = '_blank';
-    link.rel = 'noopener';
+function setupPageTabs() {
+  const main = document.querySelector('main');
+  const sections = [...main.children].filter((child) => child.matches('section'));
+  const primerIndex = sections.findIndex((section) => section.id === 'primer');
+  const pageGroups = [
+    { anchor: 'overview', label: 'Overview', sections: sections.slice(0, primerIndex) },
+    ...sections.slice(primerIndex).map((section) => ({
+      anchor: section.id,
+      label: section.querySelector('h2')?.textContent.trim() || section.id,
+      sections: [section]
+    }))
+  ];
+
+  pageGroups.forEach(({ anchor, label, sections: pageSections }) => {
+    const panel = document.createElement('div');
+    panel.id = `page-${anchor}`;
+    panel.className = 'page-view';
+    panel.dataset.pageAnchor = anchor;
+    panel.setAttribute('role', 'region');
+    panel.setAttribute('aria-label', label);
+    panel.tabIndex = 0;
+    pageSections.forEach((section) => panel.appendChild(section));
+    main.appendChild(panel);
   });
+
+  function showPage(hash, { resetScroll = true } = {}) {
+    const route = getChainRoute(hash);
+    if (route) {
+      materialButtons.forEach((button) => {
+        button.classList.toggle('active', button.dataset.material === route.materialKey);
+      });
+      buildChain(route.materialKey);
+      if (route.stageId) selectChainStage(route.stageId);
+    }
+
+    const id = hash.replace(/^#/, '');
+    const target = document.getElementById(id);
+    const page = target?.closest('.page-view')
+      || (route ? document.getElementById('chain')?.closest('.page-view') : null)
+      || document.getElementById('page-overview');
+
+    document.querySelectorAll('.page-view').forEach((panel) => {
+      const active = panel === page;
+      panel.hidden = !active;
+      panel.setAttribute('aria-hidden', String(!active));
+    });
+
+    document.querySelectorAll('#main-nav a[href^="#"]').forEach((link) => {
+      if (link.hash === `#${page.dataset.pageAnchor}`) {
+        link.setAttribute('aria-current', 'page');
+      } else {
+        link.removeAttribute('aria-current');
+      }
+    });
+
+    if (resetScroll) window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  document.addEventListener('click', (event) => {
+    const link = event.target.closest('a[href^="#"]');
+    if (!link || event.defaultPrevented || event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+
+    const hash = link.getAttribute('href');
+    if (!hash || hash === '#') return;
+    const route = getChainRoute(hash);
+    const target = document.getElementById(hash.slice(1));
+    if (!target && !route) return;
+
+    event.preventDefault();
+    if (window.location.hash === hash) {
+      showPage(hash);
+      return;
+    }
+    window.history.pushState(null, '', hash);
+    showPage(hash);
+  });
+
+  const handleLocationChange = () => showPage(window.location.hash || '#overview');
+  window.addEventListener('hashchange', handleLocationChange);
+  window.addEventListener('popstate', handleLocationChange);
+  showPage(window.location.hash || '#overview', { resetScroll: false });
 }
 
 function renderFilters() {
@@ -149,7 +212,7 @@ function renderRiskTable() {
     const target = stage ? `#chain-${stage.id}` : '#chain';
     return `
     <tr data-link="${target}">
-      <td><a href="${target}" target="_blank" rel="noopener">${row.id}</a></td>
+      <td><a href="${target}">${row.id}</a></td>
       <td>${row.material}</td>
       <td>${row.stage}</td>
       <td>${row.risk}</td>
@@ -166,7 +229,7 @@ function renderRiskTable() {
     row.addEventListener('click', (event) => {
       if (event.target.closest('a')) return;
       const target = row.dataset.link || '#chain';
-      window.open(target, '_blank', 'noopener');
+      window.location.hash = target;
     });
   });
 }
@@ -211,7 +274,7 @@ function renderStageDetail(material, stage) {
     <p><strong>Risk:</strong> ${stage.risk}</p>
     <p><strong>Confidence:</strong> ${stage.confidence}</p>
     <p><strong>Evidence:</strong> ${stage.evidence}</p>
-    <p><a href="#risks" target="_blank" rel="noopener">View the evidence register</a></p>
+    <p><a href="#risks">View the evidence register</a></p>
   `;
 
   const copyDetail = stageDetail.querySelector('.copy-detail');
@@ -343,7 +406,7 @@ function setupLayerCards() {
         <p><strong>Role:</strong> ${layer.textContent.trim() === 'Plasma' ? 'Fuel burns here' : layer.textContent.trim() === 'First wall' ? 'Faces the plasma' : layer.textContent.trim() === 'Divertor' ? 'Removes heat and exhaust' : layer.textContent.trim() === 'Breeding blanket' ? 'Makes new tritium, captures heat' : layer.textContent.trim() === 'Shield' ? 'Protects the magnets' : layer.textContent.trim() === 'Vacuum vessel' ? 'Sealed chamber' : layer.textContent.trim() === 'Magnets' ? 'Hold the plasma' : 'Keeps the magnets cold' }</p>
         <p><strong>Materials:</strong> ${materialKey === 'tungsten' ? 'Tungsten' : materialKey === 'lithium' ? 'Lithium (lithium-6)' : materialKey === 'rare-earths' ? 'Rare earths' : 'Steel / beryllium'}</p>
         <p><strong>Key supply risk:</strong> ${materialKey === 'tungsten' ? 'Concentrated refining and traceability weakness' : materialKey === 'lithium' ? 'Lithium-6 supply is effectively zero' : materialKey === 'rare-earths' ? 'Refining concentration and mine-linked harm' : 'Small supply base and design dependence'}</p>
-        <a href="${relevantLink}" target="_blank" rel="noopener">Trace this mineral →</a>
+        <a href="${relevantLink}">Trace this mineral →</a>
       `;
       document.getElementById('cutaway-detail').innerHTML = copy;
       document.querySelectorAll('.layer').forEach((item) => item.classList.toggle('active', item === layer));
@@ -353,7 +416,7 @@ function setupLayerCards() {
 
 function init() {
   initNav();
-  setupSectionLinks();
+  setupPageTabs();
   renderFilters();
   renderRiskTable();
   const initialRoute = getChainRoute(window.location.hash);
@@ -370,14 +433,6 @@ function init() {
   setupLadder();
   setupPrintAndCopy();
   setupLayerCards();
-  window.addEventListener('hashchange', handleChainHash);
-  if (window.location.hash && !initialRoute) {
-    const hash = window.location.hash;
-    const target = document.querySelector(hash);
-    if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-  } else if (initialRoute) {
-    document.getElementById('chain').scrollIntoView({ behavior: 'smooth', block: 'start' });
-  }
 }
 
 init();

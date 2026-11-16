@@ -97,6 +97,15 @@ p, li { color: var(--text); }
   cursor: pointer;
 }
 
+.main-nav > a[aria-current="page"],
+.nav-panel a[aria-current="page"] {
+  color: var(--gold);
+  background: rgba(209,172,85,0.12);
+}
+
+.page-view[hidden] { display: none; }
+.page-view { min-height: 60vh; }
+
 .nav-group {
   position: relative;
 }
