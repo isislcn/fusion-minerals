@@ -99,6 +99,26 @@ const SOURCES = [
   { id: 'wnn-2026', type: 'news', cite: 'World Nuclear News, 2026', apa: 'World Nuclear News. (2026). Fusion industry raised USD4.5 billion in past year, report says.', url: 'https://wnn.world-nuclear.org/articles/fusion-industry-raised-usd45-billion-over-past-year-report-says', verify: true }
 ];
 
+const TIMELINE = [
+  { t: 2025.10, date: 'Feb 2025', text: 'China adds export licensing for tungsten', line: 'fusion', audiences: ['investors', 'eu'], status: 'done', sourceIds: ['usgs-2026'] },
+  { t: 2025.95, date: 'Dec 2025', text: 'UN Task Force on Critical Energy Transition Minerals launched', line: 'global', audiences: ['un'], status: 'done', sourceIds: ['unctad-2026'] },
+  { t: 2026.15, date: 'Feb 2026', text: 'US NRC proposes a regulatory framework for fusion machines', line: 'global', audiences: ['investors'], status: 'done', sourceIds: ['nrc-2026'] },
+  { t: 2026.20, date: 'Mar 2026', text: 'Euratom 2026–27 commits €222 million to fusion', line: 'eu', audiences: ['eu', 'investors'], status: 'done', sourceIds: ['ec-2026'] },
+  { t: 2026.45, date: '2026', text: 'EU Conflict Minerals Regulation under review', line: 'eu', audiences: ['eu'], status: 'planned', sourceIds: ['cmr-2017'] },
+  { t: 2026.55, date: 'Jul 2026', text: 'Critical Raw Materials Act amendments reach Parliament', line: 'eu', audiences: ['eu', 'investors'], status: 'done', sourceIds: ['ep-2026'] },
+  { t: 2026.53, date: 'Jul 2026', text: 'First UN High-Level Meeting on critical energy transition minerals', line: 'global', audiences: ['un'], status: 'done', sourceIds: ['unctad-2026'] },
+  { t: 2026.75, date: 'Sep–Oct 2026', text: 'UN study on a traceability framework', line: 'global', audiences: ['un'], status: 'done', sourceIds: ['unctad-2026'] },
+  { t: 2027.00, date: 'Pending', text: 'EU Fusion Strategy', line: 'eu', audiences: ['eu', 'investors'], status: 'pending', sourceIds: ['evroux-2026'] },
+  { t: 2027.30, date: '2027', text: 'SPARC first plasma targeted', line: 'fusion', audiences: ['investors', 'eu', 'un'], status: 'planned', sourceIds: ['wnn-2026'] },
+  { t: 2027.40, date: '2027', text: 'UN expert discussions on the traceability framework', line: 'global', audiences: ['un'], status: 'planned', sourceIds: ['unctad-2026'] },
+  { t: 2027.62, date: 'Aug 2027', text: 'EU battery due diligence applies (lithium in batteries only)', line: 'eu', audiences: ['eu'], status: 'planned', sourceIds: ['batt-2023'] },
+  { t: 2027.95, date: 'Dec 2027', text: 'EU ban on products made with forced labour applies', line: 'eu', audiences: ['eu', 'investors', 'un'], status: 'planned', sourceIds: ['flr-2024'] },
+  { t: 2027.97, date: 'Dec 2027', text: 'Statutory deadline for the US fusion rule', line: 'global', audiences: ['investors'], status: 'planned', sourceIds: ['nrc-2026'] },
+  { t: 2028.30, date: '2028', text: 'Helion’s power delivery target for Microsoft', line: 'fusion', audiences: ['investors'], status: 'planned', sourceIds: ['wnn-2026'] },
+  { t: 2029.55, date: 'Jul 2029', text: 'EU CSDDD applies to the largest firms', line: 'eu', audiences: ['eu', 'investors'], status: 'planned', sourceIds: ['csddd-2024'] },
+  { t: 2031.50, date: 'Early 2030s', text: 'First commercial plants, e.g. CFS ARC', line: 'fusion', audiences: ['investors', 'eu', 'un'], status: 'planned', sourceIds: ['wnn-2026'] }
+];
+
 const riskRows = [
   { id: 'W-MINE-01', material: 'Tungsten', stage: 'Mine', risk: 'Conflict finance', location: 'Eastern DR Congo', confidence: 'reported', sourceIds: ['unsc-2025a'], type: 'conflict finance' },
   { id: 'W-MINE-02', material: 'Tungsten', stage: 'Mine', risk: 'Worker deaths', location: 'Rubaya, North Kivu', confidence: 'reported', sourceIds: ['reuters-2026', 'ap-2026', 'unsc-2025a'], type: 'worker safety' },

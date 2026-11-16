@@ -510,6 +510,7 @@ function init() {
   renderSources();
   setupSources();
   renderCitations();
+  setupTimelines();
   renderFilters();
   renderRiskTable();
   const initialRoute = getChainRoute(window.location.hash);

@@ -3,6 +3,7 @@
   --surface: #302F2C;
   --surface-2: #3A3935;
   --text: #ECE8E0;
+  --fg: #ECE8E0;
   --muted: #A8A39A;
   --soft: #7F7A72;
   --gold: #D1AC55;
@@ -415,6 +416,50 @@ select { background: var(--surface); color: var(--text); border: 1px solid rgba(
 .confidence { display: inline-block; color: var(--muted); font: 0.72rem "Geist Mono", monospace; text-transform: uppercase; }
 .data-gap { margin: 30px 0; padding: 20px; border: 1px dashed var(--muted); border-radius: 12px; }
 .harm-link { color: var(--rust); font-weight: 600; }
+.timeline-filters { display: flex; flex-wrap: wrap; gap: 8px; margin: 14px 0; }
+.timeline-scroll-hint { display: none; color: var(--muted); font-size: 0.85rem; }
+.timeline-scroll { position: relative; overflow-x: auto; max-width: 100%; }
+.timeline-scroll::after { content: ""; pointer-events: none; position: absolute; z-index: 1; inset: 0 0 0 auto; width: 22px; background: linear-gradient(90deg, transparent, var(--bg)); }
+.rail-timeline { display: block; width: 100%; min-width: 680px; }
+.time-band.cheap { fill: rgba(209,172,85,0.1); }
+.time-band.costly { fill: rgba(209,172,85,0.05); }
+.time-band.locked { fill: rgba(255,255,255,0.02); }
+.band-label, .track-label, .year-ticks text, .outcome-label, .procurement-label, .today-marker text { font-family: "Geist Mono", monospace; fill: var(--muted); font-size: 8px; }
+.track-label { text-transform: uppercase; }
+.year-ticks line { stroke: var(--muted); }
+.timeline-track path { fill: none; stroke-width: 5; stroke-linecap: round; }
+.timeline-track[data-track="fusion"] path { stroke: var(--fg); opacity: 0.55; }
+.timeline-track[data-track="eu"] path { stroke: var(--fg); }
+.timeline-track[data-track="global"] path { stroke: var(--muted); stroke-width: 2; stroke-dasharray: 2 4; }
+.timeline-track.line-dimmed { opacity: 0.2; }
+.timeline-outcome { fill: none; stroke-linecap: round; }
+.remedy-outcome { stroke: var(--gold); stroke-width: 5; }
+.retrofit-outcome { stroke: var(--muted); stroke-width: 2; stroke-dasharray: 5 5; }
+.procurement-node { fill: var(--surface); stroke: var(--gold); }
+.procurement-label { fill: var(--text); font-size: 7px; }
+.remedy-label { fill: var(--gold); }
+.today-marker line { stroke: var(--gold); stroke-width: 1.5; stroke-dasharray: 2 4; }
+.timeline-marker { cursor: pointer; transition: opacity 0.2s ease; }
+.timeline-marker circle { fill: var(--surface); stroke-width: 2.5; }
+.timeline-marker[data-line="fusion"] circle { stroke: var(--fg); }
+.timeline-marker[data-line="eu"] circle { stroke: var(--fg); }
+.timeline-marker[data-line="global"] circle { stroke: var(--muted); }
+.timeline-marker.status-done circle { fill: var(--fg); }
+.timeline-marker.status-pending circle { stroke-dasharray: 1 3; }
+.timeline-marker text { fill: var(--text); font: 8px "Geist Mono", monospace; pointer-events: none; }
+.timeline-marker.dimmed, .timeline-event-item.dimmed { opacity: 0.2; }
+.timeline-marker.highlighted circle { fill: var(--gold); stroke: var(--gold); }
+.timeline-marker.highlighted text { fill: var(--bg); }
+.timeline-list { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px 18px; padding: 0; list-style: none; }
+.timeline-event-item { display: flex; gap: 10px; padding: 10px; border-left: 2px solid var(--soft); background: rgba(255,255,255,0.02); transition: opacity 0.2s ease, background 0.2s ease; }
+.timeline-event-item[data-line="fusion"] { border-color: var(--fg); }
+.timeline-event-item[data-line="eu"] { border-color: var(--fg); }
+.timeline-event-item[data-line="global"] { border-color: var(--muted); }
+.timeline-event-item.highlighted { background: rgba(209,172,85,0.14); outline: 1px solid var(--gold); }
+.timeline-event-item p { margin: 4px 0 0; font-size: 0.9rem; }
+.event-number { flex: 0 0 1.5rem; color: var(--gold); font: 0.8rem "Geist Mono", monospace; }
+.event-status { color: var(--muted); font: 0.7rem "Geist Mono", monospace; text-transform: uppercase; }
+.timeline-caption { color: var(--muted); font-size: 0.84rem; }
 
 .site-footer {
   border-top: 1px solid rgba(255,255,255,0.08);
@@ -459,4 +504,16 @@ select { background: var(--surface); color: var(--text); border: 1px solid rgba(
   .section { padding: 56px 0; }
   .reactor-supply .mineral-stack { grid-template-columns: 1fr; }
   .history-grid { grid-template-columns: 1fr; }
+  .timeline-scroll-hint { display: block; }
+  .timeline-list { grid-template-columns: 1fr; }
+}
+
+@media print {
+  .timeline-scroll { overflow: visible; }
+  .timeline-scroll::after, .timeline-scroll-hint, .timeline-filters { display: none !important; }
+  .rail-timeline { width: 100%; min-width: 0; }
+  .timeline-mount[data-audience="all"] .timeline-event-item,
+  .timeline-mount[data-audience="all"] .timeline-marker,
+  .timeline-mount[data-audience="all"] .timeline-track { opacity: 1 !important; }
+  .timeline-list { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
