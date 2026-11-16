@@ -77,28 +77,6 @@ p, li { color: var(--text); }
   gap: 18px;
 }
 
-.header-tools {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  margin-left: auto;
-  margin-right: 10px;
-}
-
-.header-tool {
-  width: 38px;
-  height: 38px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 50%;
-  background: rgba(255,255,255,0.04);
-  border: 1px solid rgba(255,255,255,0.09);
-  font-size: 1.2rem;
-  line-height: 1;
-  text-decoration: none;
-}
-
 .brand { color: var(--text); font-size: 1.25rem; text-decoration: none; }
 
 .main-nav {
@@ -177,12 +155,8 @@ p, li { color: var(--text); }
 
 .button-outline { border-color: var(--gold); color: var(--gold); }
 
-.hero-grid {
-  display: grid;
-  grid-template-columns: 1.15fr 0.85fr;
-  gap: 32px;
-  align-items: center;
-}
+.hero-copy { max-width: 760px; }
+.hero-copy h1 { max-width: 760px; }
 
 .panel, .brief-card, .route-card, .stat-card, .demand-card, .scenario-card, .company-card, .reason-card, .copy-block, .detail-panel, .chain-panel {
   background: var(--surface);
@@ -194,6 +168,12 @@ p, li { color: var(--text); }
 .panel {
   padding: 24px;
 }
+
+.reactor-supply .mineral-stack {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.reactor-supply .caption { max-width: 940px; }
 
 .ctas {
   display: flex;
@@ -364,27 +344,6 @@ th { color: var(--muted); font-size: 0.7rem; letter-spacing: 0.08em; text-transf
   margin-top: 30px;
 }
 
-.rail-wrap { margin-top: 24px; }
-.rail-labels { display: flex; justify-content: space-between; color: var(--muted); }
-.rail {
-  position: relative;
-  height: 90px;
-  margin-top: 16px; border-radius: 18px; background: linear-gradient(90deg, rgba(116,184,170,0.18), rgba(209,172,85,0.2), rgba(212,110,76,0.2));
-  border: 1px solid rgba(255,255,255,0.08);
-}
-.rail-fork {
-  position: absolute; left: 66%; top: 0; width: 2px; height: 100%; background: rgba(255,255,255,0.2);
-}
-.rail-fork::before, .rail-fork::after {
-  content: ""; position: absolute; width: 18px; height: 2px; background: rgba(255,255,255,0.2); top: 50%; left: -8px;
-}
-.rail-fork::before { transform: rotate(30deg); }
-.rail-fork::after { transform: rotate(-30deg); }
-.today-marker {
-  position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); background: var(--gold); color: #1b1a18; font-weight: 700; padding: 4px 8px; border-radius: 999px; font-size: 0.75rem;
-}
-.timeline-events { margin-top: 24px; }
-
 .controls-row { display: flex; gap: 12px; flex-wrap: wrap; align-items: center; margin: 18px 0; }
 select { background: var(--surface); color: var(--text); border: 1px solid rgba(255,255,255,0.08); border-radius: 10px; padding: 0.7rem 0.9rem; }
 .table-wrap { overflow-x: auto; }
@@ -440,7 +399,8 @@ select { background: var(--surface); color: var(--text); border: 1px solid rgba(
 }
 
 @media (max-width: 980px) {
-  .hero-grid, .fusion-grid, .cutaway-wrap, .chain-layout, .company-grid, .brief-grid, .route-grid, .stats-grid, .scenario-grid, .demand-grid { grid-template-columns: 1fr; }
+  .fusion-grid, .cutaway-wrap, .chain-layout, .company-grid, .brief-grid, .route-grid, .stats-grid, .scenario-grid, .demand-grid { grid-template-columns: 1fr; }
+  .reactor-supply .mineral-stack { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .brief-header { flex-direction: column; }
   .date-stamp { display: none; }
 }
@@ -454,5 +414,6 @@ select { background: var(--surface); color: var(--text); border: 1px solid rgba(
   .nav-panel { position: static; display: none; width: 100%; margin-top: 6px; }
   .nav-panel.open { display: flex; }
   .section { padding: 56px 0; }
+  .reactor-supply .mineral-stack { grid-template-columns: 1fr; }
   .history-grid { grid-template-columns: 1fr; }
 }

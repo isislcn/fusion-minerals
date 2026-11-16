@@ -17,7 +17,6 @@ const affectedPanel = document.getElementById('affected-panel');
 const evidencePanel = document.getElementById('evidence-panel');
 const ladderSteps = document.querySelectorAll('.ladder-step');
 const ladderDetail = document.getElementById('ladder-detail');
-const todayMarker = document.getElementById('today-marker');
 
 const ladderStates = [
   { title: 'Identify', text: 'Mapping or audit finds a risk. The first response is to understand the exposure and agree what evidence is missing.' },
@@ -68,13 +67,6 @@ function handleChainHash() {
   return true;
 }
 
-function setCurrentDateMarker() {
-  if (!todayMarker) return;
-  const today = new Date();
-  const label = today.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
-  todayMarker.textContent = `Today (${label})`;
-}
-
 function initNav() {
   navToggle.addEventListener('click', () => {
     const isOpen = mainNav.classList.toggle('open');
@@ -89,6 +81,13 @@ function initNav() {
       panel.classList.toggle('open', willOpen);
       button.setAttribute('aria-expanded', String(willOpen));
     });
+  });
+}
+
+function setupSectionLinks() {
+  document.querySelectorAll('a[href^="#"]').forEach((link) => {
+    link.target = '_blank';
+    link.rel = 'noopener';
   });
 }
 
@@ -150,7 +149,7 @@ function renderRiskTable() {
     const target = stage ? `#chain-${stage.id}` : '#chain';
     return `
     <tr data-link="${target}">
-      <td><a href="#chain">${row.id}</a></td>
+      <td><a href="${target}" target="_blank" rel="noopener">${row.id}</a></td>
       <td>${row.material}</td>
       <td>${row.stage}</td>
       <td>${row.risk}</td>
@@ -164,9 +163,10 @@ function renderRiskTable() {
   riskCount.textContent = `Showing ${rows.length} of ${riskRows.length} risks.`;
 
   riskBody.querySelectorAll('tr').forEach((row) => {
-    row.addEventListener('click', () => {
+    row.addEventListener('click', (event) => {
+      if (event.target.closest('a')) return;
       const target = row.dataset.link || '#chain';
-      window.location.hash = target;
+      window.open(target, '_blank', 'noopener');
     });
   });
 }
@@ -211,7 +211,7 @@ function renderStageDetail(material, stage) {
     <p><strong>Risk:</strong> ${stage.risk}</p>
     <p><strong>Confidence:</strong> ${stage.confidence}</p>
     <p><strong>Evidence:</strong> ${stage.evidence}</p>
-    <p><a href="#risks">View the evidence register</a></p>
+    <p><a href="#risks" target="_blank" rel="noopener">View the evidence register</a></p>
   `;
 
   const copyDetail = stageDetail.querySelector('.copy-detail');
@@ -343,7 +343,7 @@ function setupLayerCards() {
         <p><strong>Role:</strong> ${layer.textContent.trim() === 'Plasma' ? 'Fuel burns here' : layer.textContent.trim() === 'First wall' ? 'Faces the plasma' : layer.textContent.trim() === 'Divertor' ? 'Removes heat and exhaust' : layer.textContent.trim() === 'Breeding blanket' ? 'Makes new tritium, captures heat' : layer.textContent.trim() === 'Shield' ? 'Protects the magnets' : layer.textContent.trim() === 'Vacuum vessel' ? 'Sealed chamber' : layer.textContent.trim() === 'Magnets' ? 'Hold the plasma' : 'Keeps the magnets cold' }</p>
         <p><strong>Materials:</strong> ${materialKey === 'tungsten' ? 'Tungsten' : materialKey === 'lithium' ? 'Lithium (lithium-6)' : materialKey === 'rare-earths' ? 'Rare earths' : 'Steel / beryllium'}</p>
         <p><strong>Key supply risk:</strong> ${materialKey === 'tungsten' ? 'Concentrated refining and traceability weakness' : materialKey === 'lithium' ? 'Lithium-6 supply is effectively zero' : materialKey === 'rare-earths' ? 'Refining concentration and mine-linked harm' : 'Small supply base and design dependence'}</p>
-        <a href="${relevantLink}">Trace this mineral →</a>
+        <a href="${relevantLink}" target="_blank" rel="noopener">Trace this mineral →</a>
       `;
       document.getElementById('cutaway-detail').innerHTML = copy;
       document.querySelectorAll('.layer').forEach((item) => item.classList.toggle('active', item === layer));
@@ -353,6 +353,7 @@ function setupLayerCards() {
 
 function init() {
   initNav();
+  setupSectionLinks();
   renderFilters();
   renderRiskTable();
   const initialRoute = getChainRoute(window.location.hash);
@@ -369,7 +370,6 @@ function init() {
   setupLadder();
   setupPrintAndCopy();
   setupLayerCards();
-  setCurrentDateMarker();
   window.addEventListener('hashchange', handleChainHash);
   if (window.location.hash && !initialRoute) {
     const hash = window.location.hash;

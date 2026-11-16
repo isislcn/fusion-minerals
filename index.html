@@ -11,12 +11,6 @@
     <header class="site-header">
       <div class="container topbar">
         <a href="#overview" class="brand">Fusion Minerals</a>
-        <div class="header-tools" aria-label="Quick navigation tools">
-          <a href="#methodology" class="header-tool" title="Methodology" aria-label="Methodology">⚙️</a>
-          <a href="#limitations" class="header-tool" title="Limitations" aria-label="Limitations">⚠️</a>
-          <a href="#about" class="header-tool" title="About" aria-label="About">ℹ️</a>
-          <a href="https://github.com/isislcn/fusion-minerals" target="_blank" rel="noreferrer" class="header-tool" title="GitHub repo" aria-label="GitHub repo">🐙</a>
-        </div>
         <button class="nav-toggle" aria-expanded="false" aria-controls="main-nav">Menu</button>
         <nav id="main-nav" class="main-nav" aria-label="Main navigation">
           <a href="#overview">Overview</a>
@@ -47,17 +41,8 @@
     </header>
 
     <main>
-      <section id="overview" class="section">
-        <div class="container hero-grid">
-          <div>
-            <p class="eyebrow">Fusion energy · supply chains · human rights</p>
-            <h1>Fusion could provide low-carbon power. Its material supply chains still warrant scrutiny.</h1>
-            <p class="lede">Fusion reactor designs may rely on tungsten, lithium-6, beryllium and rare earths. Their supply chains vary in concentration, traceability and documented social or environmental risk. This research maps those exposure points without inferring that a named fusion company has sourced from them.</p>
-            <div class="ctas">
-              <a href="#chain" class="button">Trace the supply chain →</a>
-              <a href="#why-now" class="button button-secondary">Why act now</a>
-            </div>
-          </div>
+      <section id="reactor-supply" class="section section-compact reactor-supply">
+        <div class="container">
           <aside class="panel">
             <h2>Inside a reactor: who controls the supply</h2>
             <div class="mineral-stack">
@@ -88,6 +73,20 @@
             </div>
             <p class="caption">Bars indicate the estimated share attributed to the leading country at the stage shown; they are not directly comparable across different materials or stages. Hatched bars indicate that a comparable estimate is unavailable. Highlighted locations identify reported upstream risks, not evidence of a link to a particular fusion buyer.</p>
           </aside>
+        </div>
+      </section>
+
+      <section id="overview" class="section">
+        <div class="container hero-copy">
+          <div>
+            <p class="eyebrow">Fusion energy · supply chains · human rights</p>
+            <h1>Fusion could provide low-carbon power. Its material supply chains still warrant scrutiny.</h1>
+            <p class="lede">Fusion reactor designs may rely on tungsten, lithium-6, beryllium and rare earths. Their supply chains vary in concentration, traceability and documented social or environmental risk. This research maps those exposure points without inferring that a named fusion company has sourced from them.</p>
+            <div class="ctas">
+              <a href="#chain" class="button">Trace the supply chain →</a>
+              <a href="#why-now" class="button button-secondary">Why act now</a>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -355,32 +354,11 @@
       <section id="why-now" class="section">
         <div class="container">
           <h2>Why now</h2>
-          <div class="timeline-filters">
-            <button class="filter active" data-filter="all">All</button>
-            <button class="filter" data-filter="investors">Investors</button>
-            <button class="filter" data-filter="eu">EU</button>
-            <button class="filter" data-filter="un">UN</button>
-          </div>
           <div class="why-grid">
             <article class="reason-card"><h3>1. Procurement choices are still developing</h3><p>Many fusion projects have not reached commercial-scale procurement, leaving an opportunity to ask how traceability and remedy could be incorporated into purchasing decisions.</p></article>
             <article class="reason-card"><h3>2. Some supply stages are concentrated</h3><p>Available estimates indicate substantial concentration in parts of tungsten and rare-earth supply chains. The figures refer to different materials and processing stages and should not be read as a single market measure.</p></article>
             <article class="reason-card"><h3>3. Early requirements can shape practice</h3><p>Contractual and reporting expectations established before large-scale procurement may be easier to implement than requirements introduced after supply relationships are established.</p></article>
           </div>
-          <div class="rail-wrap">
-            <div class="rail-labels"><span>Cheap</span><span>Costly</span><span>Locked-in</span></div>
-            <div class="rail">
-              <div class="today-marker" id="today-marker">Today</div>
-              <div class="rail-fork"></div>
-            </div>
-          </div>
-          <div class="timeline-events">
-            <ol>
-              <li>Map material use, suppliers and known risks as designs and procurement plans develop.</li>
-              <li>Investors and prospective offtakers can ask about sourcing expectations through financing and power-purchase discussions.</li>
-              <li>Project procurement can specify how identified risks are assessed, addressed and reported.</li>
-            </ol>
-          </div>
-          <p class="caption">Indicative timeline. The “Today” marker is set from the current date.</p>
           <div class="pager"><a href="#chain">Previous</a><a href="#risks">Next</a></div>
         </div>
       </section>
