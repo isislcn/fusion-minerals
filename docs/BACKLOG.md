@@ -5,6 +5,7 @@
 ### Must
 
 - Overview page exists with hero, key figures, brief cards and route-through guidance.
+- Route cards are links and include Human cost and Sources.
 - The hero uses the approved wording and colour palette.
 - The glossary contains the required terms and the fusion-specific additions.
 
@@ -35,6 +36,7 @@
 - Evidence tabs are present: Where, Who’s affected and Evidence.
 - Audience lens chips work without hiding information.
 - “Copy link to this stage” is present.
+- Stages with reported cases link to the relevant Human cost case file.
 
 ### Acceptance criteria
 
@@ -46,6 +48,9 @@
 ### Must
 
 - The page includes three concise reason columns about procurement timing, concentration and early requirements.
+- A three-track Prototype B timeline appears on Why now and all three briefs.
+- The tracks converge at first-plant procurement and fork to remedy-first sourcing or retrofit.
+- Timeline events cite sources and can be filtered by audience.
 
 ### Acceptance criteria
 
@@ -59,6 +64,8 @@
 - Risk register page with sortable table and CSV export.
 - Governance gaps page with a matrix and explanatory text.
 - Demand page with honest data-gap cards and a lithium-6 visual.
+- Governance matrix adds the CRMA, Forced Labour Regulation and Net-Zero Industry Act.
+- Matrix cells carry citations and can be shown as material cards on mobile.
 
 ### Acceptance criteria
 
@@ -84,6 +91,8 @@
 - Investor, EU and UN brief pages exist.
 - Each follows the same template.
 - Each contains print and copy-link actions.
+- EU brief contains the nine-part framework proposal, options appraisal and a four-row table of UN asks.
+- Brief print views append APA references to their cited sources.
 
 ### Acceptance criteria
 
@@ -95,6 +104,7 @@
 ### Must
 
 - A single Methodology page combines methodology, limitations and sources.
+- A separate Sources view lists linked APA 7 references alphabetically, with filters, copy and download controls.
 - About page contains the iteration log and AI-use disclosure.
 
 ### Acceptance criteria
@@ -108,6 +118,7 @@
 
 - Replace news citations with primary UN and NGO material.
 - Add missing country shares and traceability detail.
+- Verify all references marked for verification before relying on them.
 - Add smelter mapping and final demand estimates.
 
 ## Epic: Quality

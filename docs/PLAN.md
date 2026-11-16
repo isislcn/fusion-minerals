@@ -4,78 +4,48 @@
 
 1. Overview — `#overview`
 2. Fusion primer — `#primer`
-3. Supply chain — `#chain` and `#chain-<material>`
-4. Why now — `#why-now`
-5. Evidence: risk register — `#risks`
-6. Evidence: governance gaps — `#governance`
-7. Evidence: demand — `#demand`
-8. Remedy-first framework — `#remedy`
-9. Brief: fusion investors — `#brief-investors`
-10. Brief: European Union — `#brief-eu`
-11. Brief: UN Task Force — `#brief-un`
-12. Methodology, limitations and sources — `#methodology`
-13. About — `#about`
+3. Supply chain — `#chain` and `#chain-<stage>`
+4. Human cost — `#human-cost` and `#human-cost-<case>`
+5. Why now — `#why-now`
+6. Risk register — `#risks`
+7. Governance gaps — `#governance`
+8. Demand — `#demand`
+9. Remedy first — `#remedy`
+10. Investor brief — `#brief-investors`
+11. EU brief — `#brief-eu`
+12. UN brief — `#brief-un`
+13. Methodology — `#methodology`
+14. Sources — `#sources`
+15. About — `#about`
 
 ## Architecture
 
-- Static site, no build step.
-- Hash-based in-page navigation: one content view is shown at a time, and internal links switch views without opening new browser tabs.
-- Overview groups the hero, key figures, reactor supply comparison, research snapshot, briefs, route guide and glossary.
-- Data in `js/data.js` as plain `const` objects.
-- Works from `file://` and GitHub Pages.
+- Static HTML, CSS and JavaScript; no build step or added framework.
+- Hash-based in-page views with deep links and browser back/forward support.
+- Evidence and policy data live in `js/data.js`; the shared three-track timeline is rendered by `js/timeline.js`.
+- The Human cost page connects cases to material and stage views; citations link to full APA references.
+- Responsive tables scroll inside labeled regions or stack into cards. Print views include each brief’s cited references.
+- The site deploys to GitHub Pages from `main`.
 
-## Research plan per material
+## Evidence and policy work
 
-| Material | What is known | What is missing | Tool to fill it |
-| --- | --- | --- | --- |
-| Tungsten | Concentration, eastern DR Congo conflict-finance exposure, mine and refining relevance. | Smelter and trader links; detailed chain mapping. | Sayari, USGS, UN and NGO sources. |
-| Lithium | Lithium-6 has effectively no commercial supply and is central to breeding blankets. | Country shares and plant-level demand estimates. | USGS, Tavily, primary source reviews. |
-| Beryllium | It is a neutron multiplier with concentrated supply. | Detailed country shares and traceability data. | USGS, industry reports, Sayari. |
-| Rare earths | Myanmar is reported as a major heavy rare earth source; Kachin-linked mining and refining is documented. | Full mine-to-refiner chain and material-specific supply shares. | Sayari, Tavily, primary UN/NGO sources. |
+- Maintain documented, reported and inferred confidence labels.
+- Keep material-level and location-level exposure separate from any claim about a named fusion buyer.
+- Map known human impacts by material: Rubaya, Kachin, the high Andean salt flats and beryllium workers.
+- Use a three-track timeline for fusion and markets, EU rules, and UN/US/UK rules. The tracks converge at first-plant procurement and branch to remedy-first sourcing or retrofit.
+- Present the EU framework and options appraisal as policy proposals, not existing obligations.
 
-## Phases
+## Quality and publishing
 
-### Phase 1
+1. Check JavaScript syntax, internal hashes, source IDs and citations.
+2. Verify keyboard operation for navigation, timeline markers, filters, tables, tabs, copy actions and the governance list toggle.
+3. Check horizontal overflow at 390px and print layout for each brief.
+4. Check the deep links `#chain-tungsten-mine`, `#human-cost-kachin`, `#brief-eu` and `#sources`.
+5. Commit each revision stage, push to `main`, and verify GitHub Pages deployment.
 
-- All pages live.
-- Tungsten fully mapped.
-- Other materials mapped initially with honest gaps.
-- Three briefs complete.
+## Research gaps
 
-### Phase 2
-
-- Country shares for lithium, beryllium and rare earths.
-- Sayari smelter mapping.
-- Regional locators.
-- Demand sizing figures.
-- Primary-source replacements.
-
-### Phase 3
-
-- Reader testing and revision.
-- Optional translation of brief summary cards.
-
-## Reader testing
-
-Test with one investor, one EU-policy reader and one UN/NGO reader. The question is: “What would you do after reading this?”
-
-## Publishing steps
-
-1. Finalise the static site.
-2. Check links and hash routing.
-3. Confirm update dates and date stamps.
-4. Check Sayari licensing.
-5. Add AI-use disclosure.
-6. Publish to GitHub Pages.
-7. Run a pre-publish checklist.
-
-## Risks and mitigations
-
-- Overstated fusion link: use confidence labels and limitations page.
-- Data licensing: summarise findings; avoid raw records.
-- Scope creep: keep to the agreed material list and page set.
-- Stale dates: stamp and review source dates.
-
-## Summary
-
-The plan prioritises a credible static site with honest gaps, strong evidence and a clear path from primer to remedy. The first build stabilises the structure and user journey; deeper data work comes next.
+- Verify all entries marked `verify: true`.
+- Add primary-source and country-level supply data as it becomes available.
+- Continue mapping mining and processing impacts in China and beryllium chains outside the United States.
+- Update the evidence base as regulatory proposals and fusion procurement evolve.

@@ -99,7 +99,8 @@ p, li { color: var(--text); }
 }
 
 .main-nav > a[aria-current="page"],
-.nav-panel a[aria-current="page"] {
+.nav-panel a[aria-current="page"],
+.nav-button.has-active-child {
   color: var(--gold);
   background: rgba(209,172,85,0.12);
 }
@@ -254,7 +255,9 @@ p, li { color: var(--text); }
 
 .narrow { max-width: 900px; }
 
-.route-card { text-align: left; }
+.route-card { display: block; color: var(--text); text-align: left; text-decoration: none; transition: transform 0.2s ease, border-color 0.2s ease; }
+.route-card:hover, .route-card:focus-visible { color: var(--text); text-decoration: none; border-color: rgba(209,172,85,0.7); transform: translateY(-2px); outline: none; }
+.route-card:focus-visible { box-shadow: 0 0 0 3px rgba(209,172,85,0.35); }
 .route-card span { color: var(--gold); font-size: 2rem; }
 .route-card h3 { margin-top: 8px; }
 
@@ -356,10 +359,11 @@ th { color: var(--muted); font-size: 0.7rem; letter-spacing: 0.08em; text-transf
 
 .controls-row { display: flex; gap: 12px; flex-wrap: wrap; align-items: center; margin: 18px 0; }
 select { background: var(--surface); color: var(--text); border: 1px solid rgba(255,255,255,0.08); border-radius: 10px; padding: 0.7rem 0.9rem; }
-.table-wrap { overflow-x: auto; }
+.table-wrap, .table-scroll { position: relative; overflow-x: auto; max-width: 100%; }
+.table-scroll::after { content: ""; pointer-events: none; position: absolute; z-index: 1; inset: 0 0 0 auto; width: 20px; background: linear-gradient(90deg, transparent, var(--bg)); }
 .count-line { color: var(--muted); }
 .citation { color: var(--muted); font-size: 0.9em; }
-.citation a { white-space: nowrap; }
+.citation a { overflow-wrap: anywhere; }
 .source-list { padding-left: 2em; }
 .source-list li { padding: 14px 0; text-indent: -2em; overflow-wrap: anywhere; transition: background 0.2s ease; }
 .source-list li > * { text-indent: 0; }
@@ -461,6 +465,7 @@ select { background: var(--surface); color: var(--text); border: 1px solid rgba(
 .event-status { color: var(--muted); font: 0.7rem "Geist Mono", monospace; text-transform: uppercase; }
 .timeline-caption { color: var(--muted); font-size: 0.84rem; }
 .rules-heading { margin: 24px 0; padding: 18px; border-left: 3px solid var(--gold); background: rgba(209,172,85,0.07); }
+.brief-print-references { display: none; }
 .framework-table, .options-table { min-width: 760px; }
 .recommended { border-left: 3px solid var(--gold); }
 .recommended-chip { display: inline-block; margin-right: 6px; padding: 0.12rem 0.42rem; color: var(--gold); border: 1px solid var(--gold); border-radius: 999px; font-size: 0.68rem; text-transform: uppercase; }
@@ -485,11 +490,10 @@ select { background: var(--surface); color: var(--text); border: 1px solid rgba(
 .footer-row div:last-child { display: flex; flex-wrap: wrap; gap: 16px; }
 
 .date-stamp {
-  position: fixed;
-  right: 24px;
-  bottom: 22px;
   color: var(--muted);
-  font-size: 0.85rem;
+  flex: 0 0 auto;
+  margin-left: auto;
+  font: 0.7rem "Geist Mono", monospace;
   letter-spacing: 0.1em;
   text-transform: uppercase;
 }
@@ -531,9 +535,20 @@ select { background: var(--surface); color: var(--text); border: 1px solid rgba(
 }
 
 @media print {
-  .timeline-scroll { overflow: visible; }
+  .timeline-scroll, .table-scroll, .table-wrap { overflow: visible; }
+  .table-scroll::after { display: none; }
   .timeline-scroll::after, .timeline-scroll-hint, .timeline-filters { display: none !important; }
   .rail-timeline { width: 100%; min-width: 0; }
+  .framework-table, .options-table { width: 100%; min-width: 0; }
+  .framework-table, .framework-table tbody, .framework-table tr,
+  .options-table, .options-table tbody, .options-table tr { display: table; width: 100%; }
+  .framework-table thead, .options-table thead { display: table-header-group; }
+  .framework-table td, .options-table td { display: table-cell; }
+  .framework-table td::before, .options-table td::before { content: none; }
+  .brief-print-references { display: block !important; break-before: page; }
+  .brief-print-references li { overflow-wrap: anywhere; }
+  .nav-toggle, .main-nav, .site-header, .site-footer, .brief-actions, .copy-button, .copy-link { display: none !important; }
+  .page-view[hidden] { display: none !important; }
   .timeline-mount[data-audience="all"] .timeline-event-item,
   .timeline-mount[data-audience="all"] .timeline-marker,
   .timeline-mount[data-audience="all"] .timeline-track { opacity: 1 !important; }

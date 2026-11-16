@@ -2,7 +2,7 @@
 
 ## Problem statement
 
-Fusion needs tungsten, lithium (lithium-6), beryllium and rare earths. These materials already sit in supply chains linked to conflict finance in eastern DR Congo, child labour reports at Rubaya and poisoned water in Kachin State, Myanmar. Supply is highly concentrated: China accounts for about 79% of tungsten mining and around 80% of tungsten APT and rare earth refining. Lithium-6 has almost no commercial supply.
+Fusion needs tungsten, lithium (lithium-6), beryllium and rare earths. These materials sit in supply chains where public evidence describes conflict finance in eastern DR Congo, reported harm in Kachin State, Myanmar, and concentrated processing. Every claim is paired with an APA reference and a confidence label; uncertainty is shown rather than filled in.
 
 The project frames this as an anticipatory governance problem. Fusion is still early enough that sourcing rules can be designed before procurement locks in the next phase of risk.
 
@@ -50,16 +50,18 @@ The project argues that buyers should engage suppliers, require corrective actio
 
 ## Visual identity
 
-The site uses a graphite palette with gold accents for structure and data, and rust for harm to people. Mineral colours follow ore types: tungsten in blue-grey, lithium in lilac, beryllium in green and rare earths in ochre. The typography uses Newsreader for headings, Geist for body text and Geist Mono for labels and data. The timeline is an abstract transit-style rail with a single fork and no decorative vehicles.
+The site uses a graphite palette with gold accents for structure and data, and rust for harm to people. Mineral colours follow ore types: tungsten in blue-grey, lithium in lilac, beryllium in green and rare earths in ochre. The typography uses Newsreader for headings, Geist for body text and Geist Mono for labels and data. The timeline is an abstract transit-style rail: three neutral tracks converge at first-plant procurement and fork into remedy-first sourcing or later retrofit.
 
 ## Decisions log
 
 - No 3D reactor model; use an exploded 2D cutaway instead.
 - No policy lever map; each brief carries its own levers.
 - No money-flow diagram; the chain from Big Tech to armed groups cannot be evidenced.
-- Separate pages per audience rather than a view toggle.
+- In-page views per audience, reached through hash navigation rather than separate browser pages.
 - Concentration bars and small locators instead of a world globe.
 - Harm hotspots sit beside concentration bars because the most concentrated country is often not where harm happens.
+- Human cost is presented as material-specific case files, with no inference about fusion buyers.
+- Sources use linked APA references; the EU brief is a proposal, not a description of current law.
 - Removed the “security lens vs people lens” section because it was not part of the agreed concept.
 
 ## Summary

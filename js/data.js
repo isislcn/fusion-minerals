@@ -98,6 +98,7 @@ const SOURCES = [
   { id: 'nrc-2026', type: 'us-uk', cite: 'U.S. Nuclear Regulatory Commission, 2026', apa: 'U.S. Nuclear Regulatory Commission. (2026, February 26). Regulatory framework for fusion machines [Proposed rule]. <i>Federal Register</i> (Doc. 2026-03865).', url: 'https://www.govinfo.gov/content/pkg/FR-2026-02-26/pdf/2026-03865.pdf', verify: false },
   { id: 'wnn-2026', type: 'news', cite: 'World Nuclear News, 2026', apa: 'World Nuclear News. (2026). Fusion industry raised USD4.5 billion in past year, report says.', url: 'https://wnn.world-nuclear.org/articles/fusion-industry-raised-usd45-billion-over-past-year-report-says', verify: true }
 ];
+SOURCES.sort((a, b) => a.apa.localeCompare(b.apa));
 
 const TIMELINE = [
   { t: 2025.10, date: 'Feb 2025', text: 'China adds export licensing for tungsten', line: 'fusion', audiences: ['investors', 'eu'], status: 'done', sourceIds: ['usgs-2026'] },

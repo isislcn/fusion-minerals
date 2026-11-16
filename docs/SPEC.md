@@ -2,73 +2,68 @@
 
 ## Purpose
 
-This project is a research website for the assignment “Mapping the Human Cost of Fusion Energy Materials.” It explains the supply chains behind fusion materials, the human-rights risks that sit within them, and the policy gaps that can still be addressed before the market scales.
+This researcher- and policymaker-facing site maps material supply chains relevant to fusion, the evidence available about social and environmental impacts, and options to make responsible sourcing part of procurement and regulation.
 
-## Site map and page requirements
+## Page order
 
-### 1. Overview (`#overview`)
+Overview → Fusion primer → Supply chain → Human cost → Why now → Risk register → Governance gaps → Demand → Remedy first → Investor brief → EU brief → UN brief → Methodology → Sources → About.
 
-The overview page contains the hero, key figures, brief selection cards and route-through guidance. It must include the approved headline and the gold-highlighted phrase “Its minerals.”
+## Page requirements
 
-### 2. Fusion primer (`#primer`)
+### Overview (`#overview`)
 
-This page explains fusion basics and then moves into a reactor cutaway, a list of companies and funding, and the connection between AI demand and fusion procurement. Every reactor layer needs a label, role and material note, with stage links into the supply chain page.
+Show key figures, reactor material stages, research snapshot, linked brief and route cards. Evidence citations link to the corresponding APA reference.
 
-### 3. Supply chain (`#chain…`)
+### Fusion primer (`#primer`)
 
-This is the main evidence page. It includes a material switcher, chain with focus mode, legend, tabs and a detail panel. The audience lens chips must highlight but not hide relevant stages.
+Explain fusion basics, reactor cutaway, companies and financing context. Preserve text alternatives and stage deep links.
 
-### 4. Why now (`#why-now`)
+### Supply chain (`#chain`)
 
-This page explains why procurement expectations can be considered while fusion designs, financing and supplier relationships are still developing. It presents three concise reasons without a timeline or audience-filter controls.
+Provide material selection, accessible stage controls, audience lenses and stage details. Each evidence tab lists claims and confidence labels with citations. Known cases link to the Human cost page.
 
-### 5. Evidence: risk register (`#risks`)
+### Human cost (`#human-cost`)
 
-Filterable risk table built from the evidence set. Filters: material, stage, risk type and confidence. Each row should navigate to the stage on the supply chain page.
+Present four case files: Rubaya, Kachin Special Region 1, high Andean salt flats and beryllium workers. Provide deep links for each case, source citations, affected groups, data gaps and links back to relevant supply-chain stages. Keep exposure distinct from buyer attribution.
 
-### 6. Evidence: governance gaps (`#governance`)
+### Why now (`#why-now`)
 
-Matrix page comparing key due-diligence and governance instruments against tungsten, lithium, lithium-6, beryllium and rare earths. Use text and shapes, not colour alone.
+Present three dated reasons and Prototype B: a three-track timeline for fusion and markets, EU rules, and UN/US/UK rules. Tracks converge at first-plant procurement and fork to remedy-first sourcing or retrofit. The same timeline component appears in each brief with an audience filter.
 
-### 7. Evidence: demand (`#demand`)
+### Evidence (`#risks`, `#governance`, `#demand`)
 
-Demand page that is honest about sparse figures. It shows the lithium-6 comparison and the glaring data gap around tungsten, beryllium and rare earths.
+The risk register has material, stage, risk, confidence and APA sources, plus CSV export. The governance matrix compares existing instruments, including the CRMA, Forced Labour Regulation and Net-Zero Industry Act; a mobile control switches to material cards. Demand content states assumptions and gaps plainly.
 
-### 8. Remedy-first framework (`#remedy`)
+### Remedy first (`#remedy`)
 
-Interactive ladder explaining the correct sequence from identification to exit, with guardrails and scenario examples.
+Explain the five-step response ladder, guardrails and ditch-and-run policy analogy. Recommend remediation before exit except for the gravest abuses.
 
-### 9–11. Briefs (`#brief-investors`, `#brief-eu`, `#brief-un`)
+### Briefs (`#brief-investors`, `#brief-eu`, `#brief-un`)
 
-Each brief follows the same pattern: summary card, why it matters, why now, actions, remedy-first framing and evidence. All three include a print action and copyable text blocks.
+Each brief has a summary, why-now timeline, sourced claims, actions, limits, navigation, copy and print controls. The EU brief proposes a nine-part framework and compares five policy options; proposals must not be presented as current law. The UN brief includes a four-row table for scope, principle, accountability and timing. Printed briefs append their cited APA references.
 
-### 12. Methodology, limitations and sources (`#methodology`)
+### Methodology (`#methodology`) and Sources (`#sources`)
 
-This page explains data collection, confidence labels and evidence rules; states what remains uncertain and what the project cannot claim; and lists the key sources used in the analysis.
+Methodology describes scope, evidence categories and limitations. Sources lists alphabetical APA references with full linked URLs, source-type filters, individual copy controls and a text download.
 
-### 15. About (`#about`)
+### About (`#about`)
 
-This page records the project background, iteration log and AI-use disclosure.
+Record project context and the iteration log, including Revision 2 (November 2026).
 
-## Navigation rules
+## Navigation, accessibility and responsive behavior
 
-- Top navigation includes Overview, Fusion primer, Supply chain, Why now, Evidence (dropdown), Remedy first, Briefs (dropdown) and Methodology.
-- Navigation and internal links switch the visible in-page content view; they do not open separate browser tabs. The selected view is reflected in the URL hash and supports browser back/forward navigation.
-- Overview groups the hero, key figures, reactor supply comparison, research snapshot, brief cards, route guide and glossary. The reactor supply comparison appears between Key figures and Research snapshot.
-- Dropdown menus must support keyboard and touch interactions via accessible disclosure controls.
-- The footer includes the site title, “Updated November 2026,” About and the GitHub repo. Methodology and limitations are combined in the Methodology view.
-- On screens wider than 480px, a fixed stamp reading “November 2026” appears in the bottom-right corner.
+- Hash links switch in-page views and preserve deep links and browser history.
+- Navigation dropdowns support Escape, outside click, single-open behavior, arrow keys and mobile state.
+- Tables scroll in labeled regions with a visual edge hint; framework and options rows stack on small screens.
+- No page should cause document-level horizontal overflow at 390px.
+- Date appears in the header on desktop; no fixed date stamp overlaps content.
+- Preserve visible focus, text labels and accessible control state.
 
-## Content rules
+## Evidence and language rules
 
-1. Sentence case for every heading and label.
-2. Plain, direct English.
-3. Do not state or imply that a named fusion company has used conflict-sourced material.
-4. Confidence labels stay exactly as in the data: documented, reported or inferred.
-5. The Rubaya mine link stays “reported” for tungsten because the UN evidence is mainly about coltan.
-6. Every page must feature depth, a clear opening statement, at least one visual or interactive element, evidence links and a pager.
-7. Missing content should be flagged as `[TODO: source needed]` in the docs and shown as a data-gap state on the site.
-
-## Summary
-
-The specification defines the full research site: a primer, an evidence-heavy supply chain page, a policy-facing why-now section, a remedy-first framework and three audience-specific briefs. The project’s standard is to be precise, transparent and evidence-led, not dramatic.
+1. Cite claims, figures, policy cells and timeline events to the APA source list.
+2. `documented` means a primary record; `reported` means credible journalism or NGO investigation; `inferred` means project analysis.
+3. Do not claim or imply that a named fusion company has used conflict-sourced material.
+4. Sources marked `verify: true` must retain an adjacent `<!-- VERIFY -->` marker and be listed for follow-up.
+5. Keep exposure caveats in the footer, Methodology limitations and each brief’s Limits line.
+6. Use plain, direct, sentence-case English and preserve the graphite, gold, rust and mineral-colour identity.

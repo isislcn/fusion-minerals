@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Fusion Minerals</title>
     <meta name="description" content="Fusion Minerals — supply chain risk in fusion minerals." />
-    <link rel="stylesheet" href="css/styles.css" />
+    <link rel="stylesheet" href="css/styles.css?v=3" />
   </head>
   <body>
     <header class="site-header">
@@ -37,6 +37,7 @@
           </div>
           <a href="#methodology">Methodology</a>
         </nav>
+        <div class="date-stamp">November 2026</div>
       </div>
     </header>
 
@@ -170,14 +171,16 @@
         <div class="container narrow">
           <h2>A route through the evidence</h2>
           <div class="route-grid">
-            <div class="route-card"><span>1</span><h3>Primer</h3><p>Understand the technology and why minerals matter.</p></div>
-            <div class="route-card"><span>2</span><h3>Supply chain</h3><p>Map where risk sits across mine, trade and refining.</p></div>
-            <div class="route-card"><span>3</span><h3>Why now</h3><p>See the governance window before procurement hardens.</p></div>
-            <div class="route-card"><span>4</span><h3>Evidence</h3><p>Read the risk register, governance gaps and demand view.</p></div>
-            <div class="route-card"><span>5</span><h3>Remedy first</h3><p>Learn the escalation ladder and safeguards.</p></div>
-            <div class="route-card"><span>6</span><h3>Briefs</h3><p>Use the investor, EU or UN versions to act.</p></div>
-            <div class="route-card"><span>7</span><h3>Methodology</h3><p>Review the methods, limitations, sources and confidence labels.</p></div>
-            <div class="route-card"><span>8</span><h3>About</h3><p>Learn about the project and its research context.</p></div>
+            <a class="route-card" href="#primer"><span>1</span><h3>Fusion primer</h3><p>Understand the technology and why minerals matter.</p></a>
+            <a class="route-card" href="#chain"><span>2</span><h3>Supply chain</h3><p>Map where risk sits across mine, trade and refining.</p></a>
+            <a class="route-card" href="#human-cost"><span>3</span><h3>Human cost</h3><p>Read documented cases by material and community.</p></a>
+            <a class="route-card" href="#why-now"><span>4</span><h3>Why now</h3><p>See the governance window before procurement hardens.</p></a>
+            <a class="route-card" href="#risks"><span>5</span><h3>Evidence</h3><p>Read the risk register, governance gaps and demand view.</p></a>
+            <a class="route-card" href="#remedy"><span>6</span><h3>Remedy first</h3><p>Learn the escalation ladder and safeguards.</p></a>
+            <a class="route-card" href="#brief-investors"><span>7</span><h3>Briefs</h3><p>Use the investor, EU or UN versions to act.</p></a>
+            <a class="route-card" href="#methodology"><span>8</span><h3>Methodology</h3><p>Review the methods, limitations and confidence labels.</p></a>
+            <a class="route-card" href="#sources"><span>9</span><h3>Sources</h3><p>Consult and download the linked APA references.</p></a>
+            <a class="route-card" href="#about"><span>10</span><h3>About</h3><p>Learn about the project and its research context.</p></a>
           </div>
         </div>
       </section>
@@ -267,6 +270,7 @@
               <p>Select a layer to inspect the material risk.</p>
             </div>
           </div>
+          <div class="table-scroll" role="region" aria-label="Fusion reactor layers and material risks" tabindex="0">
           <table class="accessible-table">
             <thead>
               <tr><th>Layer</th><th>Role</th><th>Materials</th><th>Key supply risk</th></tr>
@@ -282,6 +286,7 @@
               <tr><td>Cryostat</td><td>Keeps magnets cold</td><td>Steel, helium</td><td>Industrial supply chain and gas logistics</td></tr>
             </tbody>
           </table>
+          </div>
 
           <h2>Who is building it</h2>
           <div class="company-grid">
@@ -296,6 +301,7 @@
           <p>$4.48 billion was raised in the 12 months to July 2026, the highest on record, and $14.24 billion since 2021 across 56 companies. IEA projects global data centre electricity demand of about 945 TWh by 2030. Big Tech power deals tie AI demand to fusion.</p>
 
           <p class="bridge">Material requirements vary by reactor design, and each design draws on industrial supply chains. <a href="#chain">Trace the materials →</a></p>
+          <div class="pager"><a href="#overview">← Overview</a><a href="#chain">Supply chain →</a></div>
         </div>
       </section>
 
@@ -346,7 +352,7 @@
             <span>Limitations</span>
             <p>Exposure, not wrongdoing. <a href="#methodology">Read the limitations →</a></p>
           </div>
-          <div class="pager"><a href="#reactor-supply">← Overview</a><a href="#human-cost">Human cost →</a></div>
+          <div class="pager"><a href="#primer">← Fusion primer</a><a href="#human-cost">Human cost →</a></div>
         </div>
       </section>
 
@@ -428,7 +434,7 @@
           </div>
           <h3>Key dates</h3>
           <div class="timeline-mount" data-audience="all"></div>
-          <div class="pager"><a href="#chain">Previous</a><a href="#risks">Next</a></div>
+          <div class="pager"><a href="#human-cost">← Human cost</a><a href="#risks">Risk register →</a></div>
         </div>
       </section>
 
@@ -443,7 +449,7 @@
             <button id="download-csv" class="button button-secondary">Download CSV</button>
           </div>
           <p id="risk-count" class="count-line"></p>
-          <div class="table-wrap">
+          <div class="table-scroll" role="region" aria-label="Fusion materials risk register" tabindex="0">
             <table>
               <thead>
                 <tr>
@@ -459,7 +465,7 @@
               <tbody id="risk-body"></tbody>
             </table>
           </div>
-          <div class="pager"><a href="#why-now">Previous</a><a href="#governance">Next</a></div>
+          <div class="pager"><a href="#why-now">← Why now</a><a href="#governance">Governance gaps →</a></div>
         </div>
       </section>
 
@@ -498,7 +504,7 @@
             <p>No binding rule requires due diligence on lithium-6, beryllium or rare earths used in fusion. Tungsten is covered only as raw ore and metal, not inside finished parts. Fusion companies are too small for the CSDDD, and fusion is not among the strategic technologies whose large manufacturers must assess raw-material supply risks under the Critical Raw Materials Act. <span data-cite="cmr-2017,csddd-2024,crma-2024,ep-2026"></span><!-- VERIFY --></p>
             <p><a href="#brief-eu">See the EU brief</a> or <a href="#brief-un">UN brief</a>.</p>
           </div>
-          <div class="pager"><a href="#risks">Previous</a><a href="#demand">Next</a></div>
+          <div class="pager"><a href="#risks">← Risk register</a><a href="#demand">Demand →</a></div>
         </div>
       </section>
 
@@ -537,7 +543,7 @@
             </div>
           </div>
           <p>Method note: This site does not provide a complete material-demand forecast. Reactor and blanket designs differ, and public, comparable material inventories are limited. Any future estimate should state its design assumptions, system boundary and uncertainty range.</p>
-          <div class="pager"><a href="#governance">Previous</a><a href="#remedy">Next</a></div>
+          <div class="pager"><a href="#governance">← Governance gaps</a><a href="#remedy">Remedy first →</a></div>
         </div>
       </section>
 
@@ -575,7 +581,7 @@
             <article class="scenario-card"><h4>Supplier is financing armed groups</h4><p>Immediate exit with notice and a transition period, while assessing the impact on workers.</p></article>
           </div>
           <p>This framework is built into all three briefs.</p>
-          <div class="pager"><a href="#demand">Previous</a><a href="#brief-investors">Next</a></div>
+          <div class="pager"><a href="#demand">← Demand</a><a href="#brief-investors">Investor brief →</a></div>
         </div>
       </section>
 
@@ -610,7 +616,7 @@
           </table>
           <aside class="rules-heading">
             <h3>Where the rules are heading</h3>
-            <p>The EU framework proposal offers a route from voluntary expectations to procurement conditions, product rules and review. <a href="#brief-eu">See the EU framework proposal →</a></p>
+            <p>The EU framework proposal offers a route from voluntary expectations to procurement conditions, product rules and review. <a href="#eu-framework">See the EU framework proposal →</a></p>
           </aside>
           <h3>Actions in detail</h3>
           <div class="copy-block">
@@ -631,7 +637,7 @@
             <li><a href="#governance">Governance gaps</a></li>
           </ul>
           <p><strong>Limits:</strong> Risk indicators do not identify a fusion buyer. The next decision point is the next major offtake or term-sheet negotiation.</p>
-          <div class="pager"><a href="#remedy">Previous</a><a href="#brief-eu">Next</a></div>
+          <div class="pager"><a href="#brief-investors">← Investor brief</a><a href="#brief-eu">EU brief →</a></div>
         </div>
       </section>
 
@@ -655,7 +661,7 @@
           <div class="timeline-mount" data-audience="eu"></div>
           <h3>Why it matters to you</h3>
           <p>The EU funds fusion to cut energy dependence. If fusion’s minerals come from one dominant supplier or from conflict zones, it rebuilds the dependence it was meant to end. No EU rule closes that gap today. <span data-cite="ec-2026,cmr-2017,crma-2024"></span></p>
-          <h3>A framework in nine parts</h3>
+          <h3 id="eu-framework">A framework in nine parts</h3>
           <div class="table-scroll" role="region" aria-label="Proposed EU framework blueprint" tabindex="0">
             <table class="framework-table">
               <thead><tr><th>#</th><th>Element</th><th>Proposal</th><th>Legal hook</th><th>Who acts</th><th>When</th></tr></thead>
@@ -707,7 +713,7 @@
           </div>
           <p><a href="#governance">Review the governance gaps</a>.</p>
           <p><strong>Limits:</strong> These are proposals, not current law. No EU fusion project is alleged to use conflict-sourced minerals.</p>
-          <div class="pager"><a href="#brief-investors">Previous</a><a href="#brief-un">Next</a></div>
+          <div class="pager"><a href="#brief-eu">← EU brief</a><a href="#brief-un">UN brief →</a></div>
         </div>
       </section>
 
@@ -754,7 +760,7 @@
           </div>
           <p>Other relevant forums include UNEA, the Security Council and the UN Forum on Business and Human Rights in Geneva.</p>
           <p><strong>Limits:</strong> Risk indicators do not identify a fusion buyer. The next decision point is the UN Task Force analytical study and expert discussions in 2027.</p>
-          <div class="pager"><a href="#brief-eu">Previous</a><a href="#methodology">Next</a></div>
+          <div class="pager"><a href="#brief-un">← UN brief</a><a href="#methodology">Methodology →</a></div>
         </div>
       </section>
 
@@ -776,7 +782,7 @@
               <tr><td>Version 1</td><td>November 2026</td><td>Initial site build and content structure.</td></tr>
             </tbody>
           </table>
-          <div class="pager"><a href="#brief-un">Previous</a><a href="#about">Next</a></div>
+          <div class="pager"><a href="#brief-un">← UN brief</a><a href="#sources">Sources →</a></div>
         </div>
       </section>
 
@@ -796,9 +802,10 @@
           <h2>About</h2>
           <p>This student research project examines how mineral sourcing, supply-chain governance and human-rights due diligence intersect with emerging fusion technologies. It is intended as a research and policy discussion resource, not a finding about the sourcing practices of any specific fusion company.</p>
           <h3>Iteration log</h3>
+          <p><strong>Revision 2 (November 2026):</strong> Added linked APA references, a Human cost page, the three-track policy timeline and an EU framework proposal with options appraisal.</p>
           <p>Planned reader testing will ask investors, EU-policy readers and UN or NGO practitioners whether the evidence, uncertainties and proposed actions are clear and decision-relevant.</p>
           <p>Version 1 presents an initial evidence map and policy framing. It should be updated as source data, fusion designs and regulatory requirements change.</p>
-          <div class="pager"><a href="#methodology">Previous</a><a href="#overview">Top</a></div>
+          <div class="pager"><a href="#sources">← Sources</a><a href="#overview">Overview →</a></div>
         </div>
       </section>
     </main>
@@ -807,7 +814,6 @@
       <div class="container footer-row">
         <div>
           <strong>Fusion Minerals</strong>
-          <p>Updated November 2026</p>
           <p>Exposure, not wrongdoing: this site maps risks in shared supply chains. No fusion company is alleged to have used conflict-sourced material.</p>
         </div>
         <div>
@@ -819,8 +825,8 @@
       </div>
     </footer>
 
-    <script src="js/data.js"></script>
-    <script src="js/timeline.js"></script>
-    <script src="js/app.js"></script>
+    <script src="js/data.js?v=3"></script>
+    <script src="js/timeline.js?v=3"></script>
+    <script src="js/app.js?v=6"></script>
   </body>
 </html>

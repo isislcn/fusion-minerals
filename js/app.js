@@ -80,8 +80,14 @@ function setupSources() {
     if (!button) return;
     const source = SOURCES.find((item) => item.id === button.dataset.sourceId);
     if (!source) return;
-    await navigator.clipboard.writeText(source.apa.replace(/<[^>]+>/g, ''));
-    button.textContent = 'Copied';
+    const reference = `${source.apa.replace(/<[^>]+>/g, '')}${source.url ? ` ${source.url}` : ''}`;
+    try {
+      await navigator.clipboard.writeText(reference);
+      button.textContent = 'Copied';
+    } catch (error) {
+      button.textContent = 'Copy failed';
+      button.setAttribute('aria-label', `Could not copy reference: ${error.message}`);
+    }
   });
   document.getElementById('download-references')?.addEventListener('click', () => {
     const text = [...SOURCES].sort((a, b) => a.apa.localeCompare(b.apa))
@@ -189,6 +195,38 @@ function setupBriefTableCitations() {
   ]);
 }
 
+function setupBriefClaimCitations() {
+  const supportingSources = {
+    'brief-investors': ['oecd-2016', 'scsp-2025'],
+    'brief-eu': ['crma-2024', 'cmr-2017', 'oecd-2016'],
+    'brief-un': ['unpanel-2024', 'unctad-2026']
+  };
+  Object.entries(supportingSources).forEach(([briefId, sourceIds]) => {
+    document.querySelectorAll(`#${briefId} p, #${briefId} li`).forEach((claim) => {
+      if (claim.closest('.pager, .timeline-event-item, .brief-print-references') || claim.querySelector('.citation') || !claim.textContent.trim()) return;
+      claim.insertAdjacentHTML('beforeend', ` ${cite(sourceIds)}`);
+    });
+  });
+}
+
+function setupPrintReferences() {
+  ['brief-investors', 'brief-eu', 'brief-un'].forEach((briefId) => {
+    const brief = document.getElementById(briefId);
+    if (!brief) return;
+    const citedIds = new Set([...brief.querySelectorAll('a[href^="#src-"]')].map((link) => link.hash.slice(5)));
+    const citations = [...SOURCES]
+      .filter((source) => citedIds.has(source.id))
+      .sort((a, b) => a.apa.localeCompare(b.apa));
+    const references = document.createElement('div');
+    references.className = 'container brief-print-references';
+    references.innerHTML = `<h3>References</h3><ol>${citations.map((source) => `
+      ${source.verify ? '<!-- VERIFY -->' : ''}
+      <li>${source.apa}${source.url ? ` <span>${source.url}</span>` : ' [URL to verify]'}</li>
+    `).join('')}</ol>`;
+    brief.appendChild(references);
+  });
+}
+
 const ladderStates = [
   { title: 'Identify', text: 'Mapping or audit finds a risk. The first response is to understand the exposure and agree what evidence is missing.' },
   { title: 'Engage', text: 'Raise the issue with the supplier and agree a corrective action plan with measurable milestones.' },
@@ -226,9 +264,23 @@ function selectChainStage(stageId) {
 }
 
 function initNav() {
+  function closeDropdowns() {
+    navButtons.forEach((button) => {
+      button.setAttribute('aria-expanded', 'false');
+      button.nextElementSibling?.classList.remove('open');
+    });
+  }
+
+  function closeMobileNav() {
+    mainNav.classList.remove('open');
+    navToggle.setAttribute('aria-expanded', 'false');
+    closeDropdowns();
+  }
+
   navToggle.addEventListener('click', () => {
     const isOpen = mainNav.classList.toggle('open');
     navToggle.setAttribute('aria-expanded', String(isOpen));
+    if (!isOpen) closeDropdowns();
   });
 
   navButtons.forEach((button) => {
@@ -236,9 +288,40 @@ function initNav() {
       const panel = button.nextElementSibling;
       if (!panel) return;
       const willOpen = !panel.classList.contains('open');
+      closeDropdowns();
       panel.classList.toggle('open', willOpen);
       button.setAttribute('aria-expanded', String(willOpen));
     });
+  });
+
+  document.addEventListener('click', (event) => {
+    if (event.target.closest('.nav-group')) return;
+    closeDropdowns();
+  });
+
+  document.addEventListener('click', (event) => {
+    if (event.target.closest('#main-nav a[href^="#"]')) closeMobileNav();
+  });
+
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape') {
+      const openButton = [...navButtons].find((button) => button.getAttribute('aria-expanded') === 'true');
+      closeMobileNav();
+      openButton?.focus();
+      return;
+    }
+
+    if (!['ArrowDown', 'ArrowUp', 'Home', 'End'].includes(event.key)) return;
+    const panel = event.target.closest('.nav-panel');
+    if (!panel) return;
+    const items = [...panel.querySelectorAll('a')];
+    if (!items.length) return;
+    const current = items.indexOf(document.activeElement);
+    const next = event.key === 'Home' ? 0
+      : event.key === 'End' ? items.length - 1
+        : (current + (event.key === 'ArrowDown' ? 1 : -1) + items.length) % items.length;
+    event.preventDefault();
+    items[next].focus();
   });
 }
 
@@ -296,13 +379,30 @@ function setupPageTabs() {
         link.removeAttribute('aria-current');
       }
     });
+    const activeChildren = {
+      Evidence: ['risks', 'governance', 'demand'],
+      Briefs: ['brief-investors', 'brief-eu', 'brief-un']
+    };
+    navButtons.forEach((button) => {
+      button.classList.toggle('has-active-child', activeChildren[button.textContent.replace('▾', '').trim()]?.includes(page.dataset.pageAnchor) || false);
+    });
 
-    if (resetScroll) window.scrollTo({ top: 0, behavior: 'smooth' });
-    if (id.startsWith('src-') || id.startsWith('human-cost-')) {
+    const hasDeepTarget = target && id !== page.dataset.pageAnchor;
+    if (resetScroll && !hasDeepTarget) window.scrollTo({ top: 0, behavior: 'smooth' });
+    const sourceTarget = id.startsWith('src-');
+    const highlightTarget = sourceTarget || id.startsWith('human-cost-');
+    if (sourceTarget) {
+      const allSources = document.querySelector('.source-filter[data-source-type="all"]');
+      allSources?.click();
+    }
+    if (hasDeepTarget) {
       requestAnimationFrame(() => {
-        target?.scrollIntoView({ behavior: 'smooth', block: 'center' });
-        target?.classList.add('highlighted');
-        window.setTimeout(() => target?.classList.remove('highlighted'), 1800);
+        const currentTarget = document.getElementById(id);
+        currentTarget?.scrollIntoView({ behavior: 'smooth', block: sourceTarget ? 'center' : 'start' });
+        if (highlightTarget) {
+          currentTarget?.classList.add('highlighted');
+          window.setTimeout(() => currentTarget?.classList.remove('highlighted'), 1800);
+        }
       });
     }
   }
@@ -536,7 +636,10 @@ function setupRiskFilters() {
   document.getElementById('download-csv').addEventListener('click', () => {
     const csvRows = [
       ['ID', 'Material', 'Stage', 'Risk', 'Location', 'Confidence', 'Source', 'Risk type'],
-      ...riskRows.map((row) => [row.id, row.material, row.stage, row.risk, row.location, row.confidence, row.sourceIds.map((id) => SOURCES.find((source) => source.id === id)?.apa.replace(/<[^>]+>/g, '')).filter(Boolean).join('; ') || 'Project analysis', row.type])
+      ...riskRows.map((row) => [row.id, row.material, row.stage, row.risk, row.location, row.confidence, row.sourceIds.map((id) => {
+        const source = SOURCES.find((item) => item.id === id);
+        return source ? `${source.apa.replace(/<[^>]+>/g, '')}${source.url ? ` ${source.url}` : ''}` : '';
+      }).filter(Boolean).join('; ') || 'Project analysis', row.type])
     ];
     const csv = csvRows.map((row) => row.map((cell) => `"${String(cell).replace(/"/g, '""')}"`).join(',')).join('\n');
     const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
@@ -574,7 +677,9 @@ function setupPrintAndCopy() {
 
   document.querySelectorAll('.copy-button').forEach((button) => {
     button.addEventListener('click', () => {
-      const text = button.previousElementSibling?.textContent || '';
+      const copyContent = button.previousElementSibling?.cloneNode(true);
+      copyContent?.querySelectorAll('.citation').forEach((citation) => citation.remove());
+      const text = copyContent?.textContent || '';
       navigator.clipboard.writeText(text);
     });
   });
@@ -606,7 +711,9 @@ function init() {
   renderCitations();
   setupGovernance();
   setupBriefTableCitations();
+  setupBriefClaimCitations();
   setupTimelines();
+  setupPrintReferences();
   renderFilters();
   renderRiskTable();
   const initialRoute = getChainRoute(window.location.hash);

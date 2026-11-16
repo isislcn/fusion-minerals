@@ -14,9 +14,9 @@ Open `index.html` in a browser, or serve this directory with any static web serv
 
 ## Research scope
 
-The site considers tungsten, lithium, lithium-6, beryllium and rare earths across mining, trade, refining, components and plant procurement. Evidence labels distinguish documented, reported and inferred claims. A reported risk in a region or material supply chain is not evidence that a specific fusion company sources from it.
+The site considers tungsten, lithium, lithium-6, beryllium and rare earths across mining, trade, refining, components and plant procurement. Evidence labels distinguish documented, reported and inferred claims. The Human cost page connects public reporting to material stages without attributing sourcing to a fusion buyer.
 
-See [Methodology](./index.html#methodology), [Limitations](./index.html#limitations) and [Sources](./index.html#sources) for scope and evidence notes.
+See [Methodology](./index.html#methodology) and [Sources](./index.html#sources) for scope, limitations and linked APA references.
 
 ## Publishing
 

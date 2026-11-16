@@ -1,7 +1,6 @@
 function setupTimelines() {
   const lineY = { fusion: 75, eu: 135, global: 195 };
   const lineNames = { fusion: 'Fusion and markets', eu: 'EU rules', global: 'UN, US and UK rules' };
-  const lineColors = { fusion: 'var(--fg)', eu: 'var(--fg)', global: 'var(--muted)' };
   const audienceOptions = ['all', 'investors', 'eu', 'un'];
   const audienceLabels = { all: 'All', investors: 'Investors', eu: 'EU', un: 'UN' };
 
