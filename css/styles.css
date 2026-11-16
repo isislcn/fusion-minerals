@@ -460,6 +460,17 @@ select { background: var(--surface); color: var(--text); border: 1px solid rgba(
 .event-number { flex: 0 0 1.5rem; color: var(--gold); font: 0.8rem "Geist Mono", monospace; }
 .event-status { color: var(--muted); font: 0.7rem "Geist Mono", monospace; text-transform: uppercase; }
 .timeline-caption { color: var(--muted); font-size: 0.84rem; }
+.rules-heading { margin: 24px 0; padding: 18px; border-left: 3px solid var(--gold); background: rgba(209,172,85,0.07); }
+.framework-table, .options-table { min-width: 760px; }
+.recommended { border-left: 3px solid var(--gold); }
+.recommended-chip { display: inline-block; margin-right: 6px; padding: 0.12rem 0.42rem; color: var(--gold); border: 1px solid var(--gold); border-radius: 999px; font-size: 0.68rem; text-transform: uppercase; }
+#governance-list-toggle { display: none; margin: 12px 0; }
+.governance-card-list { display: grid; gap: 12px; }
+.governance-card { padding: 16px; background: var(--surface); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; }
+.governance-card dl { display: grid; gap: 10px; }
+.governance-card dl > div { border-top: 1px solid rgba(255,255,255,0.08); padding-top: 8px; }
+.governance-card dt { color: var(--muted); font-size: 0.75rem; text-transform: uppercase; }
+.governance-card dd { margin: 2px 0 0; }
 
 .site-footer {
   border-top: 1px solid rgba(255,255,255,0.08);
@@ -506,6 +517,17 @@ select { background: var(--surface); color: var(--text); border: 1px solid rgba(
   .history-grid { grid-template-columns: 1fr; }
   .timeline-scroll-hint { display: block; }
   .timeline-list { grid-template-columns: 1fr; }
+  #governance-list-toggle { display: inline-flex; }
+}
+
+@media (max-width: 720px) {
+  .framework-table, .options-table { min-width: 0; }
+  .framework-table thead, .options-table thead { display: none; }
+  .framework-table, .framework-table tbody, .framework-table tr,
+  .options-table, .options-table tbody, .options-table tr { display: block; width: 100%; }
+  .framework-table tbody tr, .options-table tbody tr { margin: 0 0 14px; padding: 10px; border: 1px solid rgba(255,255,255,0.12); border-radius: 12px; background: var(--surface); }
+  .framework-table td, .options-table td { display: grid; grid-template-columns: minmax(7rem, 0.35fr) minmax(0, 1fr); gap: 10px; padding: 8px 4px; overflow-wrap: anywhere; }
+  .framework-table td::before, .options-table td::before { content: attr(data-label); color: var(--muted); font-size: 0.68rem; letter-spacing: 0.06em; text-transform: uppercase; }
 }
 
 @media print {

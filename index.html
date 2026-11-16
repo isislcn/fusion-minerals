@@ -466,8 +466,9 @@
       <section id="governance" class="section">
         <div class="container">
           <h2>Evidence: governance gaps</h2>
-          <div class="matrix-wrap">
-            <table class="matrix-table">
+          <button id="governance-list-toggle" class="button button-secondary" type="button" aria-controls="governance-card-list" aria-expanded="false">Show as list</button>
+          <div class="table-scroll matrix-wrap" role="region" aria-label="Governance coverage matrix by material" tabindex="0">
+            <table class="matrix-table" id="governance-table">
               <thead>
                 <tr>
                   <th>Material</th>
@@ -477,20 +478,24 @@
                   <th>EU CSDDD</th>
                   <th>OECD Due Diligence Guidance</th>
                   <th>UN Panel principles (2024)</th>
+                  <th>CRMA business risk preparedness</th>
+                  <th>EU Forced Labour Regulation</th>
+                  <th>Net-Zero Industry Act</th>
                 </tr>
               </thead>
               <tbody>
-                <tr><td>Tungsten</td><td><span class="state covered">Covered</span> Raw ore and metal imports are covered; finished components are not.</td><td><span class="state covered">Covered</span> 3TG, DRC and adjoining countries.</td><td><span class="state not">Not covered</span></td><td><span class="state partly">Partly</span> Voluntary or company threshold rules apply.</td><td><span class="state partly">Partly</span> Voluntary guidance.</td><td><span class="state partly">Partly</span> Voluntary, examples include rare earths.</td></tr>
-                <tr><td>Lithium</td><td><span class="state not">Not covered</span></td><td><span class="state not">Not covered</span></td><td><span class="state partly">Partly</span> Only when used in batteries.</td><td><span class="state partly">Partly</span> Only large firms above thresholds.</td><td><span class="state partly">Partly</span> Voluntary guidance.</td><td><span class="state partly">Partly</span> Examples include lithium, but not fusion-specific treatment.</td></tr>
-                <tr><td>Lithium-6</td><td><span class="state not">Not covered</span></td><td><span class="state not">Not covered</span></td><td><span class="state not">Not covered</span></td><td><span class="state partly">Partly</span> Only large firms and general due diligence.</td><td><span class="state partly">Partly</span> Voluntary guidance.</td><td><span class="state partly">Partly</span> Not named explicitly.</td></tr>
-                <tr><td>Beryllium</td><td><span class="state not">Not covered</span></td><td><span class="state not">Not covered</span></td><td><span class="state not">Not covered</span></td><td><span class="state partly">Partly</span> General company due diligence only.</td><td><span class="state partly">Partly</span> Voluntary guidance.</td><td><span class="state partly">Partly</span> Not named explicitly.</td></tr>
-                <tr><td>Rare earths</td><td><span class="state not">Not covered</span></td><td><span class="state not">Not covered</span></td><td><span class="state not">Not covered</span></td><td><span class="state partly">Partly</span> General company due diligence only.</td><td><span class="state partly">Partly</span> Voluntary guidance.</td><td><span class="state partly">Partly</span> Not named explicitly.</td></tr>
+                <tr><td>Tungsten</td><td><span class="state covered">Covered</span> Raw ore and metal imports are covered; finished components are not.</td><td><span class="state covered">Covered</span> 3TG, DRC and adjoining countries.</td><td><span class="state not">Not covered</span></td><td><span class="state partly">Partly</span> Voluntary or company threshold rules apply.</td><td><span class="state partly">Partly</span> Voluntary guidance.</td><td><span class="state partly">Partly</span> Voluntary, examples include rare earths.</td><td>Partly: large firms in listed strategic technologies only; fusion is not listed.</td><td>Partly: bans products made with forced labour from December 2027; no due-diligence duty.</td><td>Not covered: fusion is not named.</td></tr>
+                <tr><td>Lithium</td><td><span class="state not">Not covered</span></td><td><span class="state not">Not covered</span></td><td><span class="state partly">Partly</span> Only when used in batteries.</td><td><span class="state partly">Partly</span> Only large firms above thresholds.</td><td><span class="state partly">Partly</span> Voluntary guidance.</td><td><span class="state partly">Partly</span> Examples include lithium, but not fusion-specific treatment.</td><td>Partly: large firms in listed strategic technologies only; fusion is not listed.</td><td>Partly: bans products made with forced labour from December 2027; no due-diligence duty.</td><td>Not covered: fusion is not named.</td></tr>
+                <tr><td>Lithium-6</td><td><span class="state not">Not covered</span></td><td><span class="state not">Not covered</span></td><td><span class="state not">Not covered</span></td><td><span class="state partly">Partly</span> Only large firms and general due diligence.</td><td><span class="state partly">Partly</span> Voluntary guidance.</td><td><span class="state partly">Partly</span> Not named explicitly.</td><td>Partly: large firms in listed strategic technologies only; fusion is not listed.</td><td>Partly: bans products made with forced labour from December 2027; no due-diligence duty.</td><td>Not covered: fusion is not named.</td></tr>
+                <tr><td>Beryllium</td><td><span class="state not">Not covered</span></td><td><span class="state not">Not covered</span></td><td><span class="state not">Not covered</span></td><td><span class="state partly">Partly</span> General company due diligence only.</td><td><span class="state partly">Partly</span> Voluntary guidance.</td><td><span class="state partly">Partly</span> Not named explicitly.</td><td>Partly: large firms in listed strategic technologies only; fusion is not listed.</td><td>Partly: bans products made with forced labour from December 2027; no due-diligence duty.</td><td>Not covered: fusion is not named.</td></tr>
+                <tr><td>Rare earths</td><td><span class="state not">Not covered</span></td><td><span class="state not">Not covered</span></td><td><span class="state not">Not covered</span></td><td><span class="state partly">Partly</span> General company due diligence only.</td><td><span class="state partly">Partly</span> Voluntary guidance.</td><td><span class="state partly">Partly</span> Not named explicitly.</td><td>Partly: large firms in listed strategic technologies only; fusion is not listed.</td><td>Partly: bans products made with forced labour from December 2027; no due-diligence duty.</td><td>Not covered: fusion is not named.</td></tr>
               </tbody>
             </table>
           </div>
+          <div id="governance-card-list" class="governance-card-list" hidden aria-label="Governance coverage by material"></div>
           <div class="gap-summary">
             <h3>What the gaps mean</h3>
-            <p>The instruments summarized here do not create a fusion-specific due-diligence regime for lithium-6, beryllium or rare earths. Their general or product-specific requirements may still apply depending on the company, activity and market. The EU Conflict Minerals Regulation focuses on specified 3TG imports and does not cover every downstream product or component. These limits leave questions about how emerging fusion supply chains will be addressed; they do not mean that no relevant law or guidance applies.</p>
+            <p>No binding rule requires due diligence on lithium-6, beryllium or rare earths used in fusion. Tungsten is covered only as raw ore and metal, not inside finished parts. Fusion companies are too small for the CSDDD, and fusion is not among the strategic technologies whose large manufacturers must assess raw-material supply risks under the Critical Raw Materials Act. <span data-cite="cmr-2017,csddd-2024,crma-2024,ep-2026"></span><!-- VERIFY --></p>
             <p><a href="#brief-eu">See the EU brief</a> or <a href="#brief-un">UN brief</a>.</p>
           </div>
           <div class="pager"><a href="#risks">Previous</a><a href="#demand">Next</a></div>
@@ -581,7 +586,7 @@
             <div class="brief-actions"><button class="copy-link">Copy link</button><button class="print-btn">Print or save as PDF</button></div>
           </div>
           <div class="brief-summary">
-            <p><strong>Ask:</strong> Require a remedy-first sourcing policy in every fusion-offtake and project-finance contract.</p>
+            <p><strong>Ask:</strong> Require a remedy-first sourcing policy in every fusion-offtake and project-finance contract. <span data-cite="oecd-2016"></span></p>
             <ol>
               <li>Map tungsten, lithium-6, beryllium and rare earths to smelter level before major procurement.</li>
               <li>Put remedy-first escalation in the term sheet.</li>
@@ -592,7 +597,7 @@
           <h3>Why now</h3>
           <div class="timeline-mount" data-audience="investors"></div>
           <h3>Why it matters to you</h3>
-          <p>Supply, regulatory, offtake, reputational and financing risk are all part of project risk. Big Tech involvement creates leverage through contracts and equity, not direct control of the mineral chain.</p>
+          <p>Supply, regulatory, offtake, reputational and financing risk are all part of project risk. Big Tech involvement creates leverage through contracts and equity, not direct control of the mineral chain. <span data-cite="scsp-2025"></span></p>
           <table>
             <thead><tr><th>Risk</th><th>What it means</th></tr></thead>
             <tbody>
@@ -603,6 +608,10 @@
               <tr><td>Financing</td><td>Lenders will ask sourcing questions at project-finance stage.</td></tr>
             </tbody>
           </table>
+          <aside class="rules-heading">
+            <h3>Where the rules are heading</h3>
+            <p>The EU framework proposal offers a route from voluntary expectations to procurement conditions, product rules and review. <a href="#brief-eu">See the EU framework proposal →</a></p>
+          </aside>
           <h3>Actions in detail</h3>
           <div class="copy-block">
             <h4>Responsible fusion offtake clause</h4>
@@ -635,16 +644,51 @@
           <div class="brief-summary">
             <p><strong>Ask:</strong> Add fusion materials to the due-diligence and funding conditions now, before major EU-backed projects lock in procurement.</p>
             <ol>
-              <li>Condition public funding on OECD-aligned due diligence and reporting.</li>
-              <li>Review the Conflict Minerals Regulation and name fusion-related materials.</li>
-              <li>Require remedy-first clauses in Fusion for Energy procurement and licensing rules.</li>
+              <li>Set OECD-aligned conditions on EU fusion funding and Fusion for Energy procurement now.</li>
+              <li>Add fusion equipment to the CRMA business risk-preparedness list in the current amendments.</li>
+              <li>Extend the Conflict Minerals Regulation to tungsten components and assess beryllium and rare earths in its review.</li>
+              <li>Signal a fusion-specific standard in the EU Fusion Strategy and national licensing.</li>
             </ol>
-            <p><strong>Why now:</strong> Euratom 2026–27 committed €222 million to fusion, and the sector is still early enough to align standards before supplier relationships harden.</p>
+            <p><strong>Why now:</strong> Euratom 2026–27 committed €222 million to fusion, and the sector is still early enough to align standards before supplier relationships harden. <span data-cite="ec-2026"></span></p>
           </div>
           <h3>Why now</h3>
           <div class="timeline-mount" data-audience="eu"></div>
           <h3>Why it matters to you</h3>
           <p>The EU funds fusion to cut energy dependence. If fusion’s minerals come from one dominant supplier or from conflict zones, it rebuilds the dependence it was meant to end. No EU rule closes that gap today. <span data-cite="ec-2026,cmr-2017,crma-2024"></span></p>
+          <h3>A framework in nine parts</h3>
+          <div class="table-scroll" role="region" aria-label="Proposed EU framework blueprint" tabindex="0">
+            <table class="framework-table">
+              <thead><tr><th>#</th><th>Element</th><th>Proposal</th><th>Legal hook</th><th>Who acts</th><th>When</th></tr></thead>
+              <tbody>
+                <tr><td data-label="#">1</td><td data-label="Element">Materials in scope</td><td data-label="Proposal">Tungsten (including inside components), enriched lithium-6, beryllium and rare earths used in fusion magnets.</td><td data-label="Legal hook">CRMA critical and strategic raw-material lists <span data-cite="crma-2024"></span><!-- VERIFY --></td><td data-label="Who acts">Commission</td><td data-label="When">CRMA amendments 2026–27</td></tr>
+                <tr><td data-label="#">2</td><td data-label="Element">Who is obliged</td><td data-label="Proposal">(a) Every recipient of EU fusion funding, regardless of size. (b) Large manufacturers of fusion components, by adding “fusion energy equipment” to the CRMA business risk-preparedness product list. (c) Importers of tungsten components, through the CMR.</td><td data-label="Legal hook">Euratom grant agreements; CRMA amendments; CMR 2017/821 <span data-cite="crma-2024,ep-2026,cmr-2017"></span></td><td data-label="Who acts">Commission, Fusion for Energy, Parliament and Council</td><td data-label="When">2027 calls; CRMA 2026–27; CMR review</td></tr>
+                <tr><td data-label="#">3</td><td data-label="Element">Standard</td><td data-label="Proposal">OECD Minerals Guidance five-step due diligence, to smelter and refiner level.</td><td data-label="Legal hook">OECD (2016); CMR already references it <span data-cite="oecd-2016,cmr-2017"></span></td><td data-label="Who acts">Obliged companies</td><td data-label="When">From first procurement</td></tr>
+                <tr><td data-label="#">4</td><td data-label="Element">Remedy before exit</td><td data-label="Proposal">Corrective action plans with deadlines; temporary suspension if milestones are missed; exit only after failed mitigation, or immediately for the gravest abuses (forced labour, worst forms of child labour, support to armed groups).</td><td data-label="Legal hook">OECD (2016) Annex II model policy <span data-cite="oecd-2016"></span></td><td data-label="Who acts">Obliged companies</td><td data-label="When">Ongoing</td></tr>
+                <tr><td data-label="#">5</td><td data-label="Element">Verification</td><td data-label="Proposal">Independent audits of smelters and refiners through recognised schemes; a verified due-diligence policy, as under the Batteries Regulation.</td><td data-label="Legal hook">Batteries Regulation model; CMR recognised schemes <span data-cite="batt-2023,cmr-2017"></span></td><td data-label="Who acts">Notified bodies, auditors</td><td data-label="When">Before major procurement</td></tr>
+                <tr><td data-label="#">6</td><td data-label="Element">Transparency</td><td data-label="Proposal">Annual public report on risks found, actions taken and remedies delivered; smelter list shared with the competent authority.</td><td data-label="Legal hook">CMR reporting; grant reporting <span data-cite="cmr-2017"></span></td><td data-label="Who acts">Obliged companies</td><td data-label="When">Annually</td></tr>
+                <tr><td data-label="#">7</td><td data-label="Element">Enforcement</td><td data-label="Proposal">Funding eligibility and clawback for grant recipients; CMR checks by national competent authorities; the Forced Labour Regulation as backstop.</td><td data-label="Legal hook">Grant agreements; CMR; Regulation 2024/3015 <span data-cite="cmr-2017,flr-2024"></span></td><td data-label="Who acts">Commission, national authorities</td><td data-label="When">From 2027</td></tr>
+                <tr><td data-label="#">8</td><td data-label="Element">Producer-country safeguards</td><td data-label="Proposal">No blanket regional exclusion; support for formalising artisanal mining; alignment with the UN Panel principles.</td><td data-label="Legal hook">UN Panel (2024); CMR accompanying measures <span data-cite="unpanel-2024,cmr-2017"></span></td><td data-label="Who acts">Commission, EU delegations</td><td data-label="When">Ongoing</td></tr>
+                <tr><td data-label="#">9</td><td data-label="Element">Review</td><td data-label="Proposal">Review after three years, aligned with the UN traceability framework and the US and UK fusion rules.</td><td data-label="Legal hook">Review clauses <span data-cite="unctad-2026,nrc-2026,desnz-2026"></span></td><td data-label="Who acts">Commission</td><td data-label="When">2030</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p><strong>EU competence:</strong> Plant licensing is a national matter in the EU, so this framework works through EU funding, procurement and product rules, and recommends that national fusion regulators adopt the same standard. <span data-cite="nzia-2024"></span></p>
+          <p><strong>Net-Zero Industry Act:</strong> The Act names nuclear fission but not fusion explicitly; whether fusion falls under its “other nuclear technologies” category should be clarified. <span data-cite="nzia-2024"></span><!-- VERIFY --></p>
+          <h3>Five options, compared</h3>
+          <div class="table-scroll" role="region" aria-label="EU policy options appraisal" tabindex="0">
+            <table class="options-table">
+              <thead><tr><th>Option</th><th>Effectiveness</th><th>Burden on small fusion firms</th><th>Legal feasibility</th><th>Speed</th><th>Recommended</th></tr></thead>
+              <tbody>
+                <tr><td data-label="Option">0. No action</td><td data-label="Effectiveness">●○○ Low</td><td data-label="Burden">●○○ None</td><td data-label="Legal feasibility">n/a</td><td data-label="Speed">n/a</td><td data-label="Recommended">No</td></tr>
+                <tr><td data-label="Option">1. Voluntary industry code (via the Fusion Industry Association)</td><td data-label="Effectiveness">●○○ Low</td><td data-label="Burden">●○○ Low</td><td data-label="Legal feasibility">●●● High</td><td data-label="Speed">●●● Fast</td><td data-label="Recommended">No, but useful as a bridge</td></tr>
+                <tr class="recommended"><td data-label="Option">2. Conditions on EU fusion funding and Fusion for Energy procurement</td><td data-label="Effectiveness">●●○ Medium</td><td data-label="Burden">●●○ Medium (funded firms only)</td><td data-label="Legal feasibility">●●● High</td><td data-label="Speed">●●● Fast (2027 calls)</td><td data-label="Recommended"><span class="recommended-chip">Recommended</span> Yes, now</td></tr>
+                <tr class="recommended"><td data-label="Option">3. Add fusion equipment to the CRMA business risk-preparedness list</td><td data-label="Effectiveness">●●○ Medium</td><td data-label="Burden">●○○ Low (large firms only)</td><td data-label="Legal feasibility">●●○ Medium</td><td data-label="Speed">●●○ Medium (2027–28)</td><td data-label="Recommended"><span class="recommended-chip">Recommended</span> Yes, in the CRMA amendments</td></tr>
+                <tr class="recommended"><td data-label="Option">4. Extend the CMR to tungsten components, and assess beryllium and rare earths</td><td data-label="Effectiveness">●●● High for tungsten</td><td data-label="Burden">●●○ Medium</td><td data-label="Legal feasibility">●●○ Medium</td><td data-label="Speed">●○○ Slow (2028+)</td><td data-label="Recommended"><span class="recommended-chip">Recommended</span> Yes, in the CMR review</td></tr>
+                <tr class="recommended"><td data-label="Option">5. Fusion-specific due diligence through the EU Fusion Strategy and national licensing</td><td data-label="Effectiveness">●●● High</td><td data-label="Burden">●●○ Medium</td><td data-label="Legal feasibility">●○○ Low to medium (licensing is national)</td><td data-label="Speed">●○○ Slow (2029+)</td><td data-label="Recommended"><span class="recommended-chip">Recommended</span> Signal now, legislate later</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p><strong>Recommended package:</strong> option 2 now, option 3 in the CRMA amendments, option 4 in the CMR review, and option 5 signalled in the Fusion Strategy. <span data-cite="crma-2024,ep-2026,cmr-2017,nzia-2024"></span></p>
           <h3>Actions in detail</h3>
           <div class="copy-block">
             <h4>Funding condition</h4>
@@ -657,8 +701,8 @@
             <button class="copy-button">Copy</button>
           </div>
           <div class="copy-block">
-            <h4>Licensing condition</h4>
-            <p>“The EU should model a fusion licensing rule on the Batteries Regulation: a verified due diligence policy as a condition of permission, remedy-first escalation as a binding requirement, and public reporting on what was remediated and what remains unresolved.”</p>
+            <h4>Fusion Strategy commitment</h4>
+            <p>“The EU Fusion Strategy should commit to OECD-aligned due diligence for tungsten, lithium-6, beryllium and rare earths across EU-funded and EU-procured fusion projects, require remedy before exit, and recommend that national fusion regulators adopt the same standard.”</p>
             <button class="copy-button">Copy</button>
           </div>
           <p><a href="#governance">Review the governance gaps</a>.</p>
@@ -674,7 +718,7 @@
             <div class="brief-actions"><button class="copy-link">Copy link</button><button class="print-btn">Print or save as PDF</button></div>
           </div>
           <div class="brief-summary">
-            <p><strong>Ask:</strong> Add fusion-relevant materials to the UN traceability and accountability agenda and embed remedy-first principles before the market scales.</p>
+            <p><strong>Ask:</strong> Add fusion-relevant materials to the UN traceability and accountability agenda and embed remedy-first principles before the market scales. <span data-cite="unctad-2026,unpanel-2024"></span></p>
             <ol>
               <li>Add tungsten, lithium-6, beryllium and rare earths to the task-force scope.</li>
               <li>Adopt remedy-first as a principle, not just disclosure of risk.</li>
@@ -686,6 +730,17 @@
           <div class="timeline-mount" data-audience="un"></div>
           <h3>Why it matters to you</h3>
           <p>The framework’s examples are battery and grid minerals. Fusion adds demand for tungsten, lithium-6, beryllium and rare earths, often from the same high-risk areas. <span data-cite="unpanel-2024"></span></p>
+          <div class="table-scroll" role="region" aria-label="UN traceability framework proposal" tabindex="0">
+            <table class="un-proposal-table">
+              <thead><tr><th>Area</th><th>Proposal</th><th>Timing</th></tr></thead>
+              <tbody>
+                <tr><td>Scope</td><td>Add tungsten, lithium-6, beryllium and rare earths to the traceability framework’s materials scope.</td><td>September–October 2026 study; 2027 expert discussions.</td></tr>
+                <tr><td>Principle</td><td>Embed remedy-first due diligence, not disclosure alone.</td><td>2027 expert discussions.</td></tr>
+                <tr><td>Accountability</td><td>Recognise remediation funds and grievance mechanisms as part of accountability.</td><td>2027 expert discussions.</td></tr>
+                <tr><td>Timing</td><td>Include fusion materials before the framework’s scope is set.</td><td>September–October 2026 study; 2027 expert discussions.</td></tr>
+              </tbody>
+            </table>
+          </div>
           <h3>Actions in detail</h3>
           <div class="copy-block">
             <h4>Scope language</h4>

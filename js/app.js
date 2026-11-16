@@ -95,6 +95,100 @@ function setupSources() {
   });
 }
 
+function addTableCitations(table, sourceRows) {
+  if (!table) return;
+  [...table.tBodies[0].rows].forEach((row, rowIndex) => {
+    const sourceIds = sourceRows[rowIndex] || [];
+    row.querySelectorAll('td').forEach((cell) => {
+      if (!cell.textContent.trim() || cell.querySelector('.citation') || !sourceIds.length) return;
+      cell.insertAdjacentHTML('beforeend', ` ${cite(sourceIds)}`);
+    });
+  });
+}
+
+function setupGovernance() {
+  const table = document.getElementById('governance-table');
+  const list = document.getElementById('governance-card-list');
+  const toggle = document.getElementById('governance-list-toggle');
+  if (!table || !list || !toggle) return;
+  const sourceIdsByMaterial = {
+    Tungsten: ['usgs-2026', 'unsc-2025a'],
+    Lithium: ['oc-2025', 'pearson-2022'],
+    'Lithium-6': ['pearson-2022'],
+    Beryllium: ['atsdr-2008'],
+    'Rare earths': ['gw-2024', 'scsp-2025']
+  };
+  const sourceIdsByColumn = [
+    null,
+    ['cmr-2017'],
+    ['stoop-2018'],
+    ['batt-2023'],
+    ['csddd-2024'],
+    ['oecd-2016'],
+    ['unpanel-2024'],
+    ['crma-2024', 'ep-2026'],
+    ['flr-2024'],
+    ['nzia-2024']
+  ];
+  table.querySelectorAll('tbody tr').forEach((row) => {
+    row.querySelectorAll('td').forEach((cell, index) => {
+      const sourceIds = index === 0 ? sourceIdsByMaterial[cell.textContent.trim()] : sourceIdsByColumn[index];
+      if (sourceIds?.length) cell.insertAdjacentHTML('beforeend', ` ${cite(sourceIds)}`);
+    });
+  });
+
+  const headers = [...table.tHead.rows[0].cells].slice(1).map((cell) => cell.textContent.trim());
+  list.innerHTML = [...table.tBodies[0].rows].map((row) => {
+    const cells = [...row.cells];
+    return `<article class="governance-card"><h3>${cells[0].textContent.trim()}</h3><dl>${headers.map((header, index) => `
+      <div><dt>${header}</dt><dd>${cells[index + 1].innerHTML}</dd></div>
+    `).join('')}</dl></article>`;
+  }).join('');
+
+  toggle.addEventListener('click', () => {
+    const showList = list.hidden;
+    list.hidden = !showList;
+    table.closest('.table-scroll').hidden = showList;
+    toggle.setAttribute('aria-expanded', String(showList));
+    toggle.textContent = showList ? 'Show as table' : 'Show as list';
+  });
+}
+
+function setupBriefTableCitations() {
+  addTableCitations(document.querySelector('.framework-table'), [
+    ['crma-2024', 'ep-2026'],
+    ['ec-2026', 'crma-2024', 'ep-2026', 'cmr-2017'],
+    ['oecd-2016', 'cmr-2017'],
+    ['oecd-2016'],
+    ['batt-2023', 'cmr-2017'],
+    ['cmr-2017'],
+    ['cmr-2017', 'flr-2024'],
+    ['unpanel-2024', 'cmr-2017'],
+    ['unctad-2026', 'nrc-2026', 'desnz-2026']
+  ]);
+  addTableCitations(document.querySelector('.options-table'), [
+    ['scsp-2025'],
+    ['fia-2025'],
+    ['ec-2026', 'oecd-2016'],
+    ['crma-2024', 'ep-2026'],
+    ['cmr-2017', 'ipis-2024'],
+    ['nzia-2024', 'desnz-2026']
+  ]);
+  addTableCitations(document.querySelector('#brief-investors table'), [
+    ['usgs-2026', 'pearson-2022'],
+    ['crma-2024', 'ep-2026'],
+    ['oecd-2016'],
+    ['unpanel-2024', 'stoop-2018'],
+    ['scsp-2025']
+  ]);
+  addTableCitations(document.querySelector('.un-proposal-table'), [
+    ['unctad-2026'],
+    ['oecd-2016', 'unpanel-2024'],
+    ['unpanel-2024'],
+    ['unctad-2026']
+  ]);
+}
+
 const ladderStates = [
   { title: 'Identify', text: 'Mapping or audit finds a risk. The first response is to understand the exposure and agree what evidence is missing.' },
   { title: 'Engage', text: 'Raise the issue with the supplier and agree a corrective action plan with measurable milestones.' },
@@ -510,6 +604,8 @@ function init() {
   renderSources();
   setupSources();
   renderCitations();
+  setupGovernance();
+  setupBriefTableCitations();
   setupTimelines();
   renderFilters();
   renderRiskTable();
