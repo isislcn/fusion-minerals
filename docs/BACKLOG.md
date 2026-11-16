@@ -45,12 +45,11 @@
 
 ### Must
 
-- The page includes three reason columns, a rail timeline and the audience filter.
-- The “Today” marker is computed from the current date.
+- The page includes three concise reason columns about procurement timing, concentration and early requirements.
 
 ### Acceptance criteria
 
-- The timeline includes the fork at first-plant procurement.
+- The section opens as its own in-page view from navigation and internal links.
 - The page matches the wider site design language.
 
 ## Epic: Evidence and analysis

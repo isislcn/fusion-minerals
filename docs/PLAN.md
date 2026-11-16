@@ -21,7 +21,8 @@
 ## Architecture
 
 - Static site, no build step.
-- Hash routing.
+- Hash-based in-page navigation: one content view is shown at a time, and internal links switch views without opening new browser tabs.
+- Overview groups the hero, key figures, reactor supply comparison, research snapshot, briefs, route guide and glossary.
 - Data in `js/data.js` as plain `const` objects.
 - Works from `file://` and GitHub Pages.
 

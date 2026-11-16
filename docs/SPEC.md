@@ -20,7 +20,7 @@ This is the main evidence page. It includes a material switcher, chain with focu
 
 ### 4. Why now (`#why-now`)
 
-This page explains the governance window and shows where the cost of delay becomes higher than the cost of action. It includes the rail timeline, the “today” marker and the fork at first-plant procurement.
+This page explains why procurement expectations can be considered while fusion designs, financing and supplier relationships are still developing. It presents three concise reasons without a timeline or audience-filter controls.
 
 ### 5. Evidence: risk register (`#risks`)
 
@@ -61,6 +61,8 @@ This page records the project background, iteration log and AI-use disclosure.
 ## Navigation rules
 
 - Top navigation includes Overview, Fusion primer, Supply chain, Why now, Evidence (dropdown), Remedy first, Briefs (dropdown), Sources and the gold Limitations button.
+- Navigation and internal links switch the visible in-page content view; they do not open separate browser tabs. The selected view is reflected in the URL hash and supports browser back/forward navigation.
+- Overview groups the hero, key figures, reactor supply comparison, research snapshot, brief cards, route guide and glossary. The reactor supply comparison appears between Key figures and Research snapshot.
 - Dropdown menus must support keyboard and touch interactions via accessible disclosure controls.
 - Every page includes a footer with site title, “Updated November 2026,” links to Methodology, Limitations and About, and the GitHub repo.
 - On screens wider than 480px, a fixed stamp reading “November 2026” appears in the bottom-right corner.
