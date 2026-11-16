@@ -343,6 +343,7 @@ function buildChain(materialKey='tungsten') {
 function renderStageDetail(material, stage) {
   if (!stage) return;
   const targetHash = `#chain-${stage.id}`;
+  const stageSources = stage.sourceIds?.length ? cite(stage.sourceIds) : 'Project analysis';
   stageDetail.innerHTML = `
     <div class="detail-header">
       <h3>${material.label}: ${stage.stage}</h3>
@@ -351,7 +352,7 @@ function renderStageDetail(material, stage) {
     <p><strong>Location:</strong> ${stage.location}</p>
     <p><strong>Risk:</strong> ${stage.risk}</p>
     <p><strong>Confidence:</strong> ${stage.confidence}</p>
-    <p><strong>Evidence:</strong> ${stage.evidence}</p>
+    <p><strong>Evidence:</strong> ${stage.evidence} ${stageSources}</p>
     <p><a href="#risks">View the evidence register</a></p>
   `;
 
@@ -365,8 +366,11 @@ function renderStageDetail(material, stage) {
 function renderTabPanels(material, activeTab) {
   const where = material.tab.where;
   const affected = material.tab.affected;
-  const evidence = material.tab.evidence;
-  wherePanel.innerHTML = `<p>${where}</p>`;
+  const sourceIds = [...new Set(material.stages.flatMap((stage) => stage.sourceIds || []))];
+  const evidence = `<ul>${material.stages.map((stage) => `
+    <li><strong>${stage.stage} · ${stage.confidence}:</strong> ${stage.evidence} ${stage.sourceIds?.length ? cite(stage.sourceIds) : 'Project analysis'}</li>
+  `).join('')}</ul>`;
+  wherePanel.innerHTML = `<p>${where} ${sourceIds.length ? cite(sourceIds) : ''}</p>`;
   affectedPanel.innerHTML = `<p>${affected}</p>`;
   evidencePanel.innerHTML = `<p>${evidence}</p>`;
 

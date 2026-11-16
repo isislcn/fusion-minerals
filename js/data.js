@@ -3,31 +3,31 @@ const materialData = {
     label: 'Tungsten',
     id: 'tungsten',
     stages: [
-      { id: 'tungsten-mine', stage: 'Mine', kind: 'mine', title: 'Mine', location: 'Eastern DR Congo', risk: 'Reported 3T-related conflict-finance exposure; tungsten link unverified', confidence: 'reported', evidence: 'UN and field reporting describe armed-group taxation in 3T mining areas, with much reporting focused on coltan. This regional context does not establish tungsten extraction at a specific site or sourcing by a fusion company.', relevant: ['all','eu','un'] },
-      { id: 'tungsten-trade', stage: 'Trade', kind: 'trade', title: 'Trade', location: 'Regional trading hubs', risk: 'Traceability and origin mixing', confidence: 'documented', evidence: 'Multiple trade and processing steps can complicate origin tracing. The public evidence summarized here does not establish a route from a specific mine to a fusion component.', relevant: ['all','eu','un'] },
-      { id: 'tungsten-refine', stage: 'Refining', kind: 'refine', title: 'Refining', location: 'China', risk: 'Concentration and governance gaps', confidence: 'documented', evidence: 'China accounts for around 80% of APT and tungsten refining capacity.', relevant: ['all','investors','un'] },
-      { id: 'tungsten-components', stage: 'Components', kind: 'component', title: 'Components', location: 'Global industrial supply chains', risk: 'Due-diligence coverage varies by product and jurisdiction', confidence: 'inferred', evidence: 'The EU Conflict Minerals Regulation applies to specified 3TG imports and thresholds; it does not create universal traceability requirements for every finished product or component.', relevant: ['all','investors','eu'] },
-      { id: 'tungsten-plant', stage: 'Plant', kind: 'plant', title: 'Plant', location: 'Fusion plant footprint', risk: 'Project delivery risk and offtake conditions', confidence: 'inferred', evidence: 'Procurement and sourcing conditions will matter before the first commercial plant is built.', relevant: ['all','investors'] }
+      { id: 'tungsten-mine', stage: 'Mine', kind: 'mine', title: 'Mine', location: 'Eastern DR Congo', risk: 'Conflict finance in 3T mining; tungsten volumes are not quantified', confidence: 'reported', sourceIds: ['unsc-2025a'], evidence: 'UN experts report that M23 controls Rubaya, earns at least $800,000 a month from taxing coltan, and smuggles 3T minerals into Rwanda for blending with legal exports. Most evidence concerns coltan; tungsten volumes are not quantified.', relevant: ['all','eu','un'] },
+      { id: 'tungsten-trade', stage: 'Trade', kind: 'trade', title: 'Trade', location: 'DR Congo and Rwanda', risk: 'Traceability and origin mixing', confidence: 'reported', sourceIds: ['unsc-2025a'], evidence: 'UN experts report that 3T minerals are smuggled into Rwanda and blended with legal exports.', relevant: ['all','eu','un'] },
+      { id: 'tungsten-refine', stage: 'Refining', kind: 'refine', title: 'Refining', location: 'China', risk: 'Concentration and governance gaps', confidence: 'documented', sourceIds: ['usgs-2026'], evidence: 'China mined about 79% of the world’s tungsten in 2025 and produces about 80% of ammonium paratungstate (APT), a refined intermediate.', relevant: ['all','investors','un'] },
+      { id: 'tungsten-components', stage: 'Components', kind: 'component', title: 'Components', location: 'Global industrial supply chains', risk: 'Due-diligence coverage varies by product and jurisdiction', confidence: 'documented', sourceIds: ['cmr-2017'], evidence: 'The EU Conflict Minerals Regulation covers specified imports of tungsten ores and concentrates, and metals; it does not cover tungsten inside all finished components.', relevant: ['all','investors','eu'] },
+      { id: 'tungsten-plant', stage: 'Plant', kind: 'plant', title: 'Plant', location: 'Fusion plant procurement', risk: 'Procurement and design dependency', confidence: 'inferred', sourceIds: [], evidence: 'Early procurement decisions are an opportunity to specify sourcing expectations.', relevant: ['all','investors'] }
     ],
     tab: {
-      where: 'Tungsten mining and processing are concentrated in a limited number of countries. Separate reporting on 3T minerals in eastern DR Congo provides regional conflict-finance context, but does not establish a tungsten link to a specific mine or fusion buyer.',
-      affected: 'Mining and processing communities may face distinct labour, environmental and governance risks. The evidence summarized here should not be read as showing that all tungsten-producing areas share the same risk profile.',
-      evidence: 'The evidence combines commodity and trade information with UN and field reporting. The eastern DR Congo material is classified as reported and is not direct evidence of tungsten sourcing by fusion companies.'
+      where: 'China mined about 79% of the world’s tungsten in 2025 and produces about 80% of APT, the refined intermediate. Eastern Congo’s 3T trade runs through armed-group-controlled routes into Rwanda.',
+      affected: 'See the documented cases on the <a href="#human-cost-rubaya">Human cost page →</a>',
+      evidence: 'Stage-specific evidence is listed below.'
     }
   },
   lithium: {
     label: 'Lithium',
     id: 'lithium',
     stages: [
-      { id: 'lithium-mine', stage: 'Mine', kind: 'mine', title: 'Mine', location: 'Global', risk: 'Concentration and energy intensity', confidence: 'documented', evidence: 'Lithium mining is globally distributed but the chain for lithium-6 is different and much less mature.', relevant: ['all','eu','un'] },
+      { id: 'lithium-mine', stage: 'Mine', kind: 'mine', title: 'Mine', location: 'High Andean salt flats', risk: 'Water and Indigenous rights', confidence: 'reported', sourceIds: ['oc-2025'], evidence: 'Lithium extraction in the high Andean salt flats raises reported concerns about water and Indigenous rights.', relevant: ['all','eu','un'] },
       { id: 'lithium-trade', stage: 'Trade', kind: 'trade', title: 'Trade', location: 'Global ports and refineries', risk: 'Traceability and product substitution', confidence: 'documented', evidence: 'Bulk lithium supply is traded across many nodes; isotopic separation is the critical gap for lithium-6.', relevant: ['all','eu','un'] },
-      { id: 'lithium-refine', stage: 'Refining', kind: 'refine', title: 'Refining', location: 'Global', risk: 'No established commercial lithium-6 supply at fusion-relevant scale', confidence: 'documented', evidence: 'Public information does not establish commercial lithium-6 supply at the scale discussed in fusion blanket estimates; strategic stocks and historical production are not equivalent to current commercial supply.', relevant: ['all','investors','un'] },
+      { id: 'lithium-refine', stage: 'Refining', kind: 'refine', title: 'Refining', location: 'Global', risk: 'No established commercial lithium-6 supply at fusion-relevant scale', confidence: 'reported', sourceIds: ['pearson-2022'], evidence: 'Commercial lithium-6 supply at fusion-relevant scale is not established in the cited supply presentation.', relevant: ['all','investors','un'] },
       { id: 'lithium-components', stage: 'Components', kind: 'component', title: 'Components', location: 'Strategic manufacturing', risk: 'Traceability and due-diligence gaps', confidence: 'inferred', evidence: 'The sector is still early enough to build due diligence before major component procurement.', relevant: ['all','investors','eu'] },
       { id: 'lithium-plant', stage: 'Plant', kind: 'plant', title: 'Plant', location: 'Fusion plant footprint', risk: 'Procurement and design dependency', confidence: 'inferred', evidence: 'Pilot-plant demand is a key unknown and will depend on reactor design and blanket architecture.', relevant: ['all','investors'] }
     ],
     tab: {
       where: 'Lithium is produced for several established markets. Lithium-6 requires isotopic separation, so ordinary lithium production figures do not describe the supply available for fusion blanket concepts.',
-      affected: 'Potential constraints include isotopic-separation capacity, qualification and the scale of future blanket demand; public evidence is insufficient to quantify a commercial supply gap precisely.',
+      affected: 'See the documented cases on the <a href="#human-cost-andes">Human cost page →</a>',
       evidence: 'The assessment compares published strategic and demand information. Estimates depend on reactor and blanket design and should not be treated as a settled forecast.'
     }
   },
@@ -38,12 +38,12 @@ const materialData = {
       { id: 'beryllium-mine', stage: 'Mine', kind: 'mine', title: 'Mine', location: 'Limited producing countries', risk: 'Concentrated supply and limited fusion-specific visibility', confidence: 'inferred', evidence: 'Public sources reviewed for this project do not provide a complete mine-to-fusion chain or a reliable plant-level demand estimate.', relevant: ['all','eu','un'] },
       { id: 'beryllium-trade', stage: 'Trade', kind: 'trade', title: 'Trade', location: 'Global trade flows', risk: 'Traceability gaps', confidence: 'inferred', evidence: 'No definitive fusion-specific chain is yet public, which increases uncertainty.', relevant: ['all','eu','un'] },
       { id: 'beryllium-refine', stage: 'Refining', kind: 'refine', title: 'Refining', location: 'Limited processing nodes', risk: 'Concentration', confidence: 'inferred', evidence: 'Processing is limited and the design dependence of beryllium use is still unclear.', relevant: ['all','investors','un'] },
-      { id: 'beryllium-components', stage: 'Components', kind: 'component', title: 'Components', location: 'Specialist materials production', risk: 'Governance without explicit fusion rules', confidence: 'inferred', evidence: 'The fusion market is small enough to impose due diligence before procurement scales.', relevant: ['all','investors','eu'] },
+      { id: 'beryllium-components', stage: 'Components', kind: 'component', title: 'Components', location: 'Beryllium processing and machining plants', risk: 'Occupational exposure and chronic disease', confidence: 'documented', sourceIds: ['atsdr-2008'], evidence: 'Inhaled beryllium particles can sensitize workers and lead to chronic beryllium disease.', relevant: ['all','investors','eu'] },
       { id: 'beryllium-plant', stage: 'Plant', kind: 'plant', title: 'Plant', location: 'Fusion project procurement', risk: 'Design-dependent supply conditions', confidence: 'inferred', evidence: 'The risk will vary by blanket design and reactor architecture.', relevant: ['all','investors'] }
     ],
     tab: {
-      where: 'Beryllium has industrial uses, but the public evidence reviewed here does not establish a complete fusion-specific supply chain or plant-level demand profile.',
-      affected: 'The project cannot identify fusion-specific exposure for particular producers, workers or communities from the available public evidence.',
+      where: 'Beryllium has industrial uses, while public information on a complete fusion-specific supply chain and plant-level demand profile remains limited.',
+      affected: 'See the documented cases on the <a href="#human-cost-beryllium">Human cost page →</a>',
       evidence: 'The evidence base is limited. The entries are labeled inferred where they describe research gaps or potential procurement implications rather than documented fusion sourcing.'
     }
   },
@@ -51,16 +51,16 @@ const materialData = {
     label: 'Rare earths',
     id: 'ree',
     stages: [
-      { id: 'ree-mine', stage: 'Mine', kind: 'mine', title: 'Mine', location: 'Kachin State, Myanmar', risk: 'Reported pollution associated with heavy rare-earth mining', confidence: 'reported', evidence: 'Reporting describes an increase of more than 40% in identified leaching sites in Kachin Special Region 1 from 2021–23, while China’s heavy rare-earth oxide imports from Myanmar also rose. These indicators do not establish the origin of material used in any fusion component.', relevant: ['all','eu','un'] },
+      { id: 'ree-mine', stage: 'Mine', kind: 'mine', title: 'Mine', location: 'Kachin State, Myanmar', risk: 'Pollution, health and land rights', confidence: 'reported', sourceIds: ['gw-2024'], evidence: 'Mining sites in Kachin Special Region 1 rose by more than 40% from 2021 to 2023, to over 300. China’s imports of heavy rare earth oxides from Myanmar more than doubled, from 19,500 to 41,700 tonnes. Streams near the mines test highly acidic with elevated arsenic.', relevant: ['all','eu','un'] },
       { id: 'ree-trade', stage: 'Trade', kind: 'trade', title: 'Trade', location: 'China and regional hubs', risk: 'Mixed origin and limited traceability', confidence: 'documented', evidence: 'Heavy rare earth inputs move through global trade channels and can be difficult to trace by origin without stronger procurement rules.', relevant: ['all','eu','un'] },
       { id: 'ree-refine', stage: 'Refining', kind: 'refine', title: 'Refining', location: 'China', risk: 'Concentration and governance gaps', confidence: 'documented', evidence: 'China accounts for roughly 80% of rare earth refining; the issue is concentrated in a small number of processing nodes.', relevant: ['all','investors','un'] },
       { id: 'ree-components', stage: 'Components', kind: 'component', title: 'Components', location: 'Magnet and component manufacturing', risk: 'Traceability and source conditions', confidence: 'inferred', evidence: 'The project shows the need to map materials before major superconducting and magnet procurement.', relevant: ['all','investors','eu'] },
       { id: 'ree-plant', stage: 'Plant', kind: 'plant', title: 'Plant', location: 'Fusion plant procurement', risk: 'Procurement lock-in', confidence: 'inferred', evidence: 'The cost of deeper sourcing due diligence rises once contracts are signed.', relevant: ['all','investors'] }
     ],
     tab: {
-      where: 'Some magnet technologies use rare-earth-containing materials, but requirements vary by design. Mining, trade and refining are distinct stages, and concentration estimates should be tied to the specific material and stage measured.',
-      affected: 'Reports from some producing regions describe environmental and governance concerns. They should not be generalized to every mine or treated as evidence of a link to a fusion buyer.',
-      evidence: 'Mine-level risks are labeled reported because they rely on external reporting. Trade and refining concentration provide broader supply-chain context, not proof of fusion procurement.'
+      where: 'Mining sites in Kachin Special Region 1 rose by more than 40% from 2021 to 2023, and China’s imports of heavy rare earth oxides from Myanmar more than doubled, from 19,500 to 41,700 tonnes. Streams near the mines test highly acidic with elevated arsenic.',
+      affected: 'See the documented cases on the <a href="#human-cost-kachin">Human cost page →</a>',
+      evidence: 'Stage-specific evidence is listed below.'
     }
   }
 };
