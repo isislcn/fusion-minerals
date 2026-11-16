@@ -94,7 +94,7 @@
 
 ### Must
 
-- Methodology, limitations and sources pages exist.
+- A single Methodology page combines methodology, limitations and sources.
 - About page contains the iteration log and AI-use disclosure.
 
 ### Acceptance criteria
@@ -125,7 +125,7 @@
 
 ## Priority summary
 
-- Must: overview, primer, supply chain, why now, evidence, remedy, briefs, methodology, limitations, sources, about and quality.
+- Must: overview, primer, supply chain, why now, evidence, remedy, briefs, methodology/limitations/sources, about and quality.
 - Should: more detailed filters, stage explanation and deeper source mapping.
 - Could: regional maps, demand sizing charts and brief translations.
 

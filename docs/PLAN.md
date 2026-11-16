@@ -13,10 +13,8 @@
 9. Brief: fusion investors — `#brief-investors`
 10. Brief: European Union — `#brief-eu`
 11. Brief: UN Task Force — `#brief-un`
-12. Methodology — `#methodology`
-13. Limitations — `#limitations`
-14. Sources — `#sources`
-15. About — `#about`
+12. Methodology, limitations and sources — `#methodology`
+13. About — `#about`
 
 ## Architecture
 

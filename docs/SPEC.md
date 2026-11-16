@@ -42,17 +42,9 @@ Interactive ladder explaining the correct sequence from identification to exit, 
 
 Each brief follows the same pattern: summary card, why it matters, why now, actions, remedy-first framing and evidence. All three include a print action and copyable text blocks.
 
-### 12. Methodology (`#methodology`)
+### 12. Methodology, limitations and sources (`#methodology`)
 
-This page explains data collection, confidence labels and the evidence rules used throughout the project.
-
-### 13. Limitations (`#limitations`)
-
-This page states what the project cannot claim and what remains uncertain. It should include a careful explanation of the limits of traceability and supply-chain attribution.
-
-### 14. Sources (`#sources`)
-
-This page lists the key sources and links to the evidence used on the site.
+This page explains data collection, confidence labels and evidence rules; states what remains uncertain and what the project cannot claim; and lists the key sources used in the analysis.
 
 ### 15. About (`#about`)
 
@@ -60,11 +52,11 @@ This page records the project background, iteration log and AI-use disclosure.
 
 ## Navigation rules
 
-- Top navigation includes Overview, Fusion primer, Supply chain, Why now, Evidence (dropdown), Remedy first, Briefs (dropdown), Sources and the gold Limitations button.
+- Top navigation includes Overview, Fusion primer, Supply chain, Why now, Evidence (dropdown), Remedy first, Briefs (dropdown) and Methodology.
 - Navigation and internal links switch the visible in-page content view; they do not open separate browser tabs. The selected view is reflected in the URL hash and supports browser back/forward navigation.
 - Overview groups the hero, key figures, reactor supply comparison, research snapshot, brief cards, route guide and glossary. The reactor supply comparison appears between Key figures and Research snapshot.
 - Dropdown menus must support keyboard and touch interactions via accessible disclosure controls.
-- Every page includes a footer with site title, “Updated November 2026,” links to Methodology, Limitations and About, and the GitHub repo.
+- The footer includes the site title, “Updated November 2026,” About and the GitHub repo. Methodology and limitations are combined in the Methodology view.
 - On screens wider than 480px, a fixed stamp reading “November 2026” appears in the bottom-right corner.
 
 ## Content rules
