@@ -20,7 +20,7 @@ Provide a five-step, keyboard-accessible story following tungsten from mine to r
 
 ### Fusion primer (`#primer`)
 
-Explain fusion basics, reactor cutaway, companies and financing context. Preserve text alternatives and stage deep links.
+Explain fusion basics with a playable fusion-versus-fission SVG, reduced-motion support, and a temperature comparison with a clearly labeled broken axis. Mark comparison figures for author verification. Keep the reactor layer table collapsible, reactor-approach cards expandable, and preserve the cutaway's text alternatives and stage deep links.
 
 ### Supply chain (`#chain`)
 

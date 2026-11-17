@@ -36,6 +36,9 @@
 
 - Each layer has a detail card with a material-specific link.
 - The page remains readable on mobile and in print.
+- Fusion and fission have a playable, accessible SVG comparison; reduced-motion users can view the end state without animation.
+- The Sun-core/ITER temperature chart labels its broken axis and flags both figures for author review.
+- Reactor-layer information and reactor-approach examples expand on request.
 
 ## Epic: Supply chain
 

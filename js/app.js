@@ -699,7 +699,7 @@ function wrapJargonTerms(root, seen) {
   const terms = Object.keys(GLOSSARY).sort((a, b) => b.length - a.length);
   const pattern = new RegExp(`\\b(${terms.join('|')})\\b`, 'gi');
   const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT);
-  const excluded = 'button, a, script, style, .citation, .term-popover, .glossary-list, .source-list, .brief-print-references, .copy-block';
+  const excluded = 'button, a, script, style, svg, .citation, .term-popover, .glossary-list, .source-list, .brief-print-references, .copy-block';
   let node;
   let termInstance = document.querySelectorAll('.term-popover').length;
   while ((node = walker.nextNode())) {
@@ -1181,6 +1181,56 @@ function setupPrintAndCopy() {
   });
 }
 
+function setupReactionDemo() {
+  const svg = document.getElementById('reaction-comparison');
+  const button = document.getElementById('reaction-play');
+  const status = document.getElementById('reaction-status');
+  if (!svg || !button || !status) return;
+
+  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+  function reset() {
+    svg.classList.remove('is-playing', 'is-complete');
+    button.textContent = 'Play comparison';
+    status.textContent = 'Static view. Fusion joins; fission splits.';
+  }
+
+  function showComplete(withoutMotion) {
+    svg.classList.remove('is-playing');
+    svg.classList.add('is-complete');
+    button.textContent = 'Reset comparison';
+    status.textContent = withoutMotion
+      ? 'Reduced motion is on. Showing the completed comparison without animation.'
+      : 'Comparison complete.';
+  }
+
+  button.addEventListener('click', () => {
+    if (svg.classList.contains('is-playing') || svg.classList.contains('is-complete')) {
+      reset();
+      return;
+    }
+
+    if (reducedMotion.matches) {
+      showComplete(true);
+      return;
+    }
+
+    svg.classList.add('is-playing');
+    button.textContent = 'Reset comparison';
+    status.textContent = 'Comparison playing.';
+  });
+
+  svg.addEventListener('animationend', (event) => {
+    if (event.target.classList.contains('fission-products') && svg.classList.contains('is-playing')) {
+      showComplete(false);
+    }
+  });
+
+  reducedMotion.addEventListener('change', (event) => {
+    if (event.matches && svg.classList.contains('is-playing')) showComplete(true);
+  });
+}
+
 function setupLayerCards() {
   const visual = document.querySelector('.cutaway-visual');
   const svg = document.getElementById('tokamak-cutaway');
@@ -1297,6 +1347,7 @@ function init() {
   setupRiskFilters();
   setupLadder();
   setupPrintAndCopy();
+  setupReactionDemo();
   setupLayerCards();
   setupCitationControls();
   simplifyBodyLanguage();

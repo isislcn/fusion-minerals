@@ -304,14 +304,61 @@ p, li { color: var(--text); }
 
 .fusion-grid { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 24px; }
 .diagram-box { background: var(--surface-2); border-radius: 18px; padding: 24px; border: 1px solid rgba(255,255,255,0.08); }
-.fusion-vs { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
-.fusion-box, .fission-box { background: rgba(255,255,255,0.02); border-radius: 12px; padding: 14px; border: 1px solid rgba(255,255,255,0.06); }
-.atom { position: relative; height: 90px; margin: 12px auto; }
-.atom::before, .atom::after { content: ""; position: absolute; border-radius: 50%; }
-.atom::before { width: 26px; height: 26px; background: var(--gold); left: 50%; top: 50%; transform: translate(-50%, -50%); }
-.atom::after { width: 52px; height: 52px; border: 2px solid rgba(255,255,255,0.5); left: 50%; top: 50%; transform: translate(-50%, -50%); }
-.atom-merge::after { border-style: solid; }
-.atom-split::after { border-style: dashed; }
+.reaction-demo { margin: 0; }
+.reaction-svg { display: block; width: 100%; height: auto; }
+.reaction-frame { fill: var(--surface); stroke: var(--soft); stroke-width: 1.5; }
+.reaction-heading { fill: var(--gold); font: 600 21px system-ui, sans-serif; }
+.reaction-label, .reaction-footnote { fill: var(--muted); font: 13px system-ui, sans-serif; }
+.reaction-symbol { fill: var(--fg); font: 21px system-ui, sans-serif; }
+.nucleus { fill: var(--gold); }
+.product-nucleus { fill: var(--lithium); }
+.heavy-nucleus { fill: var(--tungsten); }
+.neutron { fill: var(--rust); }
+.nucleus-label, .neutron-label { fill: var(--bg); font: 600 11px system-ui, sans-serif; }
+.fusion-fuel { transform-box: fill-box; transform-origin: center; transition: transform 1.2s ease, opacity 0.2s ease; }
+.fusion-product, .fission-products { opacity: 0; }
+.fission-core { transition: opacity 0.25s ease; }
+.reaction-svg.is-playing .fusion-fuel-a { transform: translateX(20px); }
+.reaction-svg.is-playing .fusion-fuel-b { transform: translateX(-20px); }
+.reaction-svg.is-playing .fusion-product, .reaction-svg.is-playing .fission-products { animation: reaction-reveal 1.5s ease forwards; }
+.reaction-svg.is-playing .fission-core { animation: reaction-hide 1.5s ease forwards; }
+.reaction-svg.is-complete .fusion-fuel, .reaction-svg.is-complete .fission-core { opacity: 0; }
+.reaction-svg.is-complete .fusion-product, .reaction-svg.is-complete .fission-products { opacity: 1; }
+.reaction-demo figcaption, .temperature-figure figcaption { color: var(--muted); font-size: 0.78rem; margin-top: 6px; }
+.mobile-reaction-labels { display: none; }
+.reaction-controls { display: flex; align-items: center; flex-wrap: wrap; gap: 12px; margin-top: 16px; }
+.reaction-controls p { margin: 0; color: var(--muted); font-size: 0.88rem; }
+.temperature-heading { margin-top: 22px; }
+.temperature-figure { margin: 12px 0; padding: 10px; background: var(--surface-2); border: 1px solid rgba(255,255,255,0.08); border-radius: 12px; }
+.temperature-chart { display: block; width: 100%; height: auto; }
+.temperature-axis { stroke: var(--muted); stroke-width: 1.5; }
+.temperature-axis-label, .temperature-tick, .temperature-break-label { fill: var(--muted); font: 12px system-ui, sans-serif; }
+.temperature-sun { fill: var(--gold); }
+.temperature-plasma { fill: var(--rust); }
+.temperature-break { fill: none; stroke: var(--surface-2); stroke-width: 4; }
+.temperature-value { fill: var(--fg); font: 600 14px system-ui, sans-serif; }
+.temperature-name { fill: var(--muted); font: 13px system-ui, sans-serif; }
+.verification-note { padding-left: 12px; border-left: 3px solid var(--gold); color: var(--muted); }
+.primer-table-disclosure { margin-top: 18px; border-top: 1px solid rgba(255,255,255,0.1); }
+.primer-table-disclosure summary { padding: 14px 0; color: var(--gold); font-weight: 600; cursor: pointer; }
+.primer-table-disclosure[open] summary { padding-bottom: 4px; }
+.approach-card { padding: 0; overflow: hidden; }
+.approach-card summary { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 18px 20px; cursor: pointer; }
+.approach-card summary h3 { margin: 0; }
+.approach-card summary > span { color: var(--muted); font-size: 0.8rem; text-align: right; }
+.approach-content { padding: 0 20px 20px; }
+.approach-content p { margin: 0 0 8px; }
+.approach-content span { margin-top: 0; }
+
+@keyframes reaction-reveal {
+  0%, 62% { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+@keyframes reaction-hide {
+  0%, 62% { opacity: 1; }
+  100% { opacity: 0; }
+}
 
 .cutaway-wrap { display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 20px; align-items: start; }
 .cutaway-visual {
@@ -718,9 +765,16 @@ select { background: var(--surface); color: var(--text); border: 1px solid rgba(
   .cutaway-svg .layer-label, .cutaway-svg .layer-material, .cutaway-svg .layer-leader { display: none; }
   .cutaway-layer-list { display: grid; gap: 6px; margin: 8px; padding: 0; list-style: none; }
   .cutaway-list-layer { flex-wrap: wrap; }
+  .reaction-svg .reaction-heading, .reaction-svg .reaction-label, .reaction-svg .reaction-symbol,
+  .reaction-svg .reaction-footnote, .reaction-svg .nucleus-label, .reaction-svg .neutron-label { display: none; }
+  .mobile-reaction-labels { display: grid; gap: 4px; margin-top: 8px; }
+  .mobile-reaction-labels p { margin: 0; color: var(--muted); font-size: 0.8rem; }
 }
 @media (prefers-reduced-motion: reduce) {
   .cutaway-svg .layer, .cutaway-list-layer { transition: none; }
+  .reaction-svg .fusion-fuel, .reaction-svg .fission-core { transition: none; }
+  .reaction-svg.is-playing .fusion-product, .reaction-svg.is-playing .fission-products,
+  .reaction-svg.is-playing .fission-core { animation: none; }
 }
 
 @media (max-width: 720px) {
@@ -747,6 +801,10 @@ select { background: var(--surface); color: var(--text); border: 1px solid rgba(
 
 @media print {
   .timeline-scroll, .table-scroll, .table-wrap { overflow: visible; }
+  #primer details > :not(summary) { display: block !important; }
+  #primer .reaction-controls { display: none; }
+  #primer .reaction-svg .fusion-fuel, #primer .reaction-svg .fission-core { display: none; }
+  #primer .reaction-svg .fusion-product, #primer .reaction-svg .fission-products { opacity: 1; }
   .table-scroll::after { display: none; }
   .timeline-scroll::after, .timeline-scroll-hint, .timeline-filters { display: none !important; }
   .rail-timeline { width: 100%; min-width: 0; }
