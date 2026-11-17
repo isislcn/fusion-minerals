@@ -12,7 +12,7 @@ Overview → Fusion primer → Supply chain → Human cost → Why now → Risk 
 
 ### Overview (`#overview`)
 
-Show key figures, reactor material stages, research snapshot, linked brief and route cards. Evidence citations link to the corresponding APA reference.
+Show key figures, reactor material stages, linked briefs and route cards. Evidence citations link to the corresponding APA reference.
 
 ### Fusion primer (`#primer`)
 

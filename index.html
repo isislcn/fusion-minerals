@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Fusion Minerals</title>
     <meta name="description" content="Fusion Minerals — supply chain risk in fusion minerals." />
-    <link rel="stylesheet" href="css/styles.css?v=10" />
+    <link rel="stylesheet" href="css/styles.css?v=11" />
   </head>
   <body>
     <header class="site-header">
@@ -13,11 +13,15 @@
         <a href="#overview" class="brand">Fusion Minerals</a>
         <button class="nav-toggle" aria-expanded="false" aria-controls="main-nav">Menu</button>
         <nav id="main-nav" class="main-nav" aria-label="Main navigation">
-          <a href="#overview">Overview</a>
-          <a href="#primer">Fusion primer</a>
-          <a href="#chain">Supply chain</a>
-          <a href="#human-cost">Human cost</a>
-          <a href="#why-now">Why now</a>
+          <div class="nav-group">
+            <button class="nav-button" aria-expanded="false">Learn <span>▾</span></button>
+            <div class="nav-panel" role="menu">
+              <a href="#primer">Fusion primer</a>
+              <a href="#chain">Supply chain</a>
+              <a href="#human-cost">Human cost</a>
+              <a href="#why-now">Why now</a>
+            </div>
+          </div>
           <div class="nav-group">
             <button class="nav-button" aria-expanded="false">Evidence <span>▾</span></button>
             <div class="nav-panel" role="menu">
@@ -26,16 +30,24 @@
               <a href="#demand">Demand</a>
             </div>
           </div>
-          <a href="#remedy">Remedy first</a>
           <div class="nav-group">
-            <button class="nav-button" aria-expanded="false">Briefs <span>▾</span></button>
+            <button class="nav-button" aria-expanded="false">Act <span>▾</span></button>
             <div class="nav-panel" role="menu">
+              <a href="#remedy">Remedy first</a>
               <a href="#brief-investors">Investors</a>
               <a href="#brief-eu">European Union</a>
               <a href="#brief-un">UN Task Force</a>
             </div>
           </div>
-          <a href="#methodology">Methodology</a>
+          <div class="nav-group">
+            <button class="nav-button" aria-expanded="false">About <span>▾</span></button>
+            <div class="nav-panel" role="menu">
+              <a href="#methodology">Methodology</a>
+              <a href="#sources">Sources</a>
+              <a href="#about">About</a>
+            </div>
+          </div>
+          <a class="button tour-nav-button" href="#tour">Start the tour</a>
         </nav>
         <div class="date-stamp">November 2026</div>
       </div>
@@ -121,47 +133,19 @@
 
       <section class="section section-compact">
         <div class="container">
-          <h2>Research snapshot</h2>
-          <div class="stats-grid">
-            <article class="stat-card">
-              <strong>~79%</strong>
-              <span>China mined about 79% of the world’s tungsten in 2025.</span>
-              <span data-cite="usgs-2026"></span>
-            </article>
-            <article class="stat-card">
-              <strong>~80%</strong>
-              <span>China refines about 80% of rare earths.</span>
-              <span data-cite="scsp-2025"></span>
-            </article>
-            <article class="stat-card">
-              <strong>~0</strong>
-              <span>No established commercial supply at the scale some fusion blanket concepts may require.</span>
-              <span data-cite="pearson-2022"></span>
-            </article>
-            <article class="stat-card">
-              <strong>Mostly US</strong>
-              <span>Supply and fusion-specific procurement data are limited; some blanket concepts include beryllium.</span>
-              <span data-cite="atsdr-2008"></span>
-            </article>
-          </div>
-        </div>
-      </section>
-
-      <section class="section section-compact">
-        <div class="container">
           <h2>Choose your brief</h2>
           <div class="brief-grid">
             <a class="brief-card" href="#brief-investors">
               <span class="tag">For fusion investors</span>
-              <p>Assess material supply and sourcing risks before procurement decisions become difficult to change.</p>
+              <p>Materials risk is project risk. Write sourcing terms into offtake and finance deals now.</p>
             </a>
             <a class="brief-card" href="#brief-eu">
               <span class="tag">For the EU</span>
-              <p>Consider how existing EU due-diligence tools could address fusion-related supply chains.</p>
+              <p>No EU rule covers lithium-6, beryllium or rare earths for fusion. Close the gap while the Fusion Strategy is open.</p>
             </a>
             <a class="brief-card" href="#brief-un">
               <span class="tag">For the UN Task Force</span>
-              <p>Consider fusion materials in critical-minerals traceability discussions.</p>
+              <p>Put fusion materials into the UN traceability framework before its scope is set in 2027.</p>
             </a>
           </div>
         </div>
@@ -520,8 +504,14 @@
       <section id="governance" class="section">
         <div class="container">
           <h2>Evidence: governance gaps</h2>
-          <button id="governance-list-toggle" class="button button-secondary" type="button" aria-controls="governance-card-list" aria-expanded="false">Show as list</button>
-          <div class="table-scroll matrix-wrap" role="region" aria-label="Governance coverage matrix by material" tabindex="0">
+          <div class="governance-picker" aria-labelledby="governance-picker-title">
+            <h3 id="governance-picker-title">Pick a mineral</h3>
+            <div id="governance-material-picker" class="governance-material-picker" role="group" aria-label="Pick a mineral"></div>
+            <p id="governance-coverage-count" class="governance-coverage-count" aria-live="polite"></p>
+            <div id="governance-rule-cards" class="governance-rule-cards"></div>
+          </div>
+          <button id="governance-table-toggle" class="button button-secondary" type="button" aria-controls="governance-table-wrap" aria-expanded="false">Show full table</button>
+          <div class="table-scroll matrix-wrap" id="governance-table-wrap" role="region" aria-label="Governance coverage matrix by material" tabindex="0" hidden>
             <table class="matrix-table" id="governance-table">
               <thead>
                 <tr>
@@ -546,7 +536,6 @@
               </tbody>
             </table>
           </div>
-          <div id="governance-card-list" class="governance-card-list" hidden aria-label="Governance coverage by material"></div>
           <div class="gap-summary">
             <h3>What the gaps mean</h3>
             <p>No binding rule requires due diligence on lithium-6, beryllium or rare earths used in fusion. Tungsten is covered only as raw ore and metal, not inside finished parts. Fusion companies are too small for the CSDDD, and fusion is not among the strategic technologies whose large manufacturers must assess raw-material supply risks under the Critical Raw Materials Act. <span data-cite="cmr-2017,csddd-2024,crma-2024,ep-2026"></span><!-- VERIFY --></p>
@@ -875,6 +864,6 @@
 
     <script src="js/data.js?v=5"></script>
     <script src="js/timeline.js?v=3"></script>
-    <script src="js/app.js?v=10"></script>
+    <script src="js/app.js?v=11"></script>
   </body>
 </html>

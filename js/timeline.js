@@ -1,6 +1,6 @@
 function setupTimelines() {
   const lineY = { fusion: 75, eu: 135, global: 195 };
-  const lineNames = { fusion: 'Fusion and markets', eu: 'EU rules', global: 'UN, US and UK rules' };
+  const lineNames = { fusion: 'FUSION AND MARKETS', eu: 'EU RULES', global: 'UN, US AND UK RULES' };
   const audienceOptions = ['all', 'investors', 'eu', 'un'];
   const audienceLabels = { all: 'All', investors: 'Investors', eu: 'EU', un: 'UN' };
 
@@ -37,9 +37,9 @@ function setupTimelines() {
           <path class="timeline-outcome retrofit-outcome" d="M493 135 Q535 178 620 194"></path>
           <rect class="procurement-node" x="435" y="119" width="116" height="32" rx="16"></rect>
           <text class="procurement-label" x="493" y="139" text-anchor="middle">First-plant procurement</text>
-          <text class="outcome-label remedy-label" x="555" y="70">Remedy-first sourcing built in</text>
+          <text class="outcome-label remedy-label" x="555" y="70">Built in</text>
           <text class="outcome-label retrofit-label" x="552" y="218">Retrofit later</text>
-          ${Object.entries(lineY).map(([line, y]) => `<text class="track-label" x="5" y="${y + 4}">${lineNames[line]}</text>`).join('')}
+          ${Object.entries(lineY).map(([line, y]) => `<text class="track-label" x="60" y="${y - 25}">${lineNames[line]}</text>`).join('')}
           <g class="year-ticks">
             ${Array.from({ length: 8 }, (_, year) => {
               const x = 60 + year * 80;
@@ -54,7 +54,7 @@ function setupTimelines() {
         </svg>
       </div>
       <ol class="timeline-list" aria-label="Timeline events"></ol>
-      <p class="timeline-caption">Indicative. Dates come from public announcements; targets may slip. The fork is analytical, not a legal deadline.</p>
+      <p class="timeline-caption">Indicative. Dates come from public announcements; targets may slip. The fork is analytical, not a legal deadline. The gold path means remedy-first sourcing built in from the start.</p>
     `;
 
     const svg = mount.querySelector('svg');
@@ -72,6 +72,9 @@ function setupTimelines() {
       const x = 60 + (event.t - 2025) * 80;
       const y = lineY[event.line];
       const labelY = index % 2 === 0 ? y - 12 : y + 23;
+      const labelX = event.line === 'eu' && event.t >= 2026.1 && event.t <= 2026.6
+        ? x + (index === 3 ? -10 : index === 5 ? 10 : 0)
+        : x;
       const sourceNames = event.sourceIds.map((sourceId) => SOURCES.find((source) => source.id === sourceId)?.cite).filter(Boolean).join('; ');
       const marker = document.createElementNS('http://www.w3.org/2000/svg', 'g');
       marker.classList.add('timeline-marker', `status-${event.status}`);
@@ -82,7 +85,7 @@ function setupTimelines() {
       marker.setAttribute('aria-label', `${index + 1}. ${event.date}: ${event.text}. ${lineNames[event.line]}. ${event.status}. Sources: ${sourceNames}`);
       marker.innerHTML = `
         <circle cx="${x}" cy="${y}" r="6"></circle>
-        <text x="${x}" y="${labelY}" text-anchor="middle">${index + 1}</text>
+        <text x="${labelX}" y="${labelY}" text-anchor="middle">${index + 1}</text>
       `;
       markerGroup.appendChild(marker);
 

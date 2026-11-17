@@ -175,9 +175,13 @@ function addTableCitations(table, sourceRows) {
 
 function setupGovernance() {
   const table = document.getElementById('governance-table');
-  const list = document.getElementById('governance-card-list');
-  const toggle = document.getElementById('governance-list-toggle');
-  if (!table || !list || !toggle) return;
+  const tableWrap = document.getElementById('governance-table-wrap');
+  const picker = document.getElementById('governance-material-picker');
+  const pickerView = document.querySelector('.governance-picker');
+  const ruleCards = document.getElementById('governance-rule-cards');
+  const coverageCount = document.getElementById('governance-coverage-count');
+  const toggle = document.getElementById('governance-table-toggle');
+  if (!table || !tableWrap || !picker || !pickerView || !ruleCards || !coverageCount || !toggle) return;
   const sourceIdsByMaterial = {
     Tungsten: ['usgs-2026', 'unsc-2025a'],
     Lithium: ['oc-2025', 'pearson-2022'],
@@ -205,20 +209,62 @@ function setupGovernance() {
   });
 
   const headers = [...table.tHead.rows[0].cells].slice(1).map((cell) => cell.textContent.trim());
-  list.innerHTML = [...table.tBodies[0].rows].map((row) => {
-    const cells = [...row.cells];
-    return `<article class="governance-card"><h3>${cells[0].textContent.trim()}</h3><dl>${headers.map((header, index) => `
-      <div><dt>${header}</dt><dd>${cells[index + 1].innerHTML}</dd></div>
-    `).join('')}</dl></article>`;
+  const rows = [...table.tBodies[0].rows];
+  const getMaterialName = (row) => {
+    const materialCell = row.cells[0].cloneNode(true);
+    materialCell.querySelectorAll('.citation').forEach((citation) => citation.remove());
+    return materialCell.textContent.trim();
+  };
+  const selectedMaterial = 'Lithium-6';
+  picker.innerHTML = rows.map((row) => {
+    const material = getMaterialName(row);
+    return `<button type="button" class="governance-material-button" data-governance-material="${material}" aria-pressed="${material === selectedMaterial}">${material}</button>`;
   }).join('');
 
-  toggle.addEventListener('click', () => {
-    const showList = list.hidden;
-    list.hidden = !showList;
-    table.closest('.table-scroll').hidden = showList;
-    toggle.setAttribute('aria-expanded', String(showList));
-    toggle.textContent = showList ? 'Show as table' : 'Show as list';
+  function renderMaterial(materialName) {
+    const row = rows.find((item) => getMaterialName(item) === materialName);
+    if (!row) return;
+    const statuses = [...row.cells].slice(1).map((cell) => {
+      const text = cell.textContent.trim();
+      const status = text.startsWith('Covered') ? 'covered'
+        : text.startsWith('Not covered') ? 'not'
+          : text.startsWith('Partly') ? 'partly' : 'partly';
+      return { cell, status };
+    });
+    const covered = statuses.filter((item) => item.status === 'covered').length;
+    coverageCount.textContent = `${materialName}: ${covered} of ${statuses.length} rules fully cover it.`;
+    ruleCards.innerHTML = statuses.map(({ cell, status }, index) => {
+      const verdict = status === 'covered' ? 'Covered' : status === 'not' ? 'Not covered' : 'Partly';
+      const marker = status === 'covered' ? '✓' : status === 'not' ? '✕' : '◐';
+      const explanation = cell.cloneNode(true);
+      explanation.querySelectorAll('.state, .citation').forEach((item) => item.remove());
+      const reason = explanation.textContent.trim() || verdict;
+      return `<article class="governance-rule-card">
+        <h4>${headers[index]}</h4>
+        <p class="governance-verdict ${status}"><span aria-hidden="true">${marker}</span> ${verdict}</p>
+        <p>${reason}</p>
+        ${cell.querySelector('.citation')?.outerHTML || ''}
+      </article>`;
+    }).join('');
+  }
+
+  picker.addEventListener('click', (event) => {
+    const button = event.target.closest('[data-governance-material]');
+    if (!button) return;
+    picker.querySelectorAll('[data-governance-material]').forEach((item) => {
+      const active = item === button;
+      item.setAttribute('aria-pressed', String(active));
+    });
+    renderMaterial(button.dataset.governanceMaterial);
   });
+  toggle.addEventListener('click', () => {
+    const showTable = tableWrap.hidden;
+    tableWrap.hidden = !showTable;
+    pickerView.hidden = showTable;
+    toggle.setAttribute('aria-expanded', String(showTable));
+    toggle.textContent = showTable ? 'Hide full table' : 'Show full table';
+  });
+  renderMaterial(selectedMaterial);
 }
 
 function setupBriefTableCitations() {
