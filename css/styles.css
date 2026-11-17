@@ -30,6 +30,10 @@ img { max-width: 100%; }
 a { color: var(--gold); text-decoration: none; }
 a:hover { text-decoration: underline; }
 button, select { font: inherit; }
+button:focus-visible, a:focus-visible, select:focus-visible, summary:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 3px;
+}
 
 .container {
   width: min(1100px, calc(100% - 32px));
@@ -572,6 +576,23 @@ select { background: var(--surface); color: var(--text); border: 1px solid rgba(
 .governance-verdict.not { color: var(--rust); }
 #governance-table-toggle { margin: 0 0 12px; }
 
+.tour-progress { display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+.tour-progress p { margin: 0; color: var(--muted); font: 0.82rem "Geist Mono", monospace; }
+.tour-progress-dots { display: flex; gap: 8px; }
+.tour-dot { width: 14px; height: 14px; padding: 0; border: 1px solid var(--muted); border-radius: 50%; background: transparent; cursor: pointer; }
+.tour-dot.active { background: var(--gold); border-color: var(--gold); }
+.tour-screen { display: grid; grid-template-columns: minmax(110px, 0.35fr) minmax(0, 1fr); align-items: center; gap: 24px; min-height: 300px; margin: 22px 0; padding: clamp(20px, 5vw, 42px); background: var(--surface); border: 1px solid rgba(255,255,255,0.1); border-radius: 18px; }
+.tour-screen[hidden] { display: none; }
+.tour-screen h3 { font-size: clamp(1.7rem, 3vw, 2.4rem); }
+.tour-screen p { max-width: 620px; }
+.tour-illustration { display: block; width: min(100%, 150px); margin: auto; color: var(--gold); }
+.tour-figure { padding: 12px 14px; border-left: 3px solid var(--gold); background: rgba(209,172,85,0.07); }
+.tour-figure strong { color: var(--gold); }
+.tour-finish { grid-template-columns: 1fr; }
+.tour-choices { display: flex; flex-wrap: wrap; gap: 10px; }
+.tour-controls { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+.tour-skip { margin-left: auto; }
+
 .site-footer {
   border-top: 1px solid rgba(255,255,255,0.08);
   padding: 24px 0 64px;
@@ -650,6 +671,9 @@ select { background: var(--surface); color: var(--text); border: 1px solid rgba(
 
 @media (max-width: 720px) {
   .governance-rule-cards { grid-template-columns: 1fr; }
+  .tour-screen { grid-template-columns: 1fr; min-height: 0; }
+  .tour-illustration { width: 96px; }
+  .tour-skip { margin-left: 0; }
 }
 
 @media print {

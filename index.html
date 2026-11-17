@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Fusion Minerals</title>
     <meta name="description" content="Fusion Minerals — supply chain risk in fusion minerals." />
-    <link rel="stylesheet" href="css/styles.css?v=11" />
+    <link rel="stylesheet" href="css/styles.css?v=12" />
   </head>
   <body>
     <header class="site-header">
@@ -61,9 +61,55 @@
             <h1>Fusion will run on minerals from some of the world’s most harmful supply chains. The rules for those chains are not yet written.</h1>
             <p class="lede">Leading fusion designs use tungsten, lithium-6, beryllium and rare earths. Their supply chains run through armed-group-controlled mines in eastern Congo and poisoned hillsides in Myanmar, and most refining sits in one country. This site maps where the risks are and what regulators can do before the first plants are built. <span data-cite="unsc-2025a,gw-2024,usgs-2026"></span></p>
             <div class="ctas">
-              <a href="#chain" class="button">Trace the supply chain →</a>
+              <a href="#tour" class="button">Take the 3-minute tour →</a>
               <a href="#why-now" class="button button-secondary">Why act now</a>
             </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="tour" class="section guided-tour" aria-labelledby="tour-title">
+        <div class="container narrow">
+          <p class="eyebrow">A three-minute guided tour</p>
+          <h2 id="tour-title">Follow a piece of tungsten</h2>
+          <div class="tour-progress">
+            <p id="tour-progress-label">Step 1 of 5</p>
+            <div class="tour-progress-dots" role="group" aria-label="Tour progress">
+              <button type="button" class="tour-dot active" data-tour-go="0" aria-label="Go to step 1" aria-current="step"></button>
+              <button type="button" class="tour-dot" data-tour-go="1" aria-label="Go to step 2"></button>
+              <button type="button" class="tour-dot" data-tour-go="2" aria-label="Go to step 3"></button>
+              <button type="button" class="tour-dot" data-tour-go="3" aria-label="Go to step 4"></button>
+              <button type="button" class="tour-dot" data-tour-go="4" aria-label="Go to step 5"></button>
+            </div>
+          </div>
+          <div id="tour-announcement" class="visually-hidden" aria-live="polite"></div>
+          <article class="tour-screen" data-tour-screen="0">
+            <svg class="tour-illustration" viewBox="0 0 120 90" aria-hidden="true"><path d="M12 72 42 23l19 31 16-23 31 41H12Z" fill="none" stroke="currentColor" stroke-width="4"/><circle cx="47" cy="50" r="7" fill="var(--gold)"/></svg>
+            <div><p class="eyebrow">01 · Mine</p><h3>It starts in a mine</h3><p>Tungsten is dug from the ground. Most comes from China, and some eastern Congo mines lie in areas controlled by armed groups.</p><p class="tour-figure"><strong>79%</strong> of the world’s tungsten was mined in China in 2025 <span data-cite="usgs-2026"></span></p><a href="#chain-tungsten-mine">Dig deeper →</a></div>
+          </article>
+          <article class="tour-screen" data-tour-screen="1" hidden>
+            <svg class="tour-illustration" viewBox="0 0 120 90" aria-hidden="true"><path d="M12 45h96M76 20l28 25-28 25" fill="none" stroke="currentColor" stroke-width="4"/><path d="M20 24h30v42H20z" fill="none" stroke="var(--rust)" stroke-width="4"/></svg>
+            <div><p class="eyebrow">02 · Trade</p><h3>It crosses borders</h3><p>Ore from rebel-held areas is smuggled into Rwanda and mixed with legal exports. After blending, it can be hard to identify where it came from.</p><p class="tour-figure"><strong>$800,000 a month</strong> reaches M23 rebels from taxes at one mining area <span data-cite="unsc-2025a"></span></p><a href="#human-cost-rubaya">Dig deeper →</a></div>
+          </article>
+          <article class="tour-screen" data-tour-screen="2" hidden>
+            <svg class="tour-illustration" viewBox="0 0 120 90" aria-hidden="true"><path d="M20 68h80M32 68V40h56v28M40 40V23h40v17M46 23v-9h28v9" fill="none" stroke="currentColor" stroke-width="4"/><circle cx="60" cy="52" r="8" fill="var(--ree)"/></svg>
+            <div><p class="eyebrow">03 · Refining</p><h3>It is refined</h3><p>Factories turn ore into a powder called APT. About four in five tonnes of APT are produced in one country.</p><p class="tour-figure"><strong>About 80%</strong> of APT is made in China <span data-cite="usgs-2026"></span></p><a href="#chain-tungsten-refine">Dig deeper →</a></div>
+          </article>
+          <article class="tour-screen" data-tour-screen="3" hidden>
+            <svg class="tour-illustration" viewBox="0 0 120 90" aria-hidden="true"><path d="M27 17h66v56H27zM39 29h42v32H39z" fill="none" stroke="currentColor" stroke-width="4"/><path d="M49 73v9m22-9v9" stroke="var(--tungsten)" stroke-width="5"/></svg>
+            <div><p class="eyebrow">04 · Components</p><h3>It becomes a reactor part</h3><p>The powder can be pressed into tiles that line a reactor’s hottest region. EU rules check raw tungsten at the border, but not inside finished parts.</p><p class="tour-figure"><strong>Finished components</strong> fall outside the EU Conflict Minerals Regulation <span data-cite="cmr-2017"></span></p><a href="#governance">Dig deeper →</a></div>
+          </article>
+          <article class="tour-screen" data-tour-screen="4" hidden>
+            <svg class="tour-illustration" viewBox="0 0 120 90" aria-hidden="true"><circle cx="60" cy="45" r="32" fill="none" stroke="currentColor" stroke-width="4"/><path d="M60 13v64M28 45h64" stroke="var(--gold)" stroke-width="3"/><circle cx="60" cy="45" r="8" fill="var(--gold)"/></svg>
+            <div><p class="eyebrow">05 · The opening</p><h3>The rules are not written yet</h3><p>Fusion plants are still years away. Governments and investors can require buyers to fix supply-chain problems before long-term contracts make change harder.</p><p class="tour-figure"><strong>Early 2030s</strong> is the target window for first commercial plants <span data-cite="wnn-2026"></span></p><a href="#why-now">Dig deeper →</a></div>
+          </article>
+          <section class="tour-screen tour-finish" data-tour-screen="5" hidden aria-labelledby="tour-finish-title">
+            <div><p class="eyebrow">Tour complete</p><h3 id="tour-finish-title">What now?</h3><p>Choose where to go next.</p><div class="tour-choices"><a class="button" href="#human-cost">See who is affected</a><a class="button button-secondary" href="#remedy">See what can be done</a><a class="button button-secondary" href="#chain">Read the full evidence</a></div></div>
+          </section>
+          <div class="tour-controls">
+            <button type="button" class="button button-secondary" id="tour-back" disabled>← Back</button>
+            <button type="button" class="button" id="tour-next">Next →</button>
+            <a href="#chain" class="tour-skip">Skip to the full evidence →</a>
           </div>
         </div>
       </section>
@@ -864,6 +910,6 @@
 
     <script src="js/data.js?v=5"></script>
     <script src="js/timeline.js?v=3"></script>
-    <script src="js/app.js?v=11"></script>
+    <script src="js/app.js?v=12"></script>
   </body>
 </html>

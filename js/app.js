@@ -447,8 +447,10 @@ function setupPageTabs() {
   const main = document.querySelector('main');
   const sections = [...main.children].filter((child) => child.matches('section'));
   const primerIndex = sections.findIndex((section) => section.id === 'primer');
+  const tourSection = sections.find((section) => section.id === 'tour');
   const pageGroups = [
-    { anchor: 'overview', label: 'Overview', sections: sections.slice(0, primerIndex) },
+    { anchor: 'overview', label: 'Overview', sections: sections.slice(0, primerIndex).filter((section) => section.id !== 'tour') },
+    ...(tourSection ? [{ anchor: 'tour', label: 'Guided tour', sections: [tourSection] }] : []),
     ...sections.slice(primerIndex).map((section) => ({
       anchor: section.id,
       label: section.querySelector('h2')?.textContent.trim() || section.id,
@@ -499,8 +501,10 @@ function setupPageTabs() {
       }
     });
     const activeChildren = {
+      Learn: ['primer', 'chain', 'human-cost', 'why-now'],
       Evidence: ['risks', 'governance', 'demand'],
-      Briefs: ['brief-investors', 'brief-eu', 'brief-un']
+      Act: ['remedy', 'brief-investors', 'brief-eu', 'brief-un'],
+      About: ['methodology', 'sources', 'about']
     };
     navButtons.forEach((button) => {
       button.classList.toggle('has-active-child', activeChildren[button.textContent.replace('▾', '').trim()]?.includes(page.dataset.pageAnchor) || false);
@@ -549,6 +553,54 @@ function setupPageTabs() {
   window.addEventListener('hashchange', handleLocationChange);
   window.addEventListener('popstate', handleLocationChange);
   showPage(window.location.hash || '#overview', { resetScroll: false });
+}
+
+function setupTour() {
+  const tour = document.getElementById('tour');
+  if (!tour) return;
+  const screens = [...tour.querySelectorAll('[data-tour-screen]')];
+  const dots = [...tour.querySelectorAll('[data-tour-go]')];
+  const back = document.getElementById('tour-back');
+  const next = document.getElementById('tour-next');
+  const progress = document.getElementById('tour-progress-label');
+  const announcement = document.getElementById('tour-announcement');
+  const stepCount = 5;
+  let current = 0;
+
+  function showStep(index) {
+    current = Math.max(0, Math.min(screens.length - 1, index));
+    screens.forEach((screen, screenIndex) => {
+      screen.hidden = screenIndex !== current;
+      screen.setAttribute('aria-hidden', String(screenIndex !== current));
+    });
+    dots.forEach((dot, dotIndex) => {
+      dot.classList.toggle('active', dotIndex <= current && current < stepCount);
+      if (dotIndex === current && current < stepCount) dot.setAttribute('aria-current', 'step');
+      else dot.removeAttribute('aria-current');
+    });
+    progress.textContent = current < stepCount ? `Step ${current + 1} of ${stepCount}` : 'Tour complete';
+    back.disabled = current === 0;
+    next.hidden = current === screens.length - 1;
+    next.textContent = current === stepCount - 1 ? 'Finish tour →' : 'Next →';
+    const heading = screens[current].querySelector('h3')?.textContent || 'Tour step';
+    announcement.textContent = current === stepCount ? 'Tour complete. What now?' : `Step ${current + 1} of ${stepCount}: ${heading}`;
+  }
+
+  back.addEventListener('click', () => showStep(current - 1));
+  next.addEventListener('click', () => showStep(current + 1));
+  dots.forEach((dot) => dot.addEventListener('click', () => showStep(Number(dot.dataset.tourGo))));
+  tour.addEventListener('keydown', (event) => {
+    const activePage = document.querySelector('.page-view:not([hidden])');
+    if (activePage?.dataset.pageAnchor !== 'tour' || event.target.matches('input, textarea, select')) return;
+    if (event.key === 'ArrowRight' && current < screens.length - 1) {
+      event.preventDefault();
+      showStep(current + 1);
+    } else if (event.key === 'ArrowLeft' && current > 0) {
+      event.preventDefault();
+      showStep(current - 1);
+    }
+  });
+  showStep(0);
 }
 
 function renderFilters() {
@@ -940,6 +992,7 @@ function setupLayerCards() {
 function init() {
   initNav();
   setupPageTabs();
+  setupTour();
   renderSources();
   setupSources();
   renderCitations();

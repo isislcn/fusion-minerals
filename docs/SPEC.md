@@ -6,13 +6,17 @@ This researcher- and policymaker-facing site maps material supply chains relevan
 
 ## Page order
 
-Overview → Fusion primer → Supply chain → Human cost → Why now → Risk register → Governance gaps → Demand → Remedy first → Investor brief → EU brief → UN brief → Methodology → Sources → About.
+Overview → Guided tour → Fusion primer → Supply chain → Human cost → Why now → Risk register → Governance gaps → Demand → Remedy first → Investor brief → EU brief → UN brief → Methodology → Sources → About.
 
 ## Page requirements
 
 ### Overview (`#overview`)
 
 Show key figures, reactor material stages, linked briefs and route cards. Evidence citations link to the corresponding APA reference.
+
+### Guided tour (`#tour`)
+
+Provide a five-step, keyboard-accessible story following tungsten from mine to reactor component, with source-linked figures, stage links and routes into the full evidence.
 
 ### Fusion primer (`#primer`)
 

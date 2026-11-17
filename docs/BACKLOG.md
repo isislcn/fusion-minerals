@@ -9,6 +9,15 @@
 - The hero uses the approved wording and colour palette.
 - The glossary contains the required terms and the fusion-specific additions.
 
+## Epic: Guided tour
+
+### Must
+
+- Five short, sourced steps follow tungsten from mine to reactor component.
+- Back, Next, progress controls and left/right arrow keys move through the story.
+- A completion screen links to Human cost, Remedy first and the full Supply chain.
+- Hero and header entry points open the tour.
+
 ### Acceptance criteria
 
 - Sections appear in the approved order.
