@@ -17,7 +17,7 @@ function setupTimelines() {
       <div class="table-scroll timeline-scroll" role="region" aria-label="Fusion materials policy timeline" tabindex="0">
         <svg class="rail-timeline" viewBox="0 0 680 290" role="img" aria-labelledby="${id}-title ${id}-description">
           <title id="${id}-title">Fusion materials policy timeline</title>
-          <desc id="${id}-description">Three tracks for fusion and markets, EU rules, and international rules converge at first-plant procurement, with remedy-first sourcing and retrofit outcomes.</desc>
+          <desc id="${id}-description">Three tracks for fusion and markets, EU rules, and international rules converge at first-plant orders, with remedy-first sourcing and retrofit outcomes.</desc>
           <rect class="time-band cheap" x="60" y="34" width="120" height="222"></rect>
           <rect class="time-band costly" x="180" y="34" width="140" height="222"></rect>
           <rect class="time-band locked" x="320" y="34" width="300" height="222"></rect>
@@ -36,7 +36,7 @@ function setupTimelines() {
           <path class="timeline-outcome remedy-outcome" d="M493 135 Q535 95 620 82"></path>
           <path class="timeline-outcome retrofit-outcome" d="M493 135 Q535 178 620 194"></path>
           <rect class="procurement-node" x="435" y="119" width="116" height="32" rx="16"></rect>
-          <text class="procurement-label" x="493" y="139" text-anchor="middle">First-plant procurement</text>
+          <text class="procurement-label" x="493" y="139" text-anchor="middle">First-plant orders</text>
           <text class="outcome-label remedy-label" x="555" y="70">Built in</text>
           <text class="outcome-label retrofit-label" x="552" y="218">Retrofit later</text>
           ${Object.entries(lineY).map(([line, y]) => `<text class="track-label" x="60" y="${y - 25}">${lineNames[line]}</text>`).join('')}

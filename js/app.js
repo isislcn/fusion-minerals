@@ -15,6 +15,7 @@ const ladderSteps = document.querySelectorAll('.ladder-step');
 const ladderDetail = document.getElementById('ladder-detail');
 let activeStageTab = 'where';
 const copyTimers = new WeakMap();
+let citationInstance = 0;
 const harmCaseByStage = {
   'tungsten-mine': 'rubaya',
   'ree-mine': 'kachin',
@@ -22,13 +23,63 @@ const harmCaseByStage = {
   'beryllium-components': 'beryllium'
 };
 
-function cite(ids) {
+const GLOSSARY = {
+  '3T': 'Tin, tantalum and tungsten, minerals often covered by conflict-minerals rules.',
+  APT: 'Ammonium paratungstate, a powder used to make tungsten metal and products.',
+  divertor: 'A reactor part that removes heat and particles from the plasma.',
+  'breeding blanket': 'A layer around the plasma that can make tritium and capture heat.',
+  'lithium-6': 'A form of lithium used by some fusion designs to help make tritium.',
+  REBCO: 'A high-temperature superconducting material used in some magnets.',
+  'due diligence': 'Checking where your materials come from and fixing problems you find.',
+  offtake: 'A contract to buy power before the plant is built.',
+  procurement: 'Buying.',
+  smelter: 'A facility that turns ore into metal or another usable material.',
+  traceability: 'The ability to follow a material through its supply chain.',
+  CSDDD: 'The EU Corporate Sustainability Due Diligence Directive.',
+  CRMA: 'The EU Critical Raw Materials Act.',
+  CMR: 'The EU Conflict Minerals Regulation.',
+  M23: 'An armed group active in eastern Democratic Republic of the Congo.',
+  'artisanal mining': 'Small-scale mining often done by individuals or small groups.',
+  FPIC: 'Free, prior and informed consent: a community’s right to decide before a project affects it.',
+  tokamak: 'A doughnut-shaped machine that uses magnetic fields to hold hot plasma.',
+  stellarator: 'A fusion machine that uses twisted magnetic fields to hold hot plasma.'
+};
+
+const PAGE_INTROS = {
+  overview: ['Fusion’s mineral supply chains raise sourcing questions that can be addressed before plants are built.', 5],
+  tour: ['Follow tungsten from the mine to a fusion reactor in five short steps.', 3],
+  primer: ['Fusion makes energy by squeezing tiny atoms together, and the machine that does it is built from a handful of rare minerals.', 4],
+  chain: ['Follow each mineral from the mine to the reactor and see where the risks are.', 4],
+  'human-cost': ['The mines that will supply fusion are already hurting people, and here are the documented cases.', 5],
+  'why-now': ['The first fusion plants will be ordered soon, and whatever suppliers they pick will be hard to change.', 3],
+  risks: ['Every risk we found, in one sortable list.', 4],
+  governance: ['Almost no law checks where fusion’s minerals come from.', 4],
+  demand: ['Nobody has published how much of each mineral a fusion plant needs, except for one fuel ingredient that barely exists yet.', 3],
+  remedy: ['When a buyer finds a problem at a supplier, fixing it helps people more than walking away.', 4],
+  methodology: ['This site maps public evidence about fusion materials, human impacts and the rules that apply.', 3],
+  sources: ['Every cited source, with publication details and links.', 8],
+  about: ['This project asks how fusion-mineral sourcing can respect people and communities.', 2]
+};
+
+function toSuperscript(value) {
+  const digits = { '0': '⁰', '1': '¹', '2': '²', '3': '³', '4': '⁴', '5': '⁵', '6': '⁶', '7': '⁷', '8': '⁸', '9': '⁹' };
+  return String(value).split('').map((digit) => digits[digit]).join('');
+}
+
+function cite(ids, { full = false } = {}) {
   const sourceIds = Array.isArray(ids) ? ids : String(ids || '').split(',').map((id) => id.trim()).filter(Boolean);
   const references = sourceIds
     .map((id) => SOURCES.find((source) => source.id === id))
     .filter(Boolean);
   if (!references.length) return '';
-  return `<span class="citation">(${references.map((source) => `${source.verify ? '<!-- VERIFY -->' : ''}<a href="#src-${source.id}">${source.cite}</a>`).join('; ')})</span>`;
+  const instance = citationInstance++;
+  const compact = references.map((source) => {
+    const number = SOURCES.findIndex((item) => item.id === source.id) + 1;
+    const popoverId = `citation-popover-${instance}-${source.id}`;
+    return `<span class="citation-chip-wrap"><button type="button" class="citation-chip" aria-label="Citation: ${source.cite}" aria-controls="${popoverId}" aria-expanded="false">${toSuperscript(number)}</button><span class="citation-popover" id="${popoverId}" role="dialog" aria-label="Citation details" hidden>${source.cite} <a href="#src-${source.id}">See source</a></span></span>`;
+  }).join('');
+  const citationText = `(${references.map((source) => `${source.verify ? '<!-- VERIFY -->' : ''}<a href="#src-${source.id}">${source.cite}</a>`).join('; ')})`;
+  return `<span class="citation${full ? ' citation-always-full' : ''}"><span class="citation-compact">${compact}</span><span class="citation-full">${citationText}</span></span>`;
 }
 
 function announceCopy(message) {
@@ -555,6 +606,231 @@ function setupPageTabs() {
   showPage(window.location.hash || '#overview', { resetScroll: false });
 }
 
+function setupPageIntros() {
+  document.querySelectorAll('.page-view').forEach((page) => {
+    const anchor = page.dataset.pageAnchor;
+    const section = page.querySelector(`#${anchor}`);
+    if (!section) return;
+    const briefAsk = section.querySelector('.brief-summary > p:first-child');
+    if (briefAsk) {
+      briefAsk.classList.add('one-sentence');
+      const readTime = document.createElement('span');
+      readTime.className = 'reading-time';
+      readTime.textContent = '6 min read';
+      briefAsk.insertAdjacentElement('afterend', readTime);
+      return;
+    }
+    const intro = PAGE_INTROS[anchor];
+    if (!intro) return;
+    const heading = section.querySelector('h1, h2');
+    if (!heading) return;
+    const box = document.createElement('aside');
+    box.className = 'page-intro';
+    box.innerHTML = `<p>${intro[0]}</p><span class="reading-time">${intro[1]} min read</span>`;
+    heading.insertAdjacentElement('afterend', box);
+  });
+}
+
+function simplifyBodyLanguage(root = document) {
+  const pages = root === document ? [...root.querySelectorAll('.page-view')] : [root];
+  const excluded = '.citation, .source-list, .brief-print-references, .copy-block';
+  pages.forEach((page) => {
+    let firstDueDiligence = true;
+    const walker = document.createTreeWalker(page, NodeFilter.SHOW_TEXT);
+    let node;
+    while ((node = walker.nextNode())) {
+      if (!node.nodeValue.trim() || node.parentElement.closest(excluded)) continue;
+      let text = node.nodeValue
+        .replace(/\bprocured\b/gi, 'ordered')
+        .replace(/\bprocurement\b/gi, 'buying')
+        .replace(/\bdisengage(?:ment)?\b/gi, 'walk away')
+        .replace(/\bremediation\b/gi, 'repair')
+        .replace(/\bconflict[- ]finance\b/gi, 'money for armed groups')
+        .replace(/\btraceability gap\b/gi, 'no way to trace the origin');
+      text = text.replace(/\bdue[- ]diligence\b/gi, (match, offset, original) => {
+        if (original[offset - 1] === '[' && original[offset + match.length] === ']') return match;
+        if (firstDueDiligence) {
+          firstDueDiligence = false;
+          return 'supply-chain checks [due diligence]';
+        }
+        return 'supply-chain checks';
+      });
+      text = text.replace(/\bconcentration\b/gi, 'reliance on one country');
+      node.nodeValue = text;
+    }
+  });
+}
+
+function setupJargonTerms() {
+  const glossary = document.querySelector('.glossary-list');
+  if (glossary) {
+    Object.entries(GLOSSARY).forEach(([term, definition]) => {
+      const existing = [...glossary.querySelectorAll('summary')].find((summary) => summary.textContent.trim().toLowerCase() === term.toLowerCase());
+      if (existing) {
+        const description = existing.parentElement.querySelector('p');
+        if (description) description.textContent = definition;
+        return;
+      }
+      const entry = document.createElement('details');
+      entry.innerHTML = `<summary>${term}</summary><p>${definition}</p>`;
+      glossary.appendChild(entry);
+    });
+  }
+
+  document.querySelectorAll('.page-view').forEach((page) => {
+    const seen = new Set([...page.querySelectorAll('.term')].map((button) => button.dataset.term));
+    wrapJargonTerms(page, seen);
+  });
+
+  document.addEventListener('click', (event) => {
+    const button = event.target.closest('.term');
+    if (button) {
+      setTermOpen(button.closest('.term-wrap'), true);
+      return;
+    }
+    closeTermPopovers();
+  });
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape') closeTermPopovers();
+  });
+}
+
+function wrapJargonTerms(root, seen) {
+  const terms = Object.keys(GLOSSARY).sort((a, b) => b.length - a.length);
+  const pattern = new RegExp(`\\b(${terms.join('|')})\\b`, 'gi');
+  const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT);
+  const excluded = 'button, a, script, style, .citation, .term-popover, .glossary-list, .source-list, .brief-print-references, .copy-block';
+  let node;
+  let termInstance = document.querySelectorAll('.term-popover').length;
+  while ((node = walker.nextNode())) {
+    if (!node.nodeValue.trim() || node.parentElement.closest(excluded)) continue;
+    const text = node.nodeValue;
+    const fragment = document.createDocumentFragment();
+    let lastIndex = 0;
+    let match;
+    let replaced = false;
+    while ((match = pattern.exec(text))) {
+      const glossaryTerm = terms.find((term) => term.toLowerCase() === match[0].toLowerCase());
+      if (!glossaryTerm || seen.has(glossaryTerm)) continue;
+      seen.add(glossaryTerm);
+      replaced = true;
+      fragment.append(text.slice(lastIndex, match.index));
+      const wrapper = document.createElement('span');
+      wrapper.className = 'term-wrap';
+      const button = document.createElement('button');
+      button.type = 'button';
+      button.className = 'term';
+      button.dataset.term = glossaryTerm;
+      button.textContent = match[0];
+      button.setAttribute('aria-label', `Explain ${match[0]}`);
+      button.setAttribute('aria-expanded', 'false');
+      const popover = document.createElement('span');
+      popover.className = 'term-popover';
+      popover.id = `term-popover-${termInstance++}`;
+      popover.setAttribute('role', 'tooltip');
+      popover.textContent = GLOSSARY[glossaryTerm];
+      popover.hidden = true;
+      button.setAttribute('aria-describedby', popover.id);
+      wrapper.append(button, popover);
+      fragment.append(wrapper);
+      lastIndex = match.index + match[0].length;
+      bindTermWrapper(wrapper);
+    }
+    if (replaced) {
+      fragment.append(text.slice(lastIndex));
+      node.replaceWith(fragment);
+    }
+  }
+}
+
+function bindTermWrapper(wrapper) {
+  wrapper.addEventListener('pointerenter', (event) => {
+    if (event.pointerType === 'mouse') setTermOpen(wrapper, true);
+  });
+  wrapper.addEventListener('pointerleave', (event) => {
+    if (event.pointerType === 'mouse' && !wrapper.contains(document.activeElement)) setTermOpen(wrapper, false);
+  });
+  wrapper.addEventListener('focusin', () => setTermOpen(wrapper, true));
+  wrapper.addEventListener('focusout', (event) => {
+    if (!wrapper.contains(event.relatedTarget)) setTermOpen(wrapper, false);
+  });
+}
+
+function setTermOpen(wrapper, open) {
+  const button = wrapper?.querySelector('.term');
+  const popover = wrapper?.querySelector('.term-popover');
+  if (!button || !popover) return;
+  button.setAttribute('aria-expanded', String(open));
+  popover.hidden = !open;
+}
+
+function closeTermPopovers() {
+  document.querySelectorAll('.term-wrap').forEach((wrapper) => setTermOpen(wrapper, false));
+}
+
+function setupCitationControls() {
+  const toggle = document.getElementById('citation-mode-toggle');
+  if (toggle) {
+    let full = false;
+    try {
+      full = localStorage.getItem('fusion-minerals-citations') === 'full';
+    } catch (error) {
+      console.warn('Citation display preference could not be loaded.', error);
+    }
+    function renderCitationMode() {
+      document.body.classList.toggle('citations-full', full);
+      toggle.textContent = `Citations: ${full ? 'full' : 'compact'}`;
+      toggle.setAttribute('aria-label', `Show citations: ${full ? 'full' : 'compact'}`);
+      toggle.setAttribute('aria-pressed', String(full));
+    }
+    toggle.addEventListener('click', () => {
+      full = !full;
+      try {
+        localStorage.setItem('fusion-minerals-citations', full ? 'full' : 'compact');
+      } catch (error) {
+        console.warn('Citation display preference could not be saved.', error);
+      }
+      renderCitationMode();
+    });
+    renderCitationMode();
+  }
+
+  document.addEventListener('click', (event) => {
+    const chip = event.target.closest('.citation-chip');
+    document.querySelectorAll('.citation-chip[aria-expanded="true"]').forEach((openChip) => {
+      if (openChip !== chip) {
+        openChip.setAttribute('aria-expanded', 'false');
+        const popover = document.getElementById(openChip.getAttribute('aria-controls'));
+        if (popover) popover.hidden = true;
+      }
+    });
+    if (!chip) return;
+    const isOpen = chip.getAttribute('aria-expanded') === 'true';
+    chip.setAttribute('aria-expanded', String(!isOpen));
+    const popover = document.getElementById(chip.getAttribute('aria-controls'));
+    if (popover) {
+      popover.hidden = isOpen;
+      if (!isOpen) {
+        const chipRect = chip.getBoundingClientRect();
+        const popoverRect = popover.getBoundingClientRect();
+        const left = Math.max(8, Math.min(window.innerWidth - popoverRect.width - 8, chipRect.left + (chipRect.width - popoverRect.width) / 2));
+        const top = Math.max(8, chipRect.top - popoverRect.height - 8);
+        popover.style.left = `${left}px`;
+        popover.style.top = `${top}px`;
+      }
+    }
+  });
+  document.addEventListener('keydown', (event) => {
+    if (event.key !== 'Escape') return;
+    document.querySelectorAll('.citation-chip[aria-expanded="true"]').forEach((chip) => {
+      chip.setAttribute('aria-expanded', 'false');
+      const popover = document.getElementById(chip.getAttribute('aria-controls'));
+      if (popover) popover.hidden = true;
+      chip.focus();
+    });
+  });
+}
+
 function setupTour() {
   const tour = document.getElementById('tour');
   if (!tour) return;
@@ -667,7 +943,7 @@ function renderRiskTable() {
       <td>${row.risk}</td>
       <td>${row.location}</td>
       <td>${row.confidence}</td>
-      <td>${row.sourceIds.length ? cite(row.sourceIds) : 'Project analysis'}</td>
+      <td>${row.sourceIds.length ? cite(row.sourceIds, { full: true }) : 'Project analysis'}</td>
     </tr>
   `;
   }).join('');
@@ -763,6 +1039,10 @@ function renderStageDetail(material, stage, activeTab = activeStageTab) {
       <a href="#risks">All risks in the register →</a>
     </div>
   `;
+  simplifyBodyLanguage(stageDetail);
+  const page = stageDetail.closest('.page-view');
+  const usedTerms = new Set([...page.querySelectorAll('.term')].map((button) => button.dataset.term));
+  wrapJargonTerms(stageDetail, usedTerms);
 }
 
 function setupStageDetail() {
@@ -992,6 +1272,7 @@ function setupLayerCards() {
 function init() {
   initNav();
   setupPageTabs();
+  setupPageIntros();
   setupTour();
   renderSources();
   setupSources();
@@ -1017,6 +1298,9 @@ function init() {
   setupLadder();
   setupPrintAndCopy();
   setupLayerCards();
+  setupCitationControls();
+  simplifyBodyLanguage();
+  setupJargonTerms();
 }
 
 init();

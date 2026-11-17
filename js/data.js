@@ -3,7 +3,7 @@ const materialData = {
     label: 'Tungsten',
     id: 'tungsten',
     stages: [
-      { id: 'tungsten-mine', stage: 'Mine', kind: 'mine', title: 'Mine', location: 'Eastern DR Congo', risk: 'Conflict finance in 3T mining; tungsten volumes are not quantified', confidence: 'reported', sourceIds: ['unsc-2025a'], evidence: 'UN experts report that M23 controls Rubaya, earns at least $800,000 a month from taxing coltan, and smuggles 3T minerals into Rwanda for blending with legal exports. Most evidence concerns coltan; tungsten volumes are not quantified.', relevant: ['all','eu','un'] },
+      { id: 'tungsten-mine', stage: 'Mine', kind: 'mine', title: 'Mine', location: 'Eastern DR Congo', risk: 'Conflict finance in 3T mining; tungsten volumes are not quantified', confidence: 'reported', sourceIds: ['unsc-2025a'],       evidence: 'UN experts report that M23 controls Rubaya and earns at least $800,000 a month from coltan taxes. They report that 3T minerals are smuggled into Rwanda and blended with legal exports. Most evidence concerns coltan; tungsten volumes are not quantified.', relevant: ['all','eu','un'] },
       { id: 'tungsten-trade', stage: 'Trade', kind: 'trade', title: 'Trade', location: 'DR Congo and Rwanda', risk: 'Traceability and origin mixing', confidence: 'reported', sourceIds: ['unsc-2025a'], evidence: 'UN experts report that 3T minerals are smuggled into Rwanda and blended with legal exports.', relevant: ['all','eu','un'] },
       { id: 'tungsten-refine', stage: 'Refining', kind: 'refine', title: 'Refining', location: 'China', risk: 'Concentration and governance gaps', confidence: 'documented', sourceIds: ['usgs-2026'], evidence: 'China produces about 80% of ammonium paratungstate (APT), a refined tungsten intermediate.', relevant: ['all','investors','un'] },
       { id: 'tungsten-components', stage: 'Components', kind: 'component', title: 'Components', location: 'Global industrial supply chains', risk: 'Due-diligence coverage varies by product and jurisdiction', confidence: 'documented', sourceIds: ['cmr-2017'], evidence: 'The EU Conflict Minerals Regulation covers specified imports of tungsten ores and concentrates, and metals; it does not cover tungsten inside all finished components.', relevant: ['all','investors','eu'] },
@@ -63,7 +63,7 @@ const stageDetailData = {
     where: { text: 'Tungsten can line the divertor and first wall. Per-plant tonnage is not public.', sourceIds: [] }
   },
   'lithium-mine': {
-    where: { text: 'Lithium is produced across established markets; the high Andean salt flats of Argentina, Bolivia and Chile are among the regions covered by the cited human-rights research.', sourceIds: ['oc-2025'] },
+    where: { text: 'Global lithium supply is produced across established markets. The cited human-rights report covers the high Andean salt flats of Argentina, Bolivia and Chile.', sourceIds: ['oc-2025'] },
     affected: { summary: 'Brine extraction is associated with groundwater loss and pressure on Indigenous rights in the high Andean salt flats. The cited report covers communities in Argentina, Bolivia and Chile.', sourceIds: ['oc-2025'] }
   },
   'lithium-refine': {
@@ -74,7 +74,7 @@ const stageDetailData = {
     affected: { summary: 'Workers who inhale beryllium particles can become sensitized and develop chronic beryllium disease. Families and people living near plants have also been reported ill.', sourceIds: ['atsdr-2008'] }
   },
   'ree-mine': {
-    where: { text: 'Mining sites in Kachin Special Region 1 rose by more than 40% from 2021 to 2023, to over 300. China’s imports of heavy rare earth oxides from Myanmar more than doubled, from 19,500 to 41,700 tonnes; nearby streams tested highly acidic with elevated arsenic.', sourceIds: ['gw-2024'] },
+    where: { text: 'Mining sites in Kachin Special Region 1 rose by more than 40% from 2021 to 2023, to over 300. China’s imports of heavy rare earth oxides from Myanmar more than doubled. They rose from 19,500 to 41,700 tonnes. Nearby streams tested highly acidic with elevated arsenic.', sourceIds: ['gw-2024'] },
     affected: { summary: 'Workers and nearby communities report health problems amid chemical leaching and land seizure. Two miners died after leaving work, one aged 15.', sourceIds: ['gw-2024', 'gw-2022'] }
   },
   'ree-refine': {
@@ -152,21 +152,21 @@ const TIMELINE = [
 ];
 
 const riskRows = [
-  { id: 'W-MINE-01', material: 'Tungsten', stage: 'Mine', risk: 'Conflict finance', location: 'Eastern DR Congo', confidence: 'reported', sourceIds: ['unsc-2025a'], type: 'conflict finance' },
+  { id: 'W-MINE-01', material: 'Tungsten', stage: 'Mine', risk: 'Money for armed groups', location: 'Eastern DR Congo', confidence: 'reported', sourceIds: ['unsc-2025a'], type: 'money for armed groups' },
   { id: 'W-MINE-02', material: 'Tungsten', stage: 'Mine', risk: 'Worker deaths', location: 'Rubaya, North Kivu', confidence: 'reported', sourceIds: ['reuters-2026', 'ap-2026', 'unsc-2025a'], type: 'worker safety' },
-  { id: 'W-REF-01', material: 'Tungsten', stage: 'Refining', risk: 'Supply concentration', location: 'China', confidence: 'documented', sourceIds: ['usgs-2026'], type: 'supply concentration' },
+  { id: 'W-REF-01', material: 'Tungsten', stage: 'Refining', risk: 'Supply relies on one country', location: 'China', confidence: 'documented', sourceIds: ['usgs-2026'], type: 'reliance on one country' },
   { id: 'REE-MINE-01', material: 'Rare earths', stage: 'Mine', risk: 'Pollution', location: 'Kachin State, Myanmar', confidence: 'reported', sourceIds: ['gw-2024'], type: 'pollution' },
   { id: 'REE-MINE-02', material: 'Rare earths', stage: 'Mine', risk: 'Health and land rights', location: 'Kachin Special Region 1', confidence: 'reported', sourceIds: ['gw-2024'], type: 'health' },
-  { id: 'REE-REF-01', material: 'Rare earths', stage: 'Refining', risk: 'Traceability gap', location: 'China', confidence: 'inferred', sourceIds: [], type: 'traceability gap' },
+  { id: 'REE-REF-01', material: 'Rare earths', stage: 'Refining', risk: 'No way to trace the origin', location: 'China', confidence: 'inferred', sourceIds: [], type: 'no way to trace the origin' },
   { id: 'LI-MINE-01', material: 'Lithium', stage: 'Mine', risk: 'Water and Indigenous rights', location: 'High Andean salt flats', confidence: 'reported', sourceIds: ['oc-2025'], type: 'land and water' },
   { id: 'LI-MINE-02', material: 'Lithium', stage: 'Mine', risk: 'Indigenous rights', location: 'High Andean salt flats', confidence: 'reported', sourceIds: ['oc-2025'], type: 'Indigenous rights' },
-  { id: 'LI-REF-01', material: 'Lithium', stage: 'Refining', risk: 'Supply concentration', location: 'Global', confidence: 'inferred', sourceIds: [], type: 'supply concentration' },
+  { id: 'LI-REF-01', material: 'Lithium', stage: 'Refining', risk: 'Supply relies on one country', location: 'Global', confidence: 'inferred', sourceIds: [], type: 'reliance on one country' },
   { id: 'LI-PLANT-01', material: 'Lithium', stage: 'Plant', risk: 'Regulatory gap', location: 'Fusion market', confidence: 'inferred', sourceIds: [], type: 'regulatory gap' },
   { id: 'BE-COMP-01', material: 'Beryllium', stage: 'Components', risk: 'Occupational health', location: 'United States', confidence: 'documented', sourceIds: ['atsdr-2008'], type: 'health' },
   { id: 'BE-COMP-02', material: 'Beryllium', stage: 'Components', risk: 'Occupational disease', location: 'US plants', confidence: 'documented', sourceIds: ['atsdr-2008'], type: 'worker safety' },
   { id: 'W-COMP-01', material: 'Tungsten', stage: 'Components', risk: 'Regulatory gap', location: 'Global components', confidence: 'inferred', sourceIds: [], type: 'regulatory gap' },
-  { id: 'REE-COMP-01', material: 'Rare earths', stage: 'Components', risk: 'Traceability gap', location: 'Magnet manufacturing', confidence: 'inferred', sourceIds: [], type: 'traceability gap' },
-  { id: 'LI-COMP-01', material: 'Lithium', stage: 'Components', risk: 'Supply concentration', location: 'Strategic manufacturing', confidence: 'inferred', sourceIds: [], type: 'supply concentration' }
+  { id: 'REE-COMP-01', material: 'Rare earths', stage: 'Components', risk: 'No way to trace the origin', location: 'Magnet manufacturing', confidence: 'inferred', sourceIds: [], type: 'no way to trace the origin' },
+  { id: 'LI-COMP-01', material: 'Lithium', stage: 'Components', risk: 'Supply relies on one country', location: 'Strategic manufacturing', confidence: 'inferred', sourceIds: [], type: 'reliance on one country' }
 ];
 
 const allMaterials = Object.keys(materialData);

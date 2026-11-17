@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Fusion Minerals</title>
     <meta name="description" content="Fusion Minerals — supply chain risk in fusion minerals." />
-    <link rel="stylesheet" href="css/styles.css?v=12" />
+    <link rel="stylesheet" href="css/styles.css?v=16" />
   </head>
   <body>
     <header class="site-header">
@@ -49,6 +49,7 @@
           </div>
           <a class="button tour-nav-button" href="#tour">Start the tour</a>
         </nav>
+        <button id="citation-mode-toggle" class="citation-mode-toggle" type="button" aria-label="Show citations: compact" aria-pressed="false">Citations: compact</button>
         <div class="date-stamp">November 2026</div>
       </div>
     </header>
@@ -274,7 +275,7 @@
               </div>
             </div>
             <div>
-              <p>In the deuterium-tritium reaction used in many magnetic-confinement designs, light nuclei fuse at temperatures on the order of 150 million °C, producing helium, a neutron and energy. Fission instead splits heavy nuclei. Other fusion concepts may use different fuel cycles and operating conditions.</p>
+              <p>Many magnetic-confinement designs use a deuterium-tritium reaction. Light nuclei fuse at about 150 million °C, producing helium, a neutron and energy. Fission splits heavy nuclei. Other fusion concepts may use different fuels and operating conditions.</p>
               <ul>
                 <li>The fusion reaction itself does not emit carbon dioxide; the full lifecycle footprint also depends on construction, materials and energy inputs.</li>
                 <li>Waste characteristics differ from fission and depend on material choices and neutron exposure.</li>
@@ -453,7 +454,7 @@
             <article class="case-card" id="human-cost-rubaya">
               <span class="material-chip tungsten">Tungsten · 3T</span><span class="confidence">Documented</span>
               <h3>Rubaya, North Kivu</h3><p class="case-place">DR Congo · controlled by M23 since 2024</p>
-              <p>Miners dig by hand for a few dollars a day. Two collapses in early 2026 were each reported to kill about 200 people; victims of the first included children and market women. M23 disputes the second toll. UN experts report that M23 runs a parallel administration over Rubaya, earns at least $800,000 a month from taxing coltan, and smuggles 3T minerals into Rwanda. Rubaya supplies more than 15% of the world’s tantalum.</p>
+              <p>Miners dig by hand for a few dollars a day. Two collapses in early 2026 were each reported to kill about 200 people. Victims of the first included children and market women. M23 disputes the second toll. UN experts report that M23 runs a parallel administration over Rubaya. They say it earns at least $800,000 a month from coltan taxes and smuggles 3T minerals into Rwanda. Rubaya supplies more than 15% of the world’s tantalum.</p>
               <p><strong>Who is affected:</strong> Artisanal miners and their families; communities under armed-group administration.</p>
               <p class="case-note">Most evidence concerns coltan; tungsten volumes from Rubaya are not quantified.</p>
               <p><span data-cite="reuters-2026,ap-2026,unsc-2025a"></span></p>
@@ -462,7 +463,7 @@
             <article class="case-card" id="human-cost-kachin">
               <span class="material-chip ree">Rare earths</span><span class="confidence">Reported</span>
               <h3>Kachin Special Region 1</h3><p class="case-place">Myanmar · territory of junta-aligned militias</p>
-              <p>Mining sites rose by more than 40% from 2021 to 2023, to over 300. Leaching chemicals are pumped into hillsides; Myanmar’s imports of ammonium sulphate from China reached 1.5 million tonnes in 2023, up from 93,000 tonnes in 2015. Streams test highly acidic with elevated arsenic. Workers report coughing, numbness, skin conditions and kidney problems, and two miners died after leaving work, one aged 15. Residents say militias use coercion and payoffs to take land for mining.</p>
+              <p>Mining sites rose by more than 40% from 2021 to 2023, to over 300. Leaching chemicals are pumped into hillsides. Myanmar imported 1.5 million tonnes of ammonium sulphate from China in 2023. Imports were 93,000 tonnes in 2015. Streams test highly acidic with elevated arsenic. Workers report coughing, numbness, skin conditions and kidney problems. Two miners died after leaving work; one was 15. Residents say militias use coercion and payoffs to take land for mining.</p>
               <blockquote>“There are no longer fish in the waters.” <cite>— resident of Chipwe</cite></blockquote>
               <p><strong>Who is affected:</strong> Miners, farming and fishing communities, and residents displaced from riverbanks.</p>
               <p><span data-cite="gw-2024,gw-2022"></span></p>
@@ -471,7 +472,7 @@
             <article class="case-card" id="human-cost-andes">
               <span class="material-chip lithium">Lithium</span><span class="confidence">Reported</span>
               <h3>High Andean salt flats</h3><p class="case-place">Argentina, Bolivia and Chile</p>
-              <p>Brine extraction in open evaporation ponds causes an irreversible loss of water from aquifers. In Chile’s Salar de Atacama, groundwater has fallen by more than 10 metres in 15 years and the salt flat is sinking 1 to 2 cm a year. At least 200 Indigenous communities live around the salt flats; most lithium operations went ahead without free, prior and informed consent.</p>
+              <p>Brine extraction in open evaporation ponds causes an irreversible loss of water from aquifers. In Chile’s Salar de Atacama, groundwater has fallen by more than 10 metres in 15 years. The salt flat is sinking 1 to 2 cm a year. At least 200 Indigenous communities live around the salt flats. Most lithium operations went ahead without free, prior and informed consent.</p>
               <p><strong>Who is affected:</strong> Indigenous communities whose water, grazing and livelihoods depend on the salt flats.</p>
               <p class="case-note">Fusion needs lithium enriched in lithium-6; the extraction stage is shared with battery lithium.</p>
               <p><span data-cite="oc-2025"></span></p>
@@ -584,7 +585,7 @@
           </div>
           <div class="gap-summary">
             <h3>What the gaps mean</h3>
-            <p>No binding rule requires due diligence on lithium-6, beryllium or rare earths used in fusion. Tungsten is covered only as raw ore and metal, not inside finished parts. Fusion companies are too small for the CSDDD, and fusion is not among the strategic technologies whose large manufacturers must assess raw-material supply risks under the Critical Raw Materials Act. <span data-cite="cmr-2017,csddd-2024,crma-2024,ep-2026"></span><!-- VERIFY --></p>
+            <p>No binding rule requires due diligence on lithium-6, beryllium or rare earths used in fusion. Tungsten is covered only as raw ore and metal, not inside finished parts. Fusion companies are too small for the CSDDD. Fusion is also not a strategic technology under the Critical Raw Materials Act, so its manufacturers do not have that Act’s supply-risk assessment duty. <span data-cite="cmr-2017,csddd-2024,crma-2024,ep-2026"></span><!-- VERIFY --></p>
             <p><a href="#brief-eu">See the EU brief</a> or <a href="#brief-un">UN brief</a>.</p>
           </div>
           <div class="pager"><a href="#risks">← Risk register</a><a href="#demand">Demand →</a></div>
@@ -750,9 +751,9 @@
               <thead><tr><th>#</th><th>Element</th><th>Proposal</th><th>Legal hook</th><th>Who acts</th><th>When</th></tr></thead>
               <tbody>
                 <tr><td data-label="#">1</td><td data-label="Element">Materials in scope</td><td data-label="Proposal">Tungsten (including inside components), enriched lithium-6, beryllium and rare earths used in fusion magnets.</td><td data-label="Legal hook">CRMA critical and strategic raw-material lists <span data-cite="crma-2024"></span><!-- VERIFY --></td><td data-label="Who acts">Commission</td><td data-label="When">CRMA amendments 2026–27</td></tr>
-                <tr><td data-label="#">2</td><td data-label="Element">Who is obliged</td><td data-label="Proposal">(a) Every recipient of EU fusion funding, regardless of size. (b) Large manufacturers of fusion components, by adding “fusion energy equipment” to the CRMA business risk-preparedness product list. (c) Importers of tungsten components, through the CMR.</td><td data-label="Legal hook">Euratom grant agreements; CRMA amendments; CMR 2017/821 <span data-cite="crma-2024,ep-2026,cmr-2017"></span></td><td data-label="Who acts">Commission, Fusion for Energy, Parliament and Council</td><td data-label="When">2027 calls; CRMA 2026–27; CMR review</td></tr>
+                <tr><td data-label="#">2</td><td data-label="Element">Who is obliged</td><td data-label="Proposal">Every recipient of EU fusion funding, regardless of size. Large component makers would also be covered if fusion equipment is added to the CRMA product list. Tungsten component importers would be covered through the CMR.</td><td data-label="Legal hook">Euratom grant agreements; CRMA amendments; CMR 2017/821 <span data-cite="crma-2024,ep-2026,cmr-2017"></span></td><td data-label="Who acts">Commission, Fusion for Energy, Parliament and Council</td><td data-label="When">2027 calls; CRMA 2026–27; CMR review</td></tr>
                 <tr><td data-label="#">3</td><td data-label="Element">Standard</td><td data-label="Proposal">OECD Minerals Guidance five-step due diligence, to smelter and refiner level.</td><td data-label="Legal hook">OECD (2016); CMR already references it <span data-cite="oecd-2016,cmr-2017"></span></td><td data-label="Who acts">Obliged companies</td><td data-label="When">From first procurement</td></tr>
-                <tr><td data-label="#">4</td><td data-label="Element">Remedy before exit</td><td data-label="Proposal">Corrective action plans with deadlines; temporary suspension if milestones are missed; exit only after failed mitigation, or immediately for the gravest abuses (forced labour, worst forms of child labour, support to armed groups).</td><td data-label="Legal hook">OECD (2016) Annex II model policy <span data-cite="oecd-2016"></span></td><td data-label="Who acts">Obliged companies</td><td data-label="When">Ongoing</td></tr>
+                <tr><td data-label="#">4</td><td data-label="Element">Remedy before exit</td><td data-label="Proposal">Require corrective action plans with deadlines. Suspend temporarily if milestones are missed. Exit after failed mitigation, or immediately for the gravest abuses: forced labour, worst forms of child labour, or support to armed groups.</td><td data-label="Legal hook">OECD (2016) Annex II model policy <span data-cite="oecd-2016"></span></td><td data-label="Who acts">Obliged companies</td><td data-label="When">Ongoing</td></tr>
                 <tr><td data-label="#">5</td><td data-label="Element">Verification</td><td data-label="Proposal">Independent audits of smelters and refiners through recognised schemes; a verified due-diligence policy, as under the Batteries Regulation.</td><td data-label="Legal hook">Batteries Regulation model; CMR recognised schemes <span data-cite="batt-2023,cmr-2017"></span></td><td data-label="Who acts">Notified bodies, auditors</td><td data-label="When">Before major procurement</td></tr>
                 <tr><td data-label="#">6</td><td data-label="Element">Transparency</td><td data-label="Proposal">Annual public report on risks found, actions taken and remedies delivered; smelter list shared with the competent authority.</td><td data-label="Legal hook">CMR reporting; grant reporting <span data-cite="cmr-2017"></span></td><td data-label="Who acts">Obliged companies</td><td data-label="When">Annually</td></tr>
                 <tr><td data-label="#">7</td><td data-label="Element">Enforcement</td><td data-label="Proposal">Funding eligibility and clawback for grant recipients; CMR checks by national competent authorities; the Forced Labour Regulation as backstop.</td><td data-label="Legal hook">Grant agreements; CMR; Regulation 2024/3015 <span data-cite="cmr-2017,flr-2024"></span></td><td data-label="Who acts">Commission, national authorities</td><td data-label="When">From 2027</td></tr>
@@ -761,7 +762,7 @@
               </tbody>
             </table>
           </div>
-          <p><strong>EU competence:</strong> Plant licensing is a national matter in the EU, so this framework works through EU funding, procurement and product rules, and recommends that national fusion regulators adopt the same standard. <span data-cite="nzia-2024"></span></p>
+          <p><strong>EU competence:</strong> Plant licensing is a national matter in the EU. This framework therefore uses EU funding and product rules. It also recommends that national fusion regulators adopt the same standard. <span data-cite="nzia-2024"></span></p>
           <p><strong>Net-Zero Industry Act:</strong> The Act names nuclear fission but not fusion explicitly; whether fusion falls under its “other nuclear technologies” category should be clarified. <span data-cite="nzia-2024"></span><!-- VERIFY --></p>
           <h3>Five options, compared</h3>
           <div class="table-scroll" role="region" aria-label="EU policy options appraisal" tabindex="0">
@@ -853,10 +854,10 @@
           <p><strong>Research questions:</strong> Which stages of selected fusion-material supply chains are concentrated or difficult to trace? What social and environmental risks are reported in relevant producing regions? How do existing due-diligence instruments apply to those materials and downstream products?</p>
           <p><strong>Scope:</strong> five materials — tungsten, lithium, lithium-6, beryllium and rare earths — considered across five stages: mine, trade, refining, components and plant. Lithium and lithium-6 are treated separately where isotopic separation changes the supply-chain analysis.</p>
           <p><strong>Sources and tools:</strong> The evidence base combines official data, law, UN material, NGO and investigative reporting, research and public industry information. <a href="#sources">See the linked APA references →</a></p>
-          <p><strong>Evidence handling:</strong> Claims are categorized as documented, reported or inferred. “Documented” indicates support in a primary record or directly available data; “reported” identifies claims attributed to an external source; “inferred” marks the project’s interpretation of available evidence. These labels describe evidentiary status, not the severity of a risk.</p>
+          <p><strong>Evidence handling:</strong> Claims are categorized as documented, reported or inferred. “Documented” means support in a primary record or directly available data. “Reported” means claims are attributed to an external source. “Inferred” marks the project’s interpretation of available evidence. These labels describe evidence status, not risk severity.</p>
           <p><strong>AI-use disclosure:</strong> AI tools assisted with research, coding and drafting.</p>
           <h3>Limitations</h3>
-          <p>Public information on fusion-specific material demand and procurement is limited. Estimates for lithium-6, beryllium, tungsten and rare earths depend on reactor design, material substitutions and system boundaries; this site does not provide a complete bill of materials or a plant-level demand forecast.</p>
+          <p>Public information on fusion-specific material demand and procurement is limited. Estimates for lithium-6, beryllium, tungsten and rare earths depend on reactor design, material substitutions and system boundaries. This site does not provide a complete bill of materials or a plant-level demand forecast.</p>
           <p>Publicly available trade and company data may be aggregated, incomplete or difficult to connect to specific components. Regional evidence describes exposure in shared supply chains, not the sourcing practices of a particular fusion project.</p>
           <p>Legal coverage depends on the instrument’s scope, the product, the company and the relevant jurisdiction. The governance matrix is a high-level comparison, not legal advice. Claims and estimates should be checked against the underlying source and its publication date.</p>
           <table>
@@ -908,8 +909,8 @@
       </div>
     </footer>
 
-    <script src="js/data.js?v=5"></script>
+    <script src="js/data.js?v=6"></script>
     <script src="js/timeline.js?v=3"></script>
-    <script src="js/app.js?v=12"></script>
+    <script src="js/app.js?v=17"></script>
   </body>
 </html>
