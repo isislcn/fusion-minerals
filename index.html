@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Fusion Minerals</title>
     <meta name="description" content="Fusion Minerals — supply chain risk in fusion minerals." />
-    <link rel="stylesheet" href="css/styles.css?v=17" />
+    <link rel="stylesheet" href="css/styles.css?v=19" />
   </head>
   <body>
     <header class="site-header">
@@ -498,6 +498,10 @@
           <div class="chain-layout">
             <div class="chain-panel">
               <h3>Supply chain map</h3>
+              <div class="chain-journey-controls">
+                <button class="button button-secondary" id="chain-journey-toggle" type="button" aria-controls="chain-flow" aria-pressed="false">Play journey</button>
+                <p id="chain-journey-status" role="status" aria-live="polite">Ready at the first stage.</p>
+              </div>
               <div class="chain-flow" id="chain-flow"></div>
               <div class="legend">
                 <span><i class="dot mine"></i> Mine</span>
@@ -523,52 +527,80 @@
           <h2>Who pays for fusion’s minerals</h2>
           <p class="lede">The mines and refineries that will supply fusion already carry a human cost. These are the documented cases, by material. They show who is exposed, not who is to blame.</p>
 
-          <div class="human-dimensions" aria-label="Five dimensions of human cost">
-            <article><span>Lives</span><strong>200+</strong><p>killed in a Rubaya mine collapse, early 2026</p><span data-cite="reuters-2026"></span></article>
-            <article><span>Children</span><strong>15</strong><p>age of a Kachin miner who died after leaving work</p><span data-cite="gw-2024"></span></article>
-            <article><span>Health</span><strong>134,000</strong><p>US workers estimated to be exposed to beryllium</p><span data-cite="atsdr-2008"></span></article>
-            <article><span>Conflict</span><strong>$800k</strong><p>a month to M23 rebels from Rubaya mining taxes</p><span data-cite="unsc-2025a"></span></article>
-            <article><span>Water</span><strong>10 m+</strong><p>fall in groundwater in 15 years, Salar de Atacama</p><span data-cite="oc-2025"></span></article>
+          <div class="human-dimensions" role="group" aria-label="Five dimensions of human cost">
+            <article><span>Lives</span><strong data-count-target="200" data-count-suffix="+" aria-label="More than 200">200+</strong><p>killed in a Rubaya mine collapse, early 2026</p><span data-cite="reuters-2026"></span></article>
+            <article><span>Children</span><strong data-count-target="15" aria-label="15">15</strong><p>age of a Kachin miner who died after leaving work</p><span data-cite="gw-2024"></span></article>
+            <article><span>Health</span><strong data-count-target="134000" aria-label="134,000">134,000</strong><p>US workers estimated to be exposed to beryllium</p><span data-cite="atsdr-2008"></span></article>
+            <article><span>Conflict</span><strong data-count-target="800" data-count-prefix="$" data-count-suffix="k" aria-label="$800,000">$800k</strong><p>a month to M23 rebels from Rubaya mining taxes</p><span data-cite="unsc-2025a"></span></article>
+            <article><span>Water</span><strong data-count-target="10" data-count-suffix=" m+" aria-label="More than 10 metres">10 m+</strong><p>fall in groundwater in 15 years, Salar de Atacama</p><span data-cite="oc-2025"></span></article>
           </div>
 
           <h3>Case files</h3>
+          <div class="case-filters" role="group" aria-label="Filter case files by material">
+            <button type="button" class="filter active" data-case-filter="all" aria-pressed="true">All cases</button>
+            <button type="button" class="filter" data-case-filter="tungsten" aria-pressed="false">Tungsten</button>
+            <button type="button" class="filter" data-case-filter="lithium" aria-pressed="false">Lithium</button>
+            <button type="button" class="filter" data-case-filter="beryllium" aria-pressed="false">Beryllium</button>
+            <button type="button" class="filter" data-case-filter="ree" aria-pressed="false">Rare earths</button>
+          </div>
+          <p id="case-count" class="count-line" role="status" aria-live="polite"></p>
           <div class="case-grid">
-            <article class="case-card" id="human-cost-rubaya">
-              <span class="material-chip tungsten">Tungsten · 3T</span><span class="confidence">Documented</span>
-              <h3>Rubaya, North Kivu</h3><p class="case-place">DR Congo · controlled by M23 since 2024</p>
+            <details class="case-card" id="human-cost-rubaya" data-material="tungsten">
+              <summary class="case-summary">
+                <span class="case-tags"><span class="material-chip tungsten">Tungsten · 3T</span><span class="confidence">Documented</span></span>
+                <span class="case-title">Rubaya, North Kivu</span><span class="case-place">DR Congo · controlled by M23 since 2024</span>
+                <span class="case-toggle-label"><span class="case-open-label">Open case file</span><span class="case-close-label">Close case file</span></span>
+              </summary>
+              <div class="case-detail">
               <p>Miners dig by hand for a few dollars a day. Two collapses in early 2026 were each reported to kill about 200 people. Victims of the first included children and market women. M23 disputes the second toll. UN experts report that M23 runs a parallel administration over Rubaya. They say it earns at least $800,000 a month from coltan taxes and smuggles 3T minerals into Rwanda. Rubaya supplies more than 15% of the world’s tantalum.</p>
               <p><strong>Who is affected:</strong> Artisanal miners and their families; communities under armed-group administration.</p>
               <p class="case-note">Most evidence concerns coltan; tungsten volumes from Rubaya are not quantified.</p>
               <p><span data-cite="reuters-2026,ap-2026,unsc-2025a"></span></p>
               <a href="#chain-tungsten-mine">Trace this stage →</a>
-            </article>
-            <article class="case-card" id="human-cost-kachin">
-              <span class="material-chip ree">Rare earths</span><span class="confidence">Reported</span>
-              <h3>Kachin Special Region 1</h3><p class="case-place">Myanmar · territory of junta-aligned militias</p>
+              </div>
+            </details>
+            <details class="case-card" id="human-cost-kachin" data-material="ree">
+              <summary class="case-summary">
+                <span class="case-tags"><span class="material-chip ree">Rare earths</span><span class="confidence">Reported</span></span>
+                <span class="case-title">Kachin Special Region 1</span><span class="case-place">Myanmar · territory of junta-aligned militias</span>
+                <span class="case-toggle-label"><span class="case-open-label">Open case file</span><span class="case-close-label">Close case file</span></span>
+              </summary>
+              <div class="case-detail">
               <p>Mining sites rose by more than 40% from 2021 to 2023, to over 300. Leaching chemicals are pumped into hillsides. Myanmar imported 1.5 million tonnes of ammonium sulphate from China in 2023. Imports were 93,000 tonnes in 2015. Streams test highly acidic with elevated arsenic. Workers report coughing, numbness, skin conditions and kidney problems. Two miners died after leaving work; one was 15. Residents say militias use coercion and payoffs to take land for mining.</p>
               <blockquote>“There are no longer fish in the waters.” <cite>— resident of Chipwe</cite></blockquote>
               <p><strong>Who is affected:</strong> Miners, farming and fishing communities, and residents displaced from riverbanks.</p>
               <p><span data-cite="gw-2024,gw-2022"></span></p>
               <a href="#chain-ree-mine">Trace this stage →</a>
-            </article>
-            <article class="case-card" id="human-cost-andes">
-              <span class="material-chip lithium">Lithium</span><span class="confidence">Reported</span>
-              <h3>High Andean salt flats</h3><p class="case-place">Argentina, Bolivia and Chile</p>
+              </div>
+            </details>
+            <details class="case-card" id="human-cost-andes" data-material="lithium">
+              <summary class="case-summary">
+                <span class="case-tags"><span class="material-chip lithium">Lithium</span><span class="confidence">Reported</span></span>
+                <span class="case-title">High Andean salt flats</span><span class="case-place">Argentina, Bolivia and Chile</span>
+                <span class="case-toggle-label"><span class="case-open-label">Open case file</span><span class="case-close-label">Close case file</span></span>
+              </summary>
+              <div class="case-detail">
               <p>Brine extraction in open evaporation ponds causes an irreversible loss of water from aquifers. In Chile’s Salar de Atacama, groundwater has fallen by more than 10 metres in 15 years. The salt flat is sinking 1 to 2 cm a year. At least 200 Indigenous communities live around the salt flats. Most lithium operations went ahead without free, prior and informed consent.</p>
               <p><strong>Who is affected:</strong> Indigenous communities whose water, grazing and livelihoods depend on the salt flats.</p>
               <p class="case-note">Fusion needs lithium enriched in lithium-6; the extraction stage is shared with battery lithium.</p>
               <p><span data-cite="oc-2025"></span></p>
               <a href="#chain-lithium-mine">Trace this stage →</a>
-            </article>
-            <article class="case-card" id="human-cost-beryllium">
-              <span class="material-chip beryllium">Beryllium</span><span class="confidence">Documented</span>
-              <h3>Beryllium workers</h3><p class="case-place">Beryllium processing and machining plants</p>
+              </div>
+            </details>
+            <details class="case-card" id="human-cost-beryllium" data-material="beryllium">
+              <summary class="case-summary">
+                <span class="case-tags"><span class="material-chip beryllium">Beryllium</span><span class="confidence">Documented</span></span>
+                <span class="case-title">Beryllium workers</span><span class="case-place">Beryllium processing and machining plants</span>
+                <span class="case-toggle-label"><span class="case-open-label">Open case file</span><span class="case-close-label">Close case file</span></span>
+              </summary>
+              <div class="case-detail">
               <p>Inhaling small beryllium particles can sensitise workers, and 6–8% of sensitised people develop chronic beryllium disease each year, a lung disease. At least 134,000 current US workers are estimated to be exposed, and sensitisation is found in 1–16% of exposed workers tested. Families of workers and people living near plants have also become ill.</p>
               <p><strong>Who is affected:</strong> Machinists, process and lab workers, and their families.</p>
               <p class="case-note">These figures are from the United States; the global beryllium chain is not yet mapped.</p>
               <p><span data-cite="atsdr-2008"></span></p>
               <a href="#chain-beryllium-components">Trace this stage →</a>
-            </article>
+              </div>
+            </details>
           </div>
 
           <aside class="data-gap">
@@ -593,6 +625,13 @@
             <article class="reason-card"><h3>2. Supply is already squeezed</h3><p>China mines 79% of tungsten and refines about 80% of rare earths. Export licensing in 2025 doubled tungsten prices. <span data-cite="usgs-2026"></span><!-- VERIFY --></p></article>
             <article class="reason-card"><h3>3. The rules are being written now</h3><p>The EU is reviewing its conflict minerals law and amending the Critical Raw Materials Act; the US and UK are setting fusion regulations. None covers where fusion’s minerals come from. <span data-cite="ep-2026,nrc-2026,desnz-2026"></span></p></article>
           </div>
+          <div class="investment-chart">
+            <h3>Investment is accelerating</h3>
+            <p>Reported private fusion investment. The periods differ, so these figures are not like-for-like annual totals.</p>
+            <div class="investment-row"><span>12 months to July 2026</span><span class="investment-track"><span style="width:31.5%"></span></span><strong>$4.48bn</strong></div>
+            <div class="investment-row"><span>Since 2021</span><span class="investment-track"><span style="width:100%"></span></span><strong>$14.24bn</strong></div>
+            <p class="investment-note">Across 56 companies. <span data-cite="wnn-2026"></span><!-- VERIFY --></p>
+          </div>
           <h3>Key dates</h3>
           <div class="timeline-mount" data-audience="all"></div>
           <div class="pager"><a href="#human-cost">← Human cost</a><a href="#risks">Risk register →</a></div>
@@ -603,24 +642,29 @@
         <div class="container">
           <h2>Evidence: risk register</h2>
           <div class="controls-row">
-            <select id="risk-material-filter"><option value="all">Material: all</option></select>
-            <select id="risk-stage-filter"><option value="all">Stage: all</option></select>
-            <select id="risk-type-filter"><option value="all">Risk type: all</option></select>
-            <select id="risk-confidence-filter"><option value="all">Confidence: all</option></select>
-            <button id="download-csv" class="button button-secondary">Download CSV</button>
+            <label class="risk-search-label" for="risk-search">Search risks
+              <input id="risk-search" type="search" autocomplete="off">
+            </label>
+            <select id="risk-material-filter" aria-label="Filter risks by material"></select>
+            <select id="risk-stage-filter" aria-label="Filter risks by stage"></select>
+            <select id="risk-type-filter" aria-label="Filter risks by type"></select>
+            <select id="risk-confidence-filter" aria-label="Filter risks by confidence"></select>
+            <button id="risk-reset" class="button button-secondary" type="button">Reset filters</button>
+            <button id="download-csv" class="button button-secondary" type="button">Download CSV</button>
           </div>
-          <p id="risk-count" class="count-line"></p>
+          <div id="risk-active-filters" class="risk-active-filters" aria-live="polite"></div>
+          <p id="risk-count" class="count-line" role="status" aria-live="polite"></p>
           <div class="table-scroll" role="region" aria-label="Fusion materials risk register" tabindex="0">
             <table>
               <thead>
                 <tr>
-                  <th>ID</th>
-                  <th>Material</th>
-                  <th>Stage</th>
-                  <th>Risk</th>
-                  <th>Location</th>
-                  <th>Confidence</th>
-                  <th>Sources</th>
+                  <th scope="col" aria-sort="ascending"><button type="button" class="risk-sort" data-sort="id">ID <span aria-hidden="true">↑</span></button></th>
+                  <th scope="col" aria-sort="none"><button type="button" class="risk-sort" data-sort="material">Material <span aria-hidden="true">↕</span></button></th>
+                  <th scope="col" aria-sort="none"><button type="button" class="risk-sort" data-sort="stage">Stage <span aria-hidden="true">↕</span></button></th>
+                  <th scope="col" aria-sort="none"><button type="button" class="risk-sort" data-sort="risk">Risk <span aria-hidden="true">↕</span></button></th>
+                  <th scope="col" aria-sort="none"><button type="button" class="risk-sort" data-sort="location">Location <span aria-hidden="true">↕</span></button></th>
+                  <th scope="col" aria-sort="none"><button type="button" class="risk-sort" data-sort="confidence">Confidence <span aria-hidden="true">↕</span></button></th>
+                  <th scope="col" aria-sort="none"><button type="button" class="risk-sort" data-sort="sourceIds">Sources <span aria-hidden="true">↕</span></button></th>
                 </tr>
               </thead>
               <tbody id="risk-body"></tbody>
@@ -680,27 +724,42 @@
           <p>Published estimates cited in this project put lithium-6 requirements for some pilot-plant blanket concepts in the tens-of-tonnes range. Commercial availability at that scale is not established. Historical production at Oak Ridge’s Y-12 plant is not a measure of present-day commercial supply.</p>
           <h3>Known and pending</h3>
           <div class="demand-grid">
-            <article class="demand-card known">
-              <h4>Lithium-6</h4>
-              <p>Needed per pilot plant: order of tens of tonnes.</p>
-              <p>Commercial supply at fusion-relevant scale: not established.</p>
-            </article>
-            <article class="demand-card pending">
-              <h4>Tungsten</h4>
-              <p>It is a major structural material for the first wall and divertor, but plant-level tonnage estimates remain highly design-specific.</p>
-              <p>Public reporting is stronger on concentration risk than on the exact per-reactor material bill.</p>
-            </article>
-            <article class="demand-card pending">
-              <h4>Beryllium</h4>
-              <p>Design choices vary across blanket and multiplier concepts, so the tonnage picture is still preliminary and architecture-dependent.</p>
-              <p>The key issue is not just supply volume; it is the narrowness of public, fusion-specific procurement visibility.</p>
-            </article>
-            <article class="demand-card pending">
-              <h4>Rare earths</h4>
-              <p>High-field magnets can rely on rare-earth-containing superconducting technologies, but plant demand remains uncertain across reactor designs.</p>
-              <p>That uncertainty matters because refining concentration is already one of the most visible bottlenecks in the market.</p>
-            </article>
+            <details class="demand-card known">
+              <summary><span class="demand-title">Lithium-6</span><span class="demand-front">Needed per pilot plant: order of tens of tonnes.</span><span class="flip-hint"><span class="flip-open-label">Read detail</span><span class="flip-close-label">Hide detail</span></span></summary>
+              <div class="demand-back"><p>Commercial supply at fusion-relevant scale: not established.</p></div>
+            </details>
+            <details class="demand-card pending">
+              <summary><span class="demand-title">Tungsten</span><span class="demand-front">A major structural material for the first wall and divertor.</span><span class="flip-hint"><span class="flip-open-label">Read detail</span><span class="flip-close-label">Hide detail</span></span></summary>
+              <div class="demand-back"><p>Plant-level tonnage estimates remain highly design-specific. Public reporting is stronger on concentration risk than on the exact per-reactor material bill.</p></div>
+            </details>
+            <details class="demand-card pending">
+              <summary><span class="demand-title">Beryllium</span><span class="demand-front">Use varies across blanket and neutron-multiplier designs.</span><span class="flip-hint"><span class="flip-open-label">Read detail</span><span class="flip-close-label">Hide detail</span></span></summary>
+              <div class="demand-back"><p>Tonnage estimates remain preliminary. Public, fusion-specific procurement information is limited.</p></div>
+            </details>
+            <details class="demand-card pending">
+              <summary><span class="demand-title">Rare earths</span><span class="demand-front">Some high-field magnets use rare-earth-containing superconductors.</span><span class="flip-hint"><span class="flip-open-label">Read detail</span><span class="flip-close-label">Hide detail</span></span></summary>
+              <div class="demand-back"><p>Demand remains uncertain across reactor designs. Refining concentration is already a visible bottleneck.</p></div>
+            </details>
           </div>
+          <figure class="li6-pictogram">
+            <svg viewBox="0 0 360 150" role="img" aria-labelledby="li6-title li6-desc">
+              <title id="li6-title">Lithium-6 helps breed tritium</title>
+              <desc id="li6-desc">A lithium-6 atom absorbs a neutron and forms tritium and helium in a breeding blanket.</desc>
+              <circle class="li6-atom" cx="40" cy="68" r="28"></circle>
+              <text class="li6-label" x="40" y="74" text-anchor="middle">Li-6</text>
+              <text class="li6-operator" x="83" y="76" text-anchor="middle">+</text>
+              <circle class="li6-neutron" cx="120" cy="68" r="17"></circle>
+              <text class="li6-label" x="120" y="73" text-anchor="middle">n</text>
+              <text class="li6-operator" x="164" y="76" text-anchor="middle">→</text>
+              <circle class="li6-tritium" cx="210" cy="68" r="25"></circle>
+              <text class="li6-label" x="210" y="73" text-anchor="middle">T</text>
+              <text class="li6-operator" x="254" y="76" text-anchor="middle">+</text>
+              <circle class="li6-helium" cx="305" cy="68" r="25"></circle>
+              <text class="li6-label" x="305" y="73" text-anchor="middle">He</text>
+              <text class="li6-caption" x="180" y="132" text-anchor="middle">Breeding-blanket concept; design varies.</text>
+            </svg>
+            <figcaption>Lithium-6 + neutron → tritium + helium. <span data-cite="iter-breeding"></span></figcaption>
+          </figure>
           <div class="tiny-chart">
             <h3>Lithium-6 comparison</h3>
             <div class="li-chart">
@@ -991,8 +1050,8 @@
       </div>
     </footer>
 
-    <script src="js/data.js?v=7"></script>
-    <script src="js/timeline.js?v=3"></script>
-    <script src="js/app.js?v=18"></script>
+    <script src="js/data.js?v=9"></script>
+    <script src="js/timeline.js?v=5"></script>
+    <script src="js/app.js?v=20"></script>
   </body>
 </html>

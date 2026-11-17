@@ -54,6 +54,15 @@
 
 - Deep links work for material and stage anchors.
 - The page remains accessible across screen sizes.
+- The five-stage journey can play and pause without preventing manual stage selection.
+
+## Epic: Human cost
+
+### Must
+
+- Present filterable, expandable files for Rubaya, Kachin, the high Andean salt flats and beryllium workers.
+- Keep evidence citations, affected groups, data gaps and links to relevant supply-chain stages.
+- Animate the key figures on entry and respect reduced-motion preferences.
 
 ## Epic: Why now
 
@@ -68,6 +77,7 @@
 
 - The section opens as its own in-page view from navigation and internal links.
 - The page matches the wider site design language.
+- The timeline compares action now with waiting and retrofit; investment figures remain cited and clearly scoped.
 
 ## Epic: Evidence and analysis
 
@@ -83,6 +93,9 @@
 
 - Rows show material, stage, confidence and source.
 - The matrix clearly states Covered / Partly / Not covered with text labels.
+- Risk filters include text search, sorting, removable filter chips and reset.
+- Demand includes an ITER-sourced lithium-6 breeding pictogram and expandable material cards.
+- The governance picker reports full, partial and absent coverage for the selected material.
 
 ## Epic: Remedy-first framework
 

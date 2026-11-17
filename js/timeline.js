@@ -7,7 +7,19 @@ function setupTimelines() {
   document.querySelectorAll('.timeline-mount').forEach((mount, mountIndex) => {
     const defaultAudience = mount.dataset.audience || 'all';
     const id = `timeline-${mountIndex}`;
+    const scenarioControls = mount.closest('#why-now') ? `
+      <div class="timeline-scenario">
+        <h3>What if we wait?</h3>
+        <p>Choose when to set sourcing expectations. The timeline highlights the path; it does not estimate costs.</p>
+        <div class="timeline-scenario-controls" role="group" aria-label="Compare sourcing timing">
+          <button type="button" class="filter active" data-scenario-choice="now" aria-pressed="true">Set expectations now</button>
+          <button type="button" class="filter" data-scenario-choice="wait" aria-pressed="false">Wait and retrofit</button>
+        </div>
+        <p class="timeline-scenario-status" role="status" aria-live="polite"></p>
+      </div>
+    ` : '';
     mount.innerHTML = `
+      ${scenarioControls}
       <div class="timeline-filters" role="group" aria-label="Filter timeline events by audience">
         ${audienceOptions.map((audience) => `
           <button type="button" class="filter timeline-filter${audience === defaultAudience ? ' active' : ''}" data-audience="${audience}" aria-pressed="${audience === defaultAudience}">${audienceLabels[audience]}</button>
@@ -146,5 +158,27 @@ function setupTimelines() {
       if (button) filterTimeline(button.dataset.audience);
     });
     filterTimeline(defaultAudience);
+
+    const scenarioGroup = mount.querySelector('.timeline-scenario-controls');
+    if (scenarioGroup) {
+      const scenarioStatus = mount.querySelector('.timeline-scenario-status');
+      function setScenario(scenario) {
+        mount.dataset.scenario = scenario;
+        scenarioGroup.querySelectorAll('[data-scenario-choice]').forEach((button) => {
+          const active = button.dataset.scenarioChoice === scenario;
+          button.classList.toggle('active', active);
+          button.setAttribute('aria-pressed', String(active));
+        });
+        scenarioStatus.textContent = scenario === 'now'
+          ? 'Act now: set sourcing expectations before first-plant orders.'
+          : 'Wait: supplier and design choices may be harder to change after orders. Retrofit costs are not quantified.';
+      }
+
+      scenarioGroup.addEventListener('click', (event) => {
+        const button = event.target.closest('[data-scenario-choice]');
+        if (button) setScenario(button.dataset.scenarioChoice);
+      });
+      setScenario('now');
+    }
   });
 }

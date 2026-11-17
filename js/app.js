@@ -7,6 +7,8 @@ const riskMaterialFilter = document.getElementById('risk-material-filter');
 const riskStageFilter = document.getElementById('risk-stage-filter');
 const riskTypeFilter = document.getElementById('risk-type-filter');
 const riskConfidenceFilter = document.getElementById('risk-confidence-filter');
+const riskSearch = document.getElementById('risk-search');
+const riskActiveFilters = document.getElementById('risk-active-filters');
 const riskBody = document.getElementById('risk-body');
 const riskCount = document.getElementById('risk-count');
 const chainFlow = document.getElementById('chain-flow');
@@ -14,6 +16,7 @@ const stageDetail = document.getElementById('stage-detail');
 const ladderSteps = document.querySelectorAll('.ladder-step');
 const ladderDetail = document.getElementById('ladder-detail');
 let activeStageTab = 'where';
+let riskSort = { key: 'id', direction: 'asc' };
 const copyTimers = new WeakMap();
 let citationInstance = 0;
 const harmCaseByStage = {
@@ -283,7 +286,9 @@ function setupGovernance() {
       return { cell, status };
     });
     const covered = statuses.filter((item) => item.status === 'covered').length;
-    coverageCount.textContent = `${materialName}: ${covered} of ${statuses.length} rules fully cover it.`;
+    const partly = statuses.filter((item) => item.status === 'partly').length;
+    const notCovered = statuses.filter((item) => item.status === 'not').length;
+    coverageCount.textContent = `${materialName}: ${covered} fully cover it, ${partly} partly cover it, ${notCovered} do not cover it.`;
     ruleCards.innerHTML = statuses.map(({ cell, status }, index) => {
       const verdict = status === 'covered' ? 'Covered' : status === 'not' ? 'Not covered' : 'Partly';
       const marker = status === 'covered' ? '✓' : status === 'not' ? '✕' : '◐';
@@ -918,19 +923,61 @@ function getFilteredRows() {
   const stageValue = riskStageFilter?.value || 'all';
   const typeValue = riskTypeFilter?.value || 'all';
   const confidenceValue = riskConfidenceFilter?.value || 'all';
+  const searchValue = riskSearch?.value.trim().toLocaleLowerCase() || '';
 
-  return riskRows.filter((row) => {
+  const rows = riskRows.filter((row) => {
     const matchesMaterial = materialValue === 'all' || row.material === materialValue;
     const matchesStage = stageValue === 'all' || row.stage === stageValue;
     const matchesType = typeValue === 'all' || row.type === typeValue;
     const matchesConfidence = confidenceValue === 'all' || row.confidence === confidenceValue;
-    return matchesMaterial && matchesStage && matchesType && matchesConfidence;
+    const sourceText = row.sourceIds.map((id) => SOURCES.find((source) => source.id === id)?.cite || id).join(' ');
+    const searchableText = [row.id, row.material, row.stage, row.risk, row.location, row.confidence, row.type, sourceText].join(' ').toLocaleLowerCase();
+    return matchesMaterial && matchesStage && matchesType && matchesConfidence && (!searchValue || searchableText.includes(searchValue));
+  });
+
+  const collator = new Intl.Collator(undefined, { numeric: true, sensitivity: 'base' });
+  const sortValue = (row) => riskSort.key === 'sourceIds'
+    ? row.sourceIds.map((id) => SOURCES.find((source) => source.id === id)?.cite || id).join(' ')
+    : row[riskSort.key];
+  const direction = riskSort.direction === 'asc' ? 1 : -1;
+  return rows.sort((a, b) => direction * collator.compare(String(sortValue(a) || ''), String(sortValue(b) || '')));
+}
+
+function renderRiskFilterChips() {
+  if (!riskActiveFilters) return;
+  const active = [
+    { key: 'search', label: 'Search', value: riskSearch?.value.trim() },
+    { key: 'material', label: 'Material', value: riskMaterialFilter?.value !== 'all' ? riskMaterialFilter?.value : '' },
+    { key: 'stage', label: 'Stage', value: riskStageFilter?.value !== 'all' ? riskStageFilter?.value : '' },
+    { key: 'type', label: 'Risk type', value: riskTypeFilter?.value !== 'all' ? riskTypeFilter?.value : '' },
+    { key: 'confidence', label: 'Confidence', value: riskConfidenceFilter?.value !== 'all' ? riskConfidenceFilter?.value : '' }
+  ].filter((item) => item.value);
+  riskActiveFilters.replaceChildren();
+
+  if (!active.length) {
+    const label = document.createElement('span');
+    label.textContent = 'No filters applied.';
+    riskActiveFilters.appendChild(label);
+    return;
+  }
+
+  const label = document.createElement('span');
+  label.textContent = 'Active filters:';
+  riskActiveFilters.appendChild(label);
+  active.forEach((item) => {
+    const chip = document.createElement('button');
+    chip.type = 'button';
+    chip.className = 'filter-chip';
+    chip.dataset.clearFilter = item.key;
+    chip.textContent = `${item.label}: ${item.value} ×`;
+    chip.setAttribute('aria-label', `Remove ${item.label} filter`);
+    riskActiveFilters.appendChild(chip);
   });
 }
 
 function renderRiskTable() {
   const rows = getFilteredRows();
-  riskBody.innerHTML = rows.map((row) => {
+  riskBody.innerHTML = rows.length ? rows.map((row) => {
     const material = Object.entries(materialData)
       .find(([, item]) => item.label === row.material)?.[1];
     const stage = material?.stages.find((item) => item.stage === row.stage);
@@ -946,11 +993,12 @@ function renderRiskTable() {
       <td>${row.sourceIds.length ? cite(row.sourceIds, { full: true }) : 'Project analysis'}</td>
     </tr>
   `;
-  }).join('');
+  }).join('') : '<tr><td class="risk-empty" colspan="7">No risks match these filters. Reset the filters to see all risks.</td></tr>';
 
   riskCount.textContent = `Showing ${rows.length} of ${riskRows.length} risks.`;
+  renderRiskFilterChips();
 
-  riskBody.querySelectorAll('tr').forEach((row) => {
+  riskBody.querySelectorAll('tr[data-link]').forEach((row) => {
     row.addEventListener('click', (event) => {
       if (event.target.closest('a')) return;
       const target = row.dataset.link || '#chain';
@@ -1090,6 +1138,157 @@ function setupStageDetail() {
   });
 }
 
+function setupChainJourney() {
+  const button = document.getElementById('chain-journey-toggle');
+  const status = document.getElementById('chain-journey-status');
+  if (!button || !status) return;
+
+  let timer = null;
+  let playing = false;
+  let selectingAutomatically = false;
+
+  function currentNode() {
+    return chainFlow.querySelector('.chain-node[aria-current="true"]');
+  }
+
+  function announceCurrent(prefix) {
+    const nodes = [...chainFlow.querySelectorAll('.chain-node')];
+    const active = currentNode();
+    const index = nodes.indexOf(active);
+    if (index < 0) return;
+    const stage = active.querySelector('.node-tag')?.textContent.trim() || 'Stage';
+    status.textContent = `${prefix}: ${stage} (${index + 1} of ${nodes.length}).`;
+  }
+
+  function setPlaying(nextPlaying) {
+    playing = nextPlaying;
+    button.textContent = playing ? 'Pause journey' : 'Play journey';
+    button.setAttribute('aria-pressed', String(playing));
+    if (playing) announceCurrent('Playing');
+    else announceCurrent('Paused');
+  }
+
+  function pause() {
+    if (timer) window.clearInterval(timer);
+    timer = null;
+    setPlaying(false);
+  }
+
+  function selectNode(node) {
+    selectingAutomatically = true;
+    node.click();
+    selectingAutomatically = false;
+  }
+
+  function advance() {
+    const nodes = [...chainFlow.querySelectorAll('.chain-node')];
+    const index = nodes.indexOf(currentNode());
+    if (!nodes.length || index < 0) {
+      pause();
+      return;
+    }
+    if (index === nodes.length - 1) {
+      window.clearInterval(timer);
+      timer = null;
+      playing = false;
+      button.textContent = 'Play journey';
+      button.setAttribute('aria-pressed', 'false');
+      status.textContent = 'Journey complete.';
+      return;
+    }
+    selectNode(nodes[index + 1]);
+    announceCurrent('Playing');
+  }
+
+  button.addEventListener('click', () => {
+    if (playing) {
+      pause();
+      return;
+    }
+    const nodes = [...chainFlow.querySelectorAll('.chain-node')];
+    if (!nodes.length) return;
+    if (nodes.indexOf(currentNode()) === nodes.length - 1) selectNode(nodes[0]);
+    setPlaying(true);
+    timer = window.setInterval(advance, 1600);
+  });
+
+  chainFlow.addEventListener('click', (event) => {
+    if (playing && !selectingAutomatically && event.target.closest('.chain-node')) pause();
+  });
+  document.querySelector('.material-switcher')?.addEventListener('click', (event) => {
+    if (event.target.closest('.material-button') && playing) pause();
+  });
+  document.addEventListener('visibilitychange', () => {
+    if (document.hidden && playing) pause();
+  });
+}
+
+function setupHumanCost() {
+  const section = document.getElementById('human-cost');
+  const cards = [...document.querySelectorAll('.case-card')];
+  const filterButtons = document.querySelectorAll('[data-case-filter]');
+  const count = document.getElementById('case-count');
+  if (!section || !cards.length || !count) return;
+
+  function filterCases(material) {
+    let visible = 0;
+    cards.forEach((card) => {
+      const show = material === 'all' || card.dataset.material === material;
+      card.hidden = !show;
+      if (show) visible += 1;
+    });
+    filterButtons.forEach((button) => {
+      const active = button.dataset.caseFilter === material;
+      button.classList.toggle('active', active);
+      button.setAttribute('aria-pressed', String(active));
+    });
+    count.textContent = `Showing ${visible} of ${cards.length} case files.`;
+  }
+
+  function openCaseFromHash() {
+    const target = document.getElementById(window.location.hash.slice(1));
+    if (!(target instanceof HTMLDetailsElement) || !target.matches('.case-card')) return;
+    if (target.hidden) filterCases('all');
+    target.open = true;
+  }
+
+  filterButtons.forEach((button) => {
+    button.addEventListener('click', () => filterCases(button.dataset.caseFilter || 'all'));
+  });
+  window.addEventListener('hashchange', openCaseFromHash);
+  openCaseFromHash();
+  filterCases('all');
+
+  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+  if (reducedMotion.matches || !('IntersectionObserver' in window)) return;
+  const counters = [...section.querySelectorAll('[data-count-target]')];
+  const dimensions = section.querySelector('.human-dimensions');
+  if (!counters.length || !dimensions) return;
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (!entry.isIntersecting) return;
+      observer.unobserve(entry.target);
+      const start = performance.now();
+      const duration = 900;
+      counters.forEach((counter) => {
+        const target = Number(counter.dataset.countTarget);
+        const prefix = counter.dataset.countPrefix || '';
+        const suffix = counter.dataset.countSuffix || '';
+        const format = new Intl.NumberFormat();
+        function update(now) {
+          const progress = Math.min((now - start) / duration, 1);
+          const value = Math.round(target * progress);
+          counter.textContent = `${prefix}${format.format(value)}${suffix}`;
+          if (progress < 1) window.requestAnimationFrame(update);
+        }
+        window.requestAnimationFrame(update);
+      });
+    });
+  }, { threshold: 0.35 });
+  observer.observe(dimensions);
+}
+
 function applyAudienceLens(lens='all') {
   const allNodes = document.querySelectorAll('.chain-node');
   allNodes.forEach((node) => {
@@ -1127,6 +1326,43 @@ function setupRiskFilters() {
   [riskMaterialFilter, riskStageFilter, riskTypeFilter, riskConfidenceFilter].forEach((select) => {
     select.addEventListener('change', renderRiskTable);
   });
+  riskSearch.addEventListener('input', renderRiskTable);
+  document.getElementById('risk-reset').addEventListener('click', () => {
+    riskSearch.value = '';
+    riskMaterialFilter.value = 'all';
+    riskStageFilter.value = 'all';
+    riskTypeFilter.value = 'all';
+    riskConfidenceFilter.value = 'all';
+    riskSort = { key: 'id', direction: 'asc' };
+    updateRiskSortIndicators();
+    renderRiskTable();
+  });
+  riskActiveFilters.addEventListener('click', (event) => {
+    const chip = event.target.closest('[data-clear-filter]');
+    if (!chip) return;
+    if (chip.dataset.clearFilter === 'search') riskSearch.value = '';
+    else {
+      const filter = {
+        material: riskMaterialFilter,
+        stage: riskStageFilter,
+        type: riskTypeFilter,
+        confidence: riskConfidenceFilter
+      }[chip.dataset.clearFilter];
+      if (filter) filter.value = 'all';
+    }
+    renderRiskTable();
+  });
+  document.querySelectorAll('.risk-sort').forEach((button) => {
+    button.addEventListener('click', () => {
+      const key = button.dataset.sort;
+      if (!key) return;
+      if (riskSort.key === key) riskSort.direction = riskSort.direction === 'asc' ? 'desc' : 'asc';
+      else riskSort = { key, direction: 'asc' };
+      updateRiskSortIndicators();
+      renderRiskTable();
+    });
+  });
+  updateRiskSortIndicators();
 
   document.getElementById('download-csv').addEventListener('click', () => {
     const csvRows = [
@@ -1144,6 +1380,27 @@ function setupRiskFilters() {
     link.download = 'fusion-minerals-risks.csv';
     link.click();
     URL.revokeObjectURL(url);
+  });
+}
+
+function updateRiskSortIndicators() {
+  const labels = {
+    id: 'ID',
+    material: 'material',
+    stage: 'stage',
+    risk: 'risk',
+    location: 'location',
+    confidence: 'confidence',
+    sourceIds: 'sources'
+  };
+  document.querySelectorAll('.risk-sort').forEach((button) => {
+    const selected = button.dataset.sort === riskSort.key;
+    const header = button.closest('th');
+    const indicator = button.querySelector('span');
+    if (!header || !indicator) return;
+    header.setAttribute('aria-sort', selected ? (riskSort.direction === 'asc' ? 'ascending' : 'descending') : 'none');
+    indicator.textContent = selected ? (riskSort.direction === 'asc' ? '↑' : '↓') : '↕';
+    button.setAttribute('aria-label', `Sort by ${labels[button.dataset.sort]}${selected ? ` ${riskSort.direction === 'asc' ? 'ascending' : 'descending'}` : ''}`);
   });
 }
 
@@ -1344,6 +1601,8 @@ function init() {
   setupMaterialButtons();
   setupLensButtons();
   setupStageDetail();
+  setupChainJourney();
+  setupHumanCost();
   setupRiskFilters();
   setupLadder();
   setupPrintAndCopy();

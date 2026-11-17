@@ -24,19 +24,19 @@ Explain fusion basics with a playable fusion-versus-fission SVG, reduced-motion 
 
 ### Supply chain (`#chain`)
 
-Provide material selection, accessible stage controls, audience lenses and stage details. Each evidence tab lists claims and confidence labels with citations. Known cases link to the Human cost page.
+Provide material selection, accessible stage controls, audience lenses and stage details. Add a play/pause journey through the five stages. Each evidence tab lists claims and confidence labels with citations. Known cases link to the Human cost page.
 
 ### Human cost (`#human-cost`)
 
-Present four case files: Rubaya, Kachin Special Region 1, high Andean salt flats and beryllium workers. Provide deep links for each case, source citations, affected groups, data gaps and links back to relevant supply-chain stages. Keep exposure distinct from buyer attribution.
+Present four filterable, expandable case files: Rubaya, Kachin Special Region 1, high Andean salt flats and beryllium workers. Provide deep links for each case, source citations, affected groups, data gaps and links back to relevant supply-chain stages. Animate key figures on entry without motion for reduced-motion users. Keep exposure distinct from buyer attribution.
 
 ### Why now (`#why-now`)
 
-Present three dated reasons and Prototype B: a three-track timeline for fusion and markets, EU rules, and UN/US/UK rules. Tracks converge at first-plant procurement and fork to remedy-first sourcing or retrofit. The same timeline component appears in each brief with an audience filter.
+Present three dated reasons, a sourced investment chart and a timing interaction for acting now or waiting to retrofit. Prototype B is a three-track timeline for fusion and markets, EU rules, and UN/US/UK rules. Tracks converge at first-plant procurement and fork to remedy-first sourcing or retrofit. The same timeline component appears in each brief with an audience filter.
 
 ### Evidence (`#risks`, `#governance`, `#demand`)
 
-The risk register has material, stage, risk, confidence and APA sources, plus CSV export. The governance matrix compares existing instruments, including the CRMA, Forced Labour Regulation and Net-Zero Industry Act; a mobile control switches to material cards. Demand content states assumptions and gaps plainly.
+The risk register has material, stage, risk, confidence and APA sources, plus search, sorting, filter chips, reset and CSV export. The governance matrix compares existing instruments, including the CRMA, Forced Labour Regulation and Net-Zero Industry Act; the material picker reports full, partial and absent coverage. Demand content states assumptions and gaps plainly, with an annotated lithium-6 breeding pictogram and expandable material cards.
 
 ### Remedy first (`#remedy`)
 
