@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Fusion Minerals</title>
     <meta name="description" content="Fusion Minerals — supply chain risk in fusion minerals." />
-    <link rel="stylesheet" href="css/styles.css?v=5" />
+    <link rel="stylesheet" href="css/styles.css?v=10" />
   </head>
   <body>
     <header class="site-header">
@@ -253,17 +253,76 @@
             </div>
           </div>
 
-          <h2>Exploded cutaway</h2>
+          <h2>Tokamak cross-section</h2>
           <div class="cutaway-wrap">
-            <div class="cutaway" aria-label="Generic cutaway of a fusion reactor">
-              <div class="layer plasma" tabindex="0" data-material="deuterium-tritium" data-link="#chain-lithium">Plasma</div>
-              <div class="layer first-wall" tabindex="0" data-material="tungsten" data-link="#chain-tungsten">First wall</div>
-              <div class="layer divertor" tabindex="0" data-material="tungsten" data-link="#chain-tungsten">Divertor</div>
-              <div class="layer blanket" tabindex="0" data-material="lithium" data-link="#chain-lithium">Breeding blanket</div>
-              <div class="layer shield" tabindex="0" data-material="tungsten" data-link="#chain-tungsten">Shield</div>
-              <div class="layer vessel" tabindex="0" data-material="steel" data-link="#chain-beryllium">Vacuum vessel</div>
-              <div class="layer magnet" tabindex="0" data-material="rare-earths" data-link="#chain-ree">Magnets</div>
-              <div class="layer cryostat" tabindex="0" data-material="steel" data-link="#chain-ree">Cryostat</div>
+            <div class="cutaway-visual">
+              <svg class="cutaway-svg" id="tokamak-cutaway" viewBox="0 0 680 440" role="group" aria-labelledby="tokamak-title tokamak-desc">
+                <title id="tokamak-title">Simplified tokamak cross-section</title>
+                <desc id="tokamak-desc">Interactive cross-section showing plasma and the surrounding first wall, divertor, breeding blanket, shield, vacuum vessel, magnets and cryostat. Select or focus a layer to explore its materials and supply-chain detail.</desc>
+                <line class="doughnut-center-line" x1="40" y1="48" x2="40" y2="376"></line>
+                <text class="doughnut-center-label" x="18" y="426">centre of the doughnut</text>
+
+                <g class="layer cryostat" data-layer="cryostat" tabindex="0" role="button" aria-label="Cryostat. Materials: steel and helium." aria-pressed="false" data-material="steel" data-link="#chain-ree">
+                  <rect class="cryostat-shape" x="48" y="30" width="388" height="366" rx="178"></rect>
+                  <line class="layer-leader" x1="436" y1="55" x2="462" y2="55"></line>
+                  <text class="layer-label" x="472" y="52">Cryostat</text>
+                  <text class="layer-material" x="472" y="68">Steel, helium</text>
+                </g>
+                <g class="layer magnet" data-layer="magnets" tabindex="0" role="button" aria-label="Magnets. Materials: REBCO or niobium-tin superconductors." aria-pressed="false" data-material="rare-earths" data-link="#chain-ree">
+                  <ellipse class="magnet-shape" cx="240" cy="213" rx="176" ry="164"></ellipse>
+                  <line class="layer-leader" x1="408" y1="100" x2="462" y2="100"></line>
+                  <text class="layer-label" x="472" y="97">Magnets</text>
+                  <text class="layer-material" x="472" y="113">REBCO or niobium-tin</text>
+                </g>
+                <g class="layer vessel" data-layer="vessel" tabindex="0" role="button" aria-label="Vacuum vessel. Material: steel." aria-pressed="false" data-material="steel" data-link="#chain-beryllium">
+                  <ellipse class="vessel-shape" cx="240" cy="213" rx="155" ry="144"></ellipse>
+                  <line class="layer-leader" x1="392" y1="145" x2="462" y2="145"></line>
+                  <text class="layer-label" x="472" y="142">Vacuum vessel</text>
+                  <text class="layer-material" x="472" y="158">Steel</text>
+                </g>
+                <g class="layer shield" data-layer="shield" tabindex="0" role="button" aria-label="Shield. Materials: tungsten carbide and steel." aria-pressed="false" data-material="tungsten" data-link="#chain-tungsten">
+                  <ellipse class="shield-shape" cx="240" cy="213" rx="141" ry="130"></ellipse>
+                  <line class="layer-leader" x1="378" y1="190" x2="462" y2="190"></line>
+                  <text class="layer-label" x="472" y="187">Shield</text>
+                  <text class="layer-material" x="472" y="203">Tungsten carbide, steel</text>
+                </g>
+                <g class="layer blanket" data-layer="blanket" tabindex="0" role="button" aria-label="Breeding blanket. Materials: lithium-6, beryllium or lead." aria-pressed="false" data-material="lithium" data-link="#chain-lithium">
+                  <ellipse class="blanket-shape" cx="240" cy="213" rx="126" ry="115"></ellipse>
+                  <line class="layer-leader" x1="365" y1="235" x2="462" y2="235"></line>
+                  <text class="layer-label" x="472" y="232">Breeding blanket</text>
+                  <text class="layer-material" x="472" y="248">Lithium-6, beryllium or lead</text>
+                </g>
+                <g class="layer first-wall" data-layer="first-wall" tabindex="0" role="button" aria-label="First wall. Materials may include tungsten or beryllium." aria-pressed="false" data-material="tungsten" data-link="#chain-tungsten">
+                  <ellipse class="first-wall-shape" cx="240" cy="213" rx="104" ry="94"></ellipse>
+                  <line class="layer-leader" x1="344" y1="280" x2="462" y2="280"></line>
+                  <text class="layer-label" x="472" y="277">First wall</text>
+                  <text class="layer-material" x="472" y="293">Tungsten or beryllium</text>
+                </g>
+                <g class="layer divertor" data-layer="divertor" tabindex="0" role="button" aria-label="Divertor. Material: tungsten." aria-pressed="false" data-material="tungsten" data-link="#chain-tungsten">
+                  <path class="divertor-shape" d="M205 281 L275 281 L258 316 L222 316 Z"></path>
+                  <line class="layer-leader" x1="258" y1="316" x2="462" y2="325"></line>
+                  <text class="layer-label" x="472" y="322">Divertor</text>
+                  <text class="layer-material" x="472" y="338">Tungsten</text>
+                </g>
+                <g class="layer plasma" data-layer="plasma" tabindex="0" role="button" aria-label="Plasma. Fuel: deuterium and tritium." aria-pressed="false" data-material="deuterium-tritium" data-link="#chain-lithium">
+                  <ellipse class="plasma-shape" cx="240" cy="213" rx="78" ry="69"></ellipse>
+                  <text class="plasma-label" x="240" y="218" text-anchor="middle">Plasma</text>
+                  <line class="layer-leader" x1="314" y1="257" x2="462" y2="370"></line>
+                  <text class="layer-label" x="472" y="367">Plasma</text>
+                  <text class="layer-material" x="472" y="383">Deuterium and tritium</text>
+                </g>
+              </svg>
+              <ul class="cutaway-layer-list" aria-label="Tokamak layers">
+                <li><button class="cutaway-list-layer" data-layer="plasma" type="button" data-material="deuterium-tritium" data-link="#chain-lithium">Plasma <span>Deuterium and tritium</span></button></li>
+                <li><button class="cutaway-list-layer" data-layer="first-wall" type="button" data-material="tungsten" data-link="#chain-tungsten">First wall <span>Tungsten or beryllium</span></button></li>
+                <li><button class="cutaway-list-layer" data-layer="divertor" type="button" data-material="tungsten" data-link="#chain-tungsten">Divertor <span>Tungsten</span></button></li>
+                <li><button class="cutaway-list-layer" data-layer="blanket" type="button" data-material="lithium" data-link="#chain-lithium">Breeding blanket <span>Lithium-6, beryllium or lead</span></button></li>
+                <li><button class="cutaway-list-layer" data-layer="shield" type="button" data-material="tungsten" data-link="#chain-tungsten">Shield <span>Tungsten carbide, steel</span></button></li>
+                <li><button class="cutaway-list-layer" data-layer="vessel" type="button" data-material="steel" data-link="#chain-beryllium">Vacuum vessel <span>Steel</span></button></li>
+                <li><button class="cutaway-list-layer" data-layer="magnets" type="button" data-material="rare-earths" data-link="#chain-ree">Magnets <span>REBCO or niobium-tin</span></button></li>
+                <li><button class="cutaway-list-layer" data-layer="cryostat" type="button" data-material="steel" data-link="#chain-ree">Cryostat <span>Steel, helium</span></button></li>
+              </ul>
+              <p class="cutaway-caption">Simplified tokamak. Not to scale. Other designs use materials differently.</p>
             </div>
             <div class="cutaway-card" id="cutaway-detail">
               <h3>Layer detail</h3>
@@ -816,6 +875,6 @@
 
     <script src="js/data.js?v=5"></script>
     <script src="js/timeline.js?v=3"></script>
-    <script src="js/app.js?v=8"></script>
+    <script src="js/app.js?v=10"></script>
   </body>
 </html>

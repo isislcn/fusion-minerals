@@ -804,20 +804,90 @@ function setupPrintAndCopy() {
 }
 
 function setupLayerCards() {
-  document.querySelectorAll('.layer').forEach((layer) => {
-    layer.addEventListener('click', () => {
-      const materialKey = layer.dataset.material || 'tungsten';
-      const relevantLink = layer.dataset.link || '#chain';
-      const copy = `
-        <h3>${layer.textContent.trim()}</h3>
-        <p><strong>Role:</strong> ${layer.textContent.trim() === 'Plasma' ? 'Fuel burns here' : layer.textContent.trim() === 'First wall' ? 'Faces the plasma' : layer.textContent.trim() === 'Divertor' ? 'Removes heat and exhaust' : layer.textContent.trim() === 'Breeding blanket' ? 'Makes new tritium, captures heat' : layer.textContent.trim() === 'Shield' ? 'Protects the magnets' : layer.textContent.trim() === 'Vacuum vessel' ? 'Sealed chamber' : layer.textContent.trim() === 'Magnets' ? 'Hold the plasma' : 'Keeps the magnets cold' }</p>
-        <p><strong>Materials:</strong> ${materialKey === 'tungsten' ? 'Tungsten' : materialKey === 'lithium' ? 'Lithium (lithium-6)' : materialKey === 'rare-earths' ? 'Rare earths' : 'Steel / beryllium'}</p>
-        <p><strong>Key supply risk:</strong> ${materialKey === 'tungsten' ? 'Concentrated refining and traceability weakness' : materialKey === 'lithium' ? 'Lithium-6 supply is effectively zero' : materialKey === 'rare-earths' ? 'Refining concentration and mine-linked harm' : 'Small supply base and design dependence'}</p>
-        <a href="${relevantLink}">Trace this mineral →</a>
-      `;
-      document.getElementById('cutaway-detail').innerHTML = copy;
-      document.querySelectorAll('.layer').forEach((item) => item.classList.toggle('active', item === layer));
+  const visual = document.querySelector('.cutaway-visual');
+  const svg = document.getElementById('tokamak-cutaway');
+  const layerList = document.querySelector('.cutaway-layer-list');
+  if (!visual || !svg || !layerList) return;
+
+  const materials = {
+    'deuterium-tritium': 'Deuterium and tritium',
+    tungsten: 'Tungsten',
+    lithium: 'Lithium-6',
+    'rare-earths': 'REBCO or niobium-tin',
+    steel: 'Steel'
+  };
+  const details = {
+    plasma: ['Fuel burns here', 'Fusion fuel supply and tritium breeding depend on reactor design.'],
+    'first-wall': ['Faces the plasma', 'Material choice and sourcing vary by design.'],
+    divertor: ['Removes heat and exhaust', 'Tungsten refining concentration and traceability are key supply concerns.'],
+    blanket: ['Makes new tritium and captures heat', 'Lithium-6 availability and blanket design remain significant supply uncertainties.'],
+    shield: ['Protects the magnets', 'Tungsten carbide and steel requirements depend on reactor design.'],
+    vessel: ['Sealed chamber', 'Industrial steel supply is not the main risk theme of this project.'],
+    magnets: ['Confine the plasma', 'Material demand and upstream exposure depend on magnet architecture.'],
+    cryostat: ['Keeps magnets cold', 'Industrial steel supply and helium logistics vary by plant design.']
+  };
+
+  function getLayer(target) {
+    return target instanceof Element ? target.closest('.layer[data-layer], .cutaway-list-layer[data-layer]') : null;
+  }
+
+  function setHighlightedLayer(layer) {
+    const layerId = layer?.dataset.layer;
+    svg.classList.toggle('has-active-layer', Boolean(layerId));
+    layerList.classList.toggle('has-active-layer', Boolean(layerId));
+    [...svg.querySelectorAll('.layer'), ...layerList.querySelectorAll('.cutaway-list-layer')].forEach((item) => {
+      item.classList.toggle('is-highlighted', item.dataset.layer === layerId);
     });
+  }
+
+  function selectLayer(layer) {
+    const layerId = layer.dataset.layer;
+    const materialKey = layer.dataset.material || 'tungsten';
+    const relevantLink = layer.dataset.link || '#chain';
+    const label = layer.querySelector('.layer-label')?.textContent.trim()
+      || layer.childNodes[0]?.textContent.trim()
+      || layerId;
+    const [role, risk] = details[layerId] || ['Reactor component', 'Supply conditions vary by design.'];
+    const material = materials[materialKey] || materialKey;
+    document.getElementById('cutaway-detail').innerHTML = `
+      <h3>${label}</h3>
+      <p><strong>Role:</strong> ${role}</p>
+      <p><strong>Materials:</strong> ${material}${layerId === 'cryostat' ? ', helium' : ''}</p>
+      <p><strong>Key supply risk:</strong> ${risk}</p>
+      <a href="${relevantLink}">Trace this mineral →</a>
+    `;
+    [...svg.querySelectorAll('.layer'), ...layerList.querySelectorAll('.cutaway-list-layer')].forEach((item) => {
+      const active = item.dataset.layer === layerId;
+      item.classList.toggle('active', active);
+      item.setAttribute('aria-pressed', String(active));
+    });
+  }
+
+  visual.addEventListener('pointerover', (event) => {
+    const layer = getLayer(event.target);
+    if (layer) setHighlightedLayer(layer);
+  });
+  visual.addEventListener('pointerout', (event) => {
+    if (!visual.contains(event.relatedTarget)) setHighlightedLayer(null);
+    else setHighlightedLayer(getLayer(event.relatedTarget));
+  });
+  visual.addEventListener('focusin', (event) => {
+    const layer = getLayer(event.target);
+    if (layer) setHighlightedLayer(layer);
+  });
+  visual.addEventListener('focusout', (event) => {
+    if (!visual.contains(event.relatedTarget)) setHighlightedLayer(null);
+    else setHighlightedLayer(getLayer(event.relatedTarget));
+  });
+  visual.addEventListener('click', (event) => {
+    const layer = getLayer(event.target);
+    if (layer) selectLayer(layer);
+  });
+  svg.addEventListener('keydown', (event) => {
+    const layer = getLayer(event.target);
+    if (!layer || !['Enter', ' '].includes(event.key)) return;
+    event.preventDefault();
+    selectLayer(layer);
   });
 }
 

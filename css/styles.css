@@ -290,32 +290,50 @@ p, li { color: var(--text); }
 .atom-split::after { border-style: dashed; }
 
 .cutaway-wrap { display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 20px; align-items: start; }
-.cutaway {
+.cutaway-visual {
   background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.06));
   border: 1px solid rgba(255,255,255,0.08);
   border-radius: 18px;
-  padding: 18px 20px;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
+  padding: 10px;
 }
-.layer {
-  border-radius: 10px;
+.cutaway-svg { display: block; width: 100%; height: auto; overflow: visible; }
+.cutaway-svg .layer { cursor: pointer; transition: opacity 0.2s ease; outline: none; }
+.cutaway-svg.has-active-layer .layer:not(.is-highlighted) { opacity: 0.3; }
+.cutaway-svg .layer-shape { fill: none; }
+.cutaway-svg .cryostat-shape { fill: none; stroke: var(--soft); stroke-width: 5; }
+.cutaway-svg .magnet-shape { fill: none; stroke: var(--ree); stroke-width: 18; }
+.cutaway-svg .vessel-shape { fill: none; stroke: var(--soft); stroke-width: 8; }
+.cutaway-svg .shield-shape { fill: none; stroke: var(--tungsten); stroke-width: 10; opacity: 0.7; }
+.cutaway-svg .blanket-shape { fill: none; stroke: var(--lithium); stroke-width: 20; }
+.cutaway-svg .first-wall-shape { fill: none; stroke: var(--tungsten); stroke-width: 7; }
+.cutaway-svg .divertor-shape { fill: var(--tungsten); stroke: var(--tungsten); stroke-width: 2; }
+.cutaway-svg .plasma-shape { fill: var(--gold); stroke: var(--gold); stroke-width: 2; }
+.cutaway-svg .layer-leader { fill: none; stroke: var(--muted); stroke-width: 1.5; stroke-dasharray: 5 5; }
+.cutaway-svg .layer-label { fill: var(--fg); font: 600 17px system-ui, sans-serif; pointer-events: auto; }
+.cutaway-svg .layer-material { fill: var(--muted); font: 14px system-ui, sans-serif; pointer-events: auto; }
+.cutaway-svg .doughnut-center-label { fill: var(--muted); font: 12px system-ui, sans-serif; pointer-events: none; }
+.cutaway-svg .plasma-label { fill: var(--bg); font: 600 13px system-ui, sans-serif; pointer-events: none; }
+.cutaway-svg .doughnut-center-line { stroke: var(--muted); stroke-width: 1.5; stroke-dasharray: 5 5; }
+.cutaway-svg .layer:focus-visible .layer-label, .cutaway-svg .layer.active .layer-label { fill: var(--gold); }
+.cutaway-layer-list { display: none; }
+.cutaway-caption { margin: 4px 8px 8px; color: var(--muted); font-size: 0.82rem; }
+.cutaway-layer-list.has-active-layer .cutaway-list-layer:not(.is-highlighted) { opacity: 0.3; }
+.cutaway-list-layer {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  gap: 12px;
   padding: 10px 12px;
   border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 8px;
   background: var(--surface-2);
+  color: var(--fg);
+  text-align: left;
   cursor: pointer;
-  transition: opacity 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+  transition: opacity 0.2s ease;
 }
-.layer:hover, .layer:focus, .layer.active { border-color: var(--gold); opacity: 1; transform: translateX(3px); }
-.plasma { opacity: 0.9; }
-.first-wall { opacity: 0.8; }
-.divertor { opacity: 0.8; }
-.blanket { opacity: 0.82; }
-.shield { opacity: 0.79; }
-.vessel { opacity: 0.74; }
-.magnet { opacity: 0.68; }
-.cryostat { opacity: 0.66; }
+.cutaway-list-layer span { color: var(--muted); }
+.cutaway-list-layer:hover, .cutaway-list-layer:focus-visible, .cutaway-list-layer.active { border-color: var(--gold); }
 
 .cutaway-card, .detail-panel {
   background: var(--surface);
@@ -564,6 +582,15 @@ select { background: var(--surface); color: var(--text); border: 1px solid rgba(
   .timeline-scroll-hint { display: block; }
   .timeline-list { grid-template-columns: 1fr; }
   #governance-list-toggle { display: inline-flex; }
+}
+
+@media (max-width: 720px) {
+  .cutaway-svg .layer-label, .cutaway-svg .layer-material, .cutaway-svg .layer-leader { display: none; }
+  .cutaway-layer-list { display: grid; gap: 6px; margin: 8px; padding: 0; list-style: none; }
+  .cutaway-list-layer { flex-wrap: wrap; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .cutaway-svg .layer, .cutaway-list-layer { transition: none; }
 }
 
 @media (max-width: 720px) {
