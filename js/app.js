@@ -3,7 +3,6 @@ const mainNav = document.getElementById('main-nav');
 const navButtons = document.querySelectorAll('.nav-button');
 const materialButtons = document.querySelectorAll('.material-button');
 const lensButtons = document.querySelectorAll('.lens');
-const tabButtons = document.querySelectorAll('.tab-button');
 const riskMaterialFilter = document.getElementById('risk-material-filter');
 const riskStageFilter = document.getElementById('risk-stage-filter');
 const riskTypeFilter = document.getElementById('risk-type-filter');
@@ -12,11 +11,10 @@ const riskBody = document.getElementById('risk-body');
 const riskCount = document.getElementById('risk-count');
 const chainFlow = document.getElementById('chain-flow');
 const stageDetail = document.getElementById('stage-detail');
-const wherePanel = document.getElementById('where-panel');
-const affectedPanel = document.getElementById('affected-panel');
-const evidencePanel = document.getElementById('evidence-panel');
 const ladderSteps = document.querySelectorAll('.ladder-step');
 const ladderDetail = document.getElementById('ladder-detail');
+let activeStageTab = 'where';
+const copyTimers = new WeakMap();
 const harmCaseByStage = {
   'tungsten-mine': 'rubaya',
   'ree-mine': 'kachin',
@@ -31,6 +29,69 @@ function cite(ids) {
     .filter(Boolean);
   if (!references.length) return '';
   return `<span class="citation">(${references.map((source) => `${source.verify ? '<!-- VERIFY -->' : ''}<a href="#src-${source.id}">${source.cite}</a>`).join('; ')})</span>`;
+}
+
+function announceCopy(message) {
+  let liveRegion = document.getElementById('copy-announcement');
+  if (!liveRegion) {
+    liveRegion = document.createElement('span');
+    liveRegion.id = 'copy-announcement';
+    liveRegion.className = 'visually-hidden';
+    liveRegion.setAttribute('aria-live', 'polite');
+    document.body.appendChild(liveRegion);
+  }
+  liveRegion.textContent = '';
+  window.setTimeout(() => { liveRegion.textContent = message; }, 0);
+}
+
+function getCopyFeedback(button) {
+  const stageFeedback = button.closest('#stage-detail')?.querySelector('.share-feedback');
+  if (stageFeedback) return stageFeedback;
+  let feedback = button.nextElementSibling;
+  if (!feedback?.matches('.copy-feedback')) {
+    feedback = document.createElement('div');
+    feedback.className = 'copy-feedback';
+    button.insertAdjacentElement('afterend', feedback);
+  }
+  return feedback;
+}
+
+function showCopied(button) {
+  if (!button.dataset.originalLabel) button.dataset.originalLabel = button.textContent.trim();
+  button.textContent = 'Link copied ✓';
+  getCopyFeedback(button).replaceChildren();
+  announceCopy('Link copied');
+  window.clearTimeout(copyTimers.get(button));
+  copyTimers.set(button, window.setTimeout(() => {
+    button.textContent = button.dataset.originalLabel;
+  }, 2000));
+}
+
+function showUrlField(button, value) {
+  if (!button.dataset.originalLabel) button.dataset.originalLabel = button.textContent.trim();
+  button.textContent = button.dataset.originalLabel;
+  window.clearTimeout(copyTimers.get(button));
+  const feedback = getCopyFeedback(button);
+  const input = document.createElement('input');
+  input.type = 'text';
+  input.readOnly = true;
+  input.value = value;
+  input.setAttribute('aria-label', 'Copyable link or text');
+  const hint = document.createElement('span');
+  hint.textContent = 'Press Ctrl+C or ⌘C to copy.';
+  feedback.replaceChildren(input, hint);
+  input.focus();
+  input.select();
+  announceCopy('Clipboard access is unavailable. The text is selected for copying.');
+}
+
+async function copyStageLink(button, value) {
+  try {
+    await navigator.clipboard.writeText(value);
+    showCopied(button);
+  } catch {
+    showUrlField(button, value);
+  }
 }
 
 function renderCitations(root = document) {
@@ -257,10 +318,21 @@ function selectChainStage(stageId) {
   const stage = material.stages.find((item) => item.id === stageId);
   if (!stage) return;
 
-  renderStageDetail(material, stage);
+  renderStageDetail(material, stage, activeStageTab);
   chainFlow.querySelectorAll('.chain-node').forEach((item) => {
-    item.classList.toggle('active', item === node);
+    const active = item === node;
+    item.classList.toggle('active', active);
+    if (active) item.setAttribute('aria-current', 'true');
+    else item.removeAttribute('aria-current');
   });
+}
+
+function updateChainUrl(route) {
+  try {
+    window.history.replaceState(null, '', `#chain-${route}`);
+  } catch {
+    window.location.hash = `#chain-${route}`;
+  }
 }
 
 function initNav() {
@@ -353,6 +425,7 @@ function setupPageTabs() {
   function showPage(hash, { resetScroll = true } = {}) {
     const route = getChainRoute(hash);
     if (route) {
+      if (route.stageId) activeStageTab = 'where';
       materialButtons.forEach((button) => {
         button.classList.toggle('active', button.dataset.material === route.materialKey);
       });
@@ -529,62 +602,114 @@ function buildChain(materialKey='tungsten') {
   nodes.forEach((node) => {
     node.addEventListener('click', () => {
       const stage = material.stages.find((item) => item.id === node.dataset.stageId);
-      renderStageDetail(material, stage);
-      nodes.forEach((item) => item.classList.toggle('active', item === node));
+      if (!stage) return;
+      updateChainUrl(stage.id);
+      renderStageDetail(material, stage, activeStageTab);
+      nodes.forEach((item) => {
+        const active = item === node;
+        item.classList.toggle('active', active);
+        if (active) item.setAttribute('aria-current', 'true');
+        else item.removeAttribute('aria-current');
+      });
     });
   });
 
   const firstStage = material.stages[0];
-  renderStageDetail(material, firstStage);
-  if (nodes[0]) nodes[0].classList.add('active');
-  renderTabPanels(material, 'where');
+  renderStageDetail(material, firstStage, activeStageTab);
+  if (nodes[0]) {
+    nodes[0].classList.add('active');
+    nodes[0].setAttribute('aria-current', 'true');
+  }
 }
 
-function renderStageDetail(material, stage) {
+function renderStageDetail(material, stage, activeTab = activeStageTab) {
   if (!stage) return;
-  const targetHash = `#chain-${stage.id}`;
-  const stageSources = stage.sourceIds?.length ? cite(stage.sourceIds) : 'Project analysis';
   const harmCase = harmCaseByStage[stage.id];
+  const where = stage.where;
+  const affected = stage.affected;
+  const tabDefinitions = [
+    { id: 'where', label: 'Where' },
+    { id: 'affected', label: "Who's affected" },
+    { id: 'evidence', label: 'Evidence' }
+  ];
+  const evidenceSources = stage.sourceIds?.length ? cite(stage.sourceIds) : 'Project analysis';
   stageDetail.innerHTML = `
     <div class="detail-header">
-      <h3>${material.label}: ${stage.stage}</h3>
-      <button class="copy-detail" data-link="${targetHash}">Copy link to this stage</button>
+      <h3>${material.label} · ${stage.stage}</h3>
+      <button class="share-stage" type="button" aria-label="Copy link to ${material.label} ${stage.stage.toLowerCase()} stage"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M10 13a5 5 0 0 0 7.07 0l3-3A5 5 0 0 0 13 2.93l-1.72 1.71m2.72 6.36a5 5 0 0 0-7.07 0l-3 3A5 5 0 0 0 11 21.07l1.71-1.71"/></svg> Share</button>
     </div>
-    <p><strong>Location:</strong> ${stage.location}</p>
-    <p><strong>Risk:</strong> ${stage.risk}</p>
-    <p><strong>Confidence:</strong> ${stage.confidence}</p>
-    <p><strong>Evidence:</strong> ${stage.evidence} ${stageSources}</p>
-    ${harmCase ? `<p><a class="harm-link" href="#human-cost-${harmCase}">Harm documented →</a></p>` : ''}
-    <p><a href="#risks">View the evidence register</a></p>
+    <div class="share-feedback" aria-live="polite"></div>
+    <p class="stage-summary">${stage.location} · ${stage.risk} · <span class="confidence-label ${stage.confidence}">● ${stage.confidence}</span></p>
+    <div class="stage-tabs" role="tablist" aria-label="Stage detail">
+      ${tabDefinitions.map((tab) => `
+        <button type="button" role="tab" id="tab-${tab.id}" aria-controls="panel-${tab.id}" aria-selected="${activeTab === tab.id}" tabindex="${activeTab === tab.id ? '0' : '-1'}" data-stage-tab="${tab.id}">${tab.label}</button>
+      `).join('')}
+    </div>
+    <div role="tabpanel" id="panel-where" aria-labelledby="tab-where" tabindex="0"${activeTab === 'where' ? '' : ' hidden'}>
+      ${where.text ? `<p>${where.text} ${cite(where.sourceIds)}</p>` : ''}
+      ${where.share ? `
+        <div class="concentration-bar" role="img" aria-label="${where.share.country} accounts for ${where.share.percent}%">
+          <div class="concentration-bar-track"><span style="width:${where.share.percent}%"></span></div>
+          <span>${where.share.country} ${where.share.percent}%</span>
+        </div>
+      ` : `<div class="data-gap"><strong>Data gap</strong><span>No reliable country share for this stage yet.</span></div>`}
+    </div>
+    <div role="tabpanel" id="panel-affected" aria-labelledby="tab-affected" tabindex="0"${activeTab === 'affected' ? '' : ' hidden'}>
+      <p>${affected.summary} ${cite(affected.sourceIds)}</p>
+      ${harmCase ? `<a class="harm-link" href="#human-cost-${harmCase}">Read the case file →</a>` : ''}
+    </div>
+    <div role="tabpanel" id="panel-evidence" aria-labelledby="tab-evidence" tabindex="0"${activeTab === 'evidence' ? '' : ' hidden'}>
+      <ul class="stage-evidence-list">
+        <li>${stage.evidence} <span class="confidence-label ${stage.confidence}">● ${stage.confidence}</span> ${evidenceSources}</li>
+      </ul>
+      <a href="#risks">All risks in the register →</a>
+    </div>
   `;
-
-  const copyDetail = stageDetail.querySelector('.copy-detail');
-  copyDetail.addEventListener('click', () => {
-    const stageLink = `${window.location.origin}${window.location.pathname}#chain-${stage.id}`;
-    navigator.clipboard.writeText(stageLink);
-  });
 }
 
-function renderTabPanels(material, activeTab) {
-  const where = material.tab.where;
-  const affected = material.tab.affected;
-  const sourceIds = [...new Set(material.stages.flatMap((stage) => stage.sourceIds || []))];
-  const evidence = `<ul>${material.stages.map((stage) => `
-    <li><strong>${stage.stage} · ${stage.confidence}:</strong> ${stage.evidence} ${stage.sourceIds?.length ? cite(stage.sourceIds) : 'Project analysis'}</li>
-  `).join('')}</ul>`;
-  wherePanel.innerHTML = `<p>${where} ${sourceIds.length ? cite(sourceIds) : ''}</p>`;
-  affectedPanel.innerHTML = `<p>${affected}</p>`;
-  evidencePanel.innerHTML = `<p>${evidence}</p>`;
+function setupStageDetail() {
+  stageDetail.addEventListener('click', (event) => {
+    const tab = event.target.closest('[role="tab"][data-stage-tab]');
+    if (tab) {
+      activeStageTab = tab.dataset.stageTab;
+      const materialKey = document.querySelector('.material-button.active')?.dataset.material || 'tungsten';
+      const material = materialData[materialKey];
+      const stageId = chainFlow.querySelector('.chain-node[aria-current="true"]')?.dataset.stageId;
+      const stage = material.stages.find((item) => item.id === stageId);
+      renderStageDetail(material, stage, activeStageTab);
+      stageDetail.querySelector(`[role="tab"][data-stage-tab="${activeStageTab}"]`)?.focus();
+      return;
+    }
 
-  tabButtons.forEach((button) => {
-    const isActive = button.dataset.tab === activeTab;
-    button.classList.toggle('active', isActive);
+    const shareButton = event.target.closest('.share-stage');
+    if (!shareButton) return;
+    const stageId = chainFlow.querySelector('.chain-node[aria-current="true"]')?.dataset.stageId;
+    if (!stageId) return;
+    const url = new URL(window.location.href);
+    url.hash = `chain-${stageId}`;
+    copyStageLink(shareButton, url.href);
   });
 
-  const panels = [wherePanel, affectedPanel, evidencePanel];
-  panels.forEach((panel) => panel.classList.remove('active'));
-  const activePanel = { where: wherePanel, affected: affectedPanel, evidence: evidencePanel }[activeTab];
-  if (activePanel) activePanel.classList.add('active');
+  stageDetail.addEventListener('keydown', (event) => {
+    const currentTab = event.target.closest('[role="tab"][data-stage-tab]');
+    if (!currentTab) return;
+    const tabs = [...stageDetail.querySelectorAll('[role="tab"][data-stage-tab]')];
+    const currentIndex = tabs.indexOf(currentTab);
+    let nextIndex;
+    if (event.key === 'Home') nextIndex = 0;
+    else if (event.key === 'End') nextIndex = tabs.length - 1;
+    else if (event.key === 'ArrowRight') nextIndex = (currentIndex + 1) % tabs.length;
+    else if (event.key === 'ArrowLeft') nextIndex = (currentIndex - 1 + tabs.length) % tabs.length;
+    else return;
+    event.preventDefault();
+    activeStageTab = tabs[nextIndex].dataset.stageTab;
+    const materialKey = document.querySelector('.material-button.active')?.dataset.material || 'tungsten';
+    const material = materialData[materialKey];
+    const stageId = chainFlow.querySelector('.chain-node[aria-current="true"]')?.dataset.stageId;
+    const stage = material.stages.find((item) => item.id === stageId);
+    renderStageDetail(material, stage, activeStageTab);
+    stageDetail.querySelector(`[role="tab"][data-stage-tab="${activeStageTab}"]`)?.focus();
+  });
 }
 
 function applyAudienceLens(lens='all') {
@@ -605,6 +730,7 @@ function setupMaterialButtons() {
       materialButtons.forEach((btn) => btn.classList.toggle('active', btn === button));
       const materialKey = button.dataset.material;
       buildChain(materialKey);
+      updateChainUrl(materialKey);
       applyAudienceLens(document.querySelector('.lens.active')?.dataset.lens || 'all');
     });
   });
@@ -615,15 +741,6 @@ function setupLensButtons() {
     button.addEventListener('click', () => {
       lensButtons.forEach((btn) => btn.classList.toggle('active', btn === button));
       applyAudienceLens(button.dataset.lens || 'all');
-    });
-  });
-}
-
-function setupTabs() {
-  tabButtons.forEach((button) => {
-    button.addEventListener('click', () => {
-      const materialKey = document.querySelector('.material-button.active')?.dataset.material || 'tungsten';
-      renderTabPanels(materialData[materialKey], button.dataset.tab);
     });
   });
 }
@@ -670,8 +787,9 @@ function setupPrintAndCopy() {
 
   document.querySelectorAll('.copy-link').forEach((button) => {
     button.addEventListener('click', () => {
-      const url = window.location.href.split('#')[0] + '#' + button.closest('section')?.id;
-      navigator.clipboard.writeText(url);
+      const url = new URL(window.location.href);
+      url.hash = button.closest('section')?.id || '';
+      copyStageLink(button, url.href);
     });
   });
 
@@ -680,7 +798,7 @@ function setupPrintAndCopy() {
       const copyContent = button.previousElementSibling?.cloneNode(true);
       copyContent?.querySelectorAll('.citation').forEach((citation) => citation.remove());
       const text = copyContent?.textContent || '';
-      navigator.clipboard.writeText(text);
+      copyStageLink(button, text);
     });
   });
 }
@@ -725,7 +843,7 @@ function init() {
   if (initialRoute?.stageId) selectChainStage(initialRoute.stageId);
   setupMaterialButtons();
   setupLensButtons();
-  setupTabs();
+  setupStageDetail();
   setupRiskFilters();
   setupLadder();
   setupPrintAndCopy();

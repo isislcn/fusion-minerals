@@ -5,15 +5,10 @@ const materialData = {
     stages: [
       { id: 'tungsten-mine', stage: 'Mine', kind: 'mine', title: 'Mine', location: 'Eastern DR Congo', risk: 'Conflict finance in 3T mining; tungsten volumes are not quantified', confidence: 'reported', sourceIds: ['unsc-2025a'], evidence: 'UN experts report that M23 controls Rubaya, earns at least $800,000 a month from taxing coltan, and smuggles 3T minerals into Rwanda for blending with legal exports. Most evidence concerns coltan; tungsten volumes are not quantified.', relevant: ['all','eu','un'] },
       { id: 'tungsten-trade', stage: 'Trade', kind: 'trade', title: 'Trade', location: 'DR Congo and Rwanda', risk: 'Traceability and origin mixing', confidence: 'reported', sourceIds: ['unsc-2025a'], evidence: 'UN experts report that 3T minerals are smuggled into Rwanda and blended with legal exports.', relevant: ['all','eu','un'] },
-      { id: 'tungsten-refine', stage: 'Refining', kind: 'refine', title: 'Refining', location: 'China', risk: 'Concentration and governance gaps', confidence: 'documented', sourceIds: ['usgs-2026'], evidence: 'China mined about 79% of the world’s tungsten in 2025 and produces about 80% of ammonium paratungstate (APT), a refined intermediate.', relevant: ['all','investors','un'] },
+      { id: 'tungsten-refine', stage: 'Refining', kind: 'refine', title: 'Refining', location: 'China', risk: 'Concentration and governance gaps', confidence: 'documented', sourceIds: ['usgs-2026'], evidence: 'China produces about 80% of ammonium paratungstate (APT), a refined tungsten intermediate.', relevant: ['all','investors','un'] },
       { id: 'tungsten-components', stage: 'Components', kind: 'component', title: 'Components', location: 'Global industrial supply chains', risk: 'Due-diligence coverage varies by product and jurisdiction', confidence: 'documented', sourceIds: ['cmr-2017'], evidence: 'The EU Conflict Minerals Regulation covers specified imports of tungsten ores and concentrates, and metals; it does not cover tungsten inside all finished components.', relevant: ['all','investors','eu'] },
       { id: 'tungsten-plant', stage: 'Plant', kind: 'plant', title: 'Plant', location: 'Fusion plant procurement', risk: 'Procurement and design dependency', confidence: 'inferred', sourceIds: [], evidence: 'Early procurement decisions are an opportunity to specify sourcing expectations.', relevant: ['all','investors'] }
-    ],
-    tab: {
-      where: 'China mined about 79% of the world’s tungsten in 2025 and produces about 80% of APT, the refined intermediate. Eastern Congo’s 3T trade runs through armed-group-controlled routes into Rwanda.',
-      affected: 'See the documented cases on the <a href="#human-cost-rubaya">Human cost page →</a>',
-      evidence: 'Stage-specific evidence is listed below.'
-    }
+    ]
   },
   lithium: {
     label: 'Lithium',
@@ -24,12 +19,7 @@ const materialData = {
       { id: 'lithium-refine', stage: 'Refining', kind: 'refine', title: 'Refining', location: 'Global', risk: 'No established commercial lithium-6 supply at fusion-relevant scale', confidence: 'reported', sourceIds: ['pearson-2022'], evidence: 'Commercial lithium-6 supply at fusion-relevant scale is not established in the cited supply presentation.', relevant: ['all','investors','un'] },
       { id: 'lithium-components', stage: 'Components', kind: 'component', title: 'Components', location: 'Strategic manufacturing', risk: 'Traceability and due-diligence gaps', confidence: 'inferred', evidence: 'The sector is still early enough to build due diligence before major component procurement.', relevant: ['all','investors','eu'] },
       { id: 'lithium-plant', stage: 'Plant', kind: 'plant', title: 'Plant', location: 'Fusion plant footprint', risk: 'Procurement and design dependency', confidence: 'inferred', evidence: 'Pilot-plant demand is a key unknown and will depend on reactor design and blanket architecture.', relevant: ['all','investors'] }
-    ],
-    tab: {
-      where: 'Lithium is produced for several established markets. Lithium-6 requires isotopic separation, so ordinary lithium production figures do not describe the supply available for fusion blanket concepts.',
-      affected: 'See the documented cases on the <a href="#human-cost-andes">Human cost page →</a>',
-      evidence: 'The assessment compares published strategic and demand information. Estimates depend on reactor and blanket design and should not be treated as a settled forecast.'
-    }
+    ]
   },
   beryllium: {
     label: 'Beryllium',
@@ -40,12 +30,7 @@ const materialData = {
       { id: 'beryllium-refine', stage: 'Refining', kind: 'refine', title: 'Refining', location: 'Limited processing nodes', risk: 'Concentration', confidence: 'inferred', evidence: 'Processing is limited and the design dependence of beryllium use is still unclear.', relevant: ['all','investors','un'] },
       { id: 'beryllium-components', stage: 'Components', kind: 'component', title: 'Components', location: 'Beryllium processing and machining plants', risk: 'Occupational exposure and chronic disease', confidence: 'documented', sourceIds: ['atsdr-2008'], evidence: 'Inhaled beryllium particles can sensitize workers and lead to chronic beryllium disease.', relevant: ['all','investors','eu'] },
       { id: 'beryllium-plant', stage: 'Plant', kind: 'plant', title: 'Plant', location: 'Fusion project procurement', risk: 'Design-dependent supply conditions', confidence: 'inferred', evidence: 'The risk will vary by blanket design and reactor architecture.', relevant: ['all','investors'] }
-    ],
-    tab: {
-      where: 'Beryllium has industrial uses, while public information on a complete fusion-specific supply chain and plant-level demand profile remains limited.',
-      affected: 'See the documented cases on the <a href="#human-cost-beryllium">Human cost page →</a>',
-      evidence: 'The evidence base is limited. The entries are labeled inferred where they describe research gaps or potential procurement implications rather than documented fusion sourcing.'
-    }
+    ]
   },
   ree: {
     label: 'Rare earths',
@@ -56,14 +41,60 @@ const materialData = {
       { id: 'ree-refine', stage: 'Refining', kind: 'refine', title: 'Refining', location: 'China', risk: 'Concentration and governance gaps', confidence: 'documented', evidence: 'China accounts for roughly 80% of rare earth refining; the issue is concentrated in a small number of processing nodes.', relevant: ['all','investors','un'] },
       { id: 'ree-components', stage: 'Components', kind: 'component', title: 'Components', location: 'Magnet and component manufacturing', risk: 'Traceability and source conditions', confidence: 'inferred', evidence: 'The project shows the need to map materials before major superconducting and magnet procurement.', relevant: ['all','investors','eu'] },
       { id: 'ree-plant', stage: 'Plant', kind: 'plant', title: 'Plant', location: 'Fusion plant procurement', risk: 'Procurement lock-in', confidence: 'inferred', evidence: 'The cost of deeper sourcing due diligence rises once contracts are signed.', relevant: ['all','investors'] }
-    ],
-    tab: {
-      where: 'Mining sites in Kachin Special Region 1 rose by more than 40% from 2021 to 2023, and China’s imports of heavy rare earth oxides from Myanmar more than doubled, from 19,500 to 41,700 tonnes. Streams near the mines test highly acidic with elevated arsenic.',
-      affected: 'See the documented cases on the <a href="#human-cost-kachin">Human cost page →</a>',
-      evidence: 'Stage-specific evidence is listed below.'
-    }
+    ]
   }
 };
+
+const stageDetailData = {
+  'tungsten-mine': {
+    where: { text: 'China mined about 79% of world tungsten in 2025. Eastern DR Congo is a smaller, conflict-affected source; tungsten volumes from Rubaya are not quantified.', sourceIds: ['usgs-2026', 'unsc-2025a'], share: { country: 'China', percent: 79 } },
+    affected: { summary: 'UN experts report that M23 controls Rubaya and collects at least $800,000 a month in coltan taxes. Most evidence concerns coltan; tungsten volumes are not quantified.', sourceIds: ['unsc-2025a'] }
+  },
+  'tungsten-trade': {
+    where: { text: 'Ore from rebel-held areas is reported to be smuggled into Rwanda and blended with legal exports.', sourceIds: ['unsc-2025a'] }
+  },
+  'tungsten-refine': {
+    where: { text: 'China produces about 80% of ammonium paratungstate (APT), a refined tungsten intermediate.', sourceIds: ['usgs-2026'], share: { country: 'China', percent: 80 } }
+  },
+  'tungsten-components': {
+    where: { text: 'The EU Conflict Minerals Regulation covers specified imports of tungsten ores, concentrates and metals, but not tungsten inside all finished components.', sourceIds: ['cmr-2017'] }
+  },
+  'tungsten-plant': {
+    where: { text: 'Tungsten can line the divertor and first wall. Per-plant tonnage is not public.', sourceIds: [] }
+  },
+  'lithium-mine': {
+    where: { text: 'Lithium is produced across established markets; the high Andean salt flats of Argentina, Bolivia and Chile are among the regions covered by the cited human-rights research.', sourceIds: ['oc-2025'] },
+    affected: { summary: 'Brine extraction is associated with groundwater loss and pressure on Indigenous rights in the high Andean salt flats. The cited report covers communities in Argentina, Bolivia and Chile.', sourceIds: ['oc-2025'] }
+  },
+  'lithium-refine': {
+    where: { text: 'Lithium-6 requires isotopic separation, so ordinary lithium production figures do not describe supply available for fusion blanket concepts. Commercial lithium-6 supply at fusion-relevant scale is not established in the cited presentation.', sourceIds: ['pearson-2022'] }
+  },
+  'beryllium-components': {
+    where: { text: 'Beryllium has established industrial uses, including processing and machining; public information on a complete fusion-specific supply chain and plant-level demand profile remains limited.', sourceIds: ['atsdr-2008'] },
+    affected: { summary: 'Workers who inhale beryllium particles can become sensitized and develop chronic beryllium disease. Families and people living near plants have also been reported ill.', sourceIds: ['atsdr-2008'] }
+  },
+  'ree-mine': {
+    where: { text: 'Mining sites in Kachin Special Region 1 rose by more than 40% from 2021 to 2023, to over 300. China’s imports of heavy rare earth oxides from Myanmar more than doubled, from 19,500 to 41,700 tonnes; nearby streams tested highly acidic with elevated arsenic.', sourceIds: ['gw-2024'] },
+    affected: { summary: 'Workers and nearby communities report health problems amid chemical leaching and land seizure. Two miners died after leaving work, one aged 15.', sourceIds: ['gw-2024', 'gw-2022'] }
+  },
+  'ree-refine': {
+    where: { text: 'China accounts for roughly 80% of rare-earth refining, concentrating processing in a small number of nodes.', sourceIds: ['scsp-2025'], share: { country: 'China', percent: 80 } }
+  }
+};
+
+for (const material of Object.values(materialData)) {
+  for (const stage of material.stages) {
+    const detail = stageDetailData[stage.id] || {};
+    stage.where = detail.where || {
+      text: '',
+      sourceIds: []
+    };
+    stage.affected = detail.affected || {
+      summary: 'No documented harm at this stage yet. That is a research gap, not evidence of no harm.',
+      sourceIds: []
+    };
+  }
+}
 
 const SOURCES = [
   { id: 'atsdr-2008', type: 'us-uk', cite: 'ATSDR, 2008', apa: 'Agency for Toxic Substances and Disease Registry. (2008). <i>Beryllium toxicity: Who is at risk of exposure to beryllium?</i> Centers for Disease Control and Prevention.', url: 'https://archive.cdc.gov/www_atsdr_cdc_gov/csem/beryllium/who_risk.html', verify: false },
