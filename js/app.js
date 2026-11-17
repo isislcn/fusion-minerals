@@ -17,7 +17,6 @@ const ladderSteps = document.querySelectorAll('.ladder-step');
 const ladderDetail = document.getElementById('ladder-detail');
 let activeStageTab = 'where';
 let riskSort = { key: 'id', direction: 'asc' };
-const copyTimers = new WeakMap();
 let citationInstance = 0;
 const harmCaseByStage = {
   'tungsten-mine': 'rubaya',
@@ -85,69 +84,6 @@ function cite(ids, { full = false } = {}) {
   return `<span class="citation${full ? ' citation-always-full' : ''}"><span class="citation-compact">${compact}</span><span class="citation-full">${citationText}</span></span>`;
 }
 
-function announceCopy(message) {
-  let liveRegion = document.getElementById('copy-announcement');
-  if (!liveRegion) {
-    liveRegion = document.createElement('span');
-    liveRegion.id = 'copy-announcement';
-    liveRegion.className = 'visually-hidden';
-    liveRegion.setAttribute('aria-live', 'polite');
-    document.body.appendChild(liveRegion);
-  }
-  liveRegion.textContent = '';
-  window.setTimeout(() => { liveRegion.textContent = message; }, 0);
-}
-
-function getCopyFeedback(button) {
-  const stageFeedback = button.closest('#stage-detail')?.querySelector('.share-feedback');
-  if (stageFeedback) return stageFeedback;
-  let feedback = button.nextElementSibling;
-  if (!feedback?.matches('.copy-feedback')) {
-    feedback = document.createElement('div');
-    feedback.className = 'copy-feedback';
-    button.insertAdjacentElement('afterend', feedback);
-  }
-  return feedback;
-}
-
-function showCopied(button) {
-  if (!button.dataset.originalLabel) button.dataset.originalLabel = button.textContent.trim();
-  button.textContent = 'Link copied ✓';
-  getCopyFeedback(button).replaceChildren();
-  announceCopy('Link copied');
-  window.clearTimeout(copyTimers.get(button));
-  copyTimers.set(button, window.setTimeout(() => {
-    button.textContent = button.dataset.originalLabel;
-  }, 2000));
-}
-
-function showUrlField(button, value) {
-  if (!button.dataset.originalLabel) button.dataset.originalLabel = button.textContent.trim();
-  button.textContent = button.dataset.originalLabel;
-  window.clearTimeout(copyTimers.get(button));
-  const feedback = getCopyFeedback(button);
-  const input = document.createElement('input');
-  input.type = 'text';
-  input.readOnly = true;
-  input.value = value;
-  input.setAttribute('aria-label', 'Copyable link or text');
-  const hint = document.createElement('span');
-  hint.textContent = 'Press Ctrl+C or ⌘C to copy.';
-  feedback.replaceChildren(input, hint);
-  input.focus();
-  input.select();
-  announceCopy('Clipboard access is unavailable. The text is selected for copying.');
-}
-
-async function copyStageLink(button, value) {
-  try {
-    await navigator.clipboard.writeText(value);
-    showCopied(button);
-  } catch {
-    showUrlField(button, value);
-  }
-}
-
 function renderCitations(root = document) {
   root.querySelectorAll('[data-cite]').forEach((element) => {
     element.innerHTML = cite(element.dataset.cite);
@@ -169,7 +105,6 @@ function renderSources() {
     <li id="src-${source.id}" data-source-type="${source.type}">
       <span>${source.apa}</span>
       ${source.url ? `<a class="source-url" href="${source.url}" target="_blank" rel="noopener">${source.url}</a>` : '<span class="pending">URL to verify</span>'}
-      <button class="copy-source" type="button" data-source-id="${source.id}">Copy APA reference</button>
       ${source.verify ? '<span class="verify-flag">Verify reference</span>' : ''}
     </li>
   `).join('');
@@ -189,20 +124,6 @@ function setupSources() {
     document.querySelectorAll('#source-list li').forEach((item) => {
       item.hidden = button.dataset.sourceType !== 'all' && item.dataset.sourceType !== button.dataset.sourceType;
     });
-  });
-  document.getElementById('source-list')?.addEventListener('click', async (event) => {
-    const button = event.target.closest('.copy-source');
-    if (!button) return;
-    const source = SOURCES.find((item) => item.id === button.dataset.sourceId);
-    if (!source) return;
-    const reference = `${source.apa.replace(/<[^>]+>/g, '')}${source.url ? ` ${source.url}` : ''}`;
-    try {
-      await navigator.clipboard.writeText(reference);
-      button.textContent = 'Copied';
-    } catch (error) {
-      button.textContent = 'Copy failed';
-      button.setAttribute('aria-label', `Could not copy reference: ${error.message}`);
-    }
   });
   document.getElementById('download-references')?.addEventListener('click', () => {
     const text = [...SOURCES].sort((a, b) => a.apa.localeCompare(b.apa))
@@ -1058,9 +979,7 @@ function renderStageDetail(material, stage, activeTab = activeStageTab) {
   stageDetail.innerHTML = `
     <div class="detail-header">
       <h3>${material.label} · ${stage.stage}</h3>
-      <button class="share-stage" type="button" aria-label="Copy link to ${material.label} ${stage.stage.toLowerCase()} stage"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M10 13a5 5 0 0 0 7.07 0l3-3A5 5 0 0 0 13 2.93l-1.72 1.71m2.72 6.36a5 5 0 0 0-7.07 0l-3 3A5 5 0 0 0 11 21.07l1.71-1.71"/></svg> Share</button>
     </div>
-    <div class="share-feedback" aria-live="polite"></div>
     <p class="stage-summary">${stage.location} · ${stage.risk} · <span class="confidence-label ${stage.confidence}">● ${stage.confidence}</span></p>
     <div class="stage-tabs" role="tablist" aria-label="Stage detail">
       ${tabDefinitions.map((tab) => `
@@ -1106,14 +1025,6 @@ function setupStageDetail() {
       stageDetail.querySelector(`[role="tab"][data-stage-tab="${activeStageTab}"]`)?.focus();
       return;
     }
-
-    const shareButton = event.target.closest('.share-stage');
-    if (!shareButton) return;
-    const stageId = chainFlow.querySelector('.chain-node[aria-current="true"]')?.dataset.stageId;
-    if (!stageId) return;
-    const url = new URL(window.location.href);
-    url.hash = `chain-${stageId}`;
-    copyStageLink(shareButton, url.href);
   });
 
   stageDetail.addEventListener('keydown', (event) => {
@@ -1415,27 +1326,8 @@ function setupLadder() {
   });
 }
 
-function setupPrintAndCopy() {
-  document.querySelectorAll('.print-btn').forEach((button) => {
-    button.addEventListener('click', () => window.print());
-  });
-
-  document.querySelectorAll('.copy-link').forEach((button) => {
-    button.addEventListener('click', () => {
-      const url = new URL(window.location.href);
-      url.hash = button.closest('section')?.id || '';
-      copyStageLink(button, url.href);
-    });
-  });
-
-  document.querySelectorAll('.copy-button').forEach((button) => {
-    button.addEventListener('click', () => {
-      const copyContent = button.previousElementSibling?.cloneNode(true);
-      copyContent?.querySelectorAll('.citation').forEach((citation) => citation.remove());
-      const text = copyContent?.textContent || '';
-      copyStageLink(button, text);
-    });
-  });
+function setupPagePrint() {
+  document.getElementById('page-print-button')?.addEventListener('click', () => window.print());
 }
 
 function setupReactionDemo() {
@@ -1605,7 +1497,7 @@ function init() {
   setupHumanCost();
   setupRiskFilters();
   setupLadder();
-  setupPrintAndCopy();
+  setupPagePrint();
   setupReactionDemo();
   setupLayerCards();
   setupCitationControls();

@@ -47,7 +47,7 @@
 - Material switcher and chain focus mode are implemented.
 - Evidence tabs are present: Where, Who’s affected and Evidence.
 - Audience lens chips work without hiding information.
-- “Copy link to this stage” is present.
+- Page-level PDF control opens the browser print dialog for the current page.
 - Stages with reported cases link to the relevant Human cost case file.
 
 ### Acceptance criteria

@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Fusion Minerals</title>
     <meta name="description" content="Fusion Minerals — supply chain risk in fusion minerals." />
-    <link rel="stylesheet" href="css/styles.css?v=19" />
+    <link rel="stylesheet" href="css/styles.css?v=20" />
   </head>
   <body>
     <header class="site-header">
@@ -49,6 +49,9 @@
           </div>
           <a class="button tour-nav-button" href="#tour">Start the tour</a>
         </nav>
+        <button id="page-print-button" class="page-print-button" type="button" aria-label="Save this page as PDF" title="Save this page as PDF">
+          <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M7 3h7l5 5v13H7zM14 3v5h5M9 14h8M9 17h6"/></svg>
+        </button>
         <button id="citation-mode-toggle" class="citation-mode-toggle" type="button" aria-label="Show citations: compact" aria-pressed="false">Citations: compact</button>
         <div class="date-stamp">November 2026</div>
       </div>
@@ -262,48 +265,48 @@
           <div class="fusion-grid">
             <div class="diagram-box">
               <figure class="reaction-demo">
-                <svg class="reaction-svg" id="reaction-comparison" viewBox="0 0 680 230" role="img" aria-labelledby="reaction-title reaction-desc">
+                <svg class="reaction-svg" id="reaction-comparison" viewBox="0 0 680 440" role="img" aria-labelledby="reaction-title reaction-desc">
                   <title id="reaction-title">Fusion and fission compared</title>
                   <desc id="reaction-desc">Fusion joins deuterium and tritium to make helium and a neutron. Fission splits a heavy nucleus into smaller nuclei and neutrons.</desc>
-                  <rect class="reaction-frame" x="8" y="8" width="320" height="210" rx="14"></rect>
-                  <rect class="reaction-frame" x="352" y="8" width="320" height="210" rx="14"></rect>
-                  <text class="reaction-heading" x="26" y="38">Fusion</text>
-                  <text class="reaction-label" x="26" y="62">Light nuclei join</text>
+                  <rect class="reaction-frame" x="8" y="8" width="664" height="206" rx="14"></rect>
+                  <rect class="reaction-frame" x="8" y="226" width="664" height="206" rx="14"></rect>
+                  <text class="reaction-heading" x="28" y="40">Fusion</text>
+                  <text class="reaction-label" x="28" y="66">Light nuclei join</text>
                   <g class="fusion-fuel fusion-fuel-a">
-                    <circle class="nucleus" cx="76" cy="112" r="22"></circle>
-                    <text class="nucleus-label" x="76" y="117" text-anchor="middle">D</text>
+                    <circle class="nucleus" cx="118" cy="126" r="30"></circle>
+                    <text class="nucleus-label" x="118" y="132" text-anchor="middle">D</text>
                   </g>
-                  <text class="reaction-symbol" x="104" y="117">+</text>
+                  <text class="reaction-symbol" x="166" y="134">+</text>
                   <g class="fusion-fuel fusion-fuel-b">
-                    <circle class="nucleus" cx="132" cy="112" r="22"></circle>
-                    <text class="nucleus-label" x="132" y="117" text-anchor="middle">T</text>
+                    <circle class="nucleus" cx="222" cy="126" r="30"></circle>
+                    <text class="nucleus-label" x="222" y="132" text-anchor="middle">T</text>
                   </g>
-                  <text class="reaction-symbol" x="163" y="117">→</text>
+                  <text class="reaction-symbol" x="298" y="134">→</text>
                   <g class="fusion-product">
-                    <circle class="product-nucleus" cx="211" cy="112" r="24"></circle>
-                    <text class="nucleus-label" x="211" y="117" text-anchor="middle">He</text>
-                    <circle class="neutron" cx="270" cy="112" r="10"></circle>
-                    <text class="neutron-label" x="270" y="116" text-anchor="middle">n</text>
+                    <circle class="product-nucleus" cx="398" cy="126" r="31"></circle>
+                    <text class="nucleus-label" x="398" y="132" text-anchor="middle">He</text>
+                    <circle class="neutron" cx="510" cy="126" r="13"></circle>
+                    <text class="neutron-label" x="510" y="131" text-anchor="middle">n</text>
                   </g>
-                  <text class="reaction-footnote" x="26" y="187">Deuterium + tritium → helium + neutron</text>
+                  <text class="reaction-footnote" x="28" y="192">Deuterium + tritium → helium + neutron</text>
 
-                  <text class="reaction-heading" x="370" y="38">Fission</text>
-                  <text class="reaction-label" x="370" y="62">A heavy nucleus splits</text>
-                  <circle class="neutron" cx="403" cy="112" r="10"></circle>
-                  <text class="neutron-label" x="403" y="116" text-anchor="middle">n</text>
-                  <text class="reaction-symbol" x="424" y="117">+</text>
+                  <text class="reaction-heading" x="28" y="258">Fission</text>
+                  <text class="reaction-label" x="28" y="284">A heavy nucleus splits</text>
+                  <circle class="neutron" cx="118" cy="344" r="13"></circle>
+                  <text class="neutron-label" x="118" y="349" text-anchor="middle">n</text>
+                  <text class="reaction-symbol" x="164" y="352">+</text>
                   <g class="fission-core">
-                    <circle class="heavy-nucleus" cx="468" cy="112" r="27"></circle>
-                    <text class="nucleus-label" x="468" y="117" text-anchor="middle">heavy</text>
+                    <circle class="heavy-nucleus" cx="245" cy="344" r="34"></circle>
+                    <text class="nucleus-label" x="245" y="349" text-anchor="middle">heavy</text>
                   </g>
-                  <text class="reaction-symbol" x="505" y="117">→</text>
+                  <text class="reaction-symbol" x="322" y="352">→</text>
                   <g class="fission-products">
-                    <circle class="product-nucleus" cx="555" cy="98" r="19"></circle>
-                    <circle class="product-nucleus" cx="604" cy="126" r="16"></circle>
-                    <circle class="neutron" cx="646" cy="98" r="8"></circle>
-                    <circle class="neutron" cx="640" cy="145" r="8"></circle>
+                    <circle class="product-nucleus" cx="422" cy="330" r="25"></circle>
+                    <circle class="product-nucleus" cx="482" cy="362" r="22"></circle>
+                    <circle class="neutron" cx="546" cy="328" r="11"></circle>
+                    <circle class="neutron" cx="552" cy="377" r="11"></circle>
                   </g>
-                  <text class="reaction-footnote" x="370" y="187">A heavy nucleus → smaller nuclei + neutrons</text>
+                  <text class="reaction-footnote" x="28" y="410">A heavy nucleus → smaller nuclei + neutrons</text>
                 </svg>
                 <div class="mobile-reaction-labels" aria-hidden="true">
                   <p><strong>Fusion:</strong> deuterium + tritium → helium + neutron</p>
@@ -814,7 +817,6 @@
         <div class="container narrow">
           <div class="brief-header">
             <h2>Materials risk is project risk. Manage it before it delays your plant.</h2>
-            <div class="brief-actions"><button class="copy-link">Copy link</button><button class="print-btn">Print or save as PDF</button></div>
           </div>
           <div class="brief-summary">
             <p><strong>Ask:</strong> Require a remedy-first sourcing policy in every fusion-offtake and project-finance contract. <span data-cite="oecd-2016"></span></p>
@@ -847,12 +849,10 @@
           <div class="copy-block">
             <h4>Responsible fusion offtake clause</h4>
             <p>“The buyer will implement an OECD-aligned sourcing policy within 12 months, requiring mapping of tungsten, lithium-6, beryllium and rare earths to smelter level before major procurement, audited smelters or a plan to audit, a grievance mechanism and a remedy-first escalation ladder rather than automatic termination.”</p>
-            <button class="copy-button">Copy</button>
           </div>
           <div class="copy-block">
             <h4>KPI pack</h4>
             <p>“Track the share of volume mapped to smelter level, the share of smelters audited, issues found and resolved, and grievances received and closed.”</p>
-            <button class="copy-button">Copy</button>
           </div>
           <p><a href="#remedy">Read the remedy-first framework</a>.</p>
           <h3>Evidence</h3>
@@ -870,7 +870,6 @@
         <div class="container narrow">
           <div class="brief-header">
             <h2>Make fusion the first EU energy technology with responsible sourcing built in.</h2>
-            <div class="brief-actions"><button class="copy-link">Copy link</button><button class="print-btn">Print or save as PDF</button></div>
           </div>
           <div class="brief-summary">
             <p><strong>Ask:</strong> Add fusion materials to the due-diligence and funding conditions now, before major EU-backed projects lock in procurement.</p>
@@ -924,17 +923,14 @@
           <div class="copy-block">
             <h4>Funding condition</h4>
             <p>“EU funding for fusion projects shall require OECD-aligned due diligence for tungsten, lithium-6, beryllium and rare earths; a grievance mechanism; a remedy-first escalation ladder; and annual reporting on corrective actions and remediation outcomes.”</p>
-            <button class="copy-button">Copy</button>
           </div>
           <div class="copy-block">
             <h4>Regulation review</h4>
             <p>“The EU should commit in the 2026–27 review of the Conflict Minerals Regulation to extend coverage beyond raw tungsten to tungsten components and assess beryllium and rare earths in fusion supply chains, while making clear that blanket avoidance is not compliance.”</p>
-            <button class="copy-button">Copy</button>
           </div>
           <div class="copy-block">
             <h4>Fusion Strategy commitment</h4>
             <p>“The EU Fusion Strategy should commit to OECD-aligned due diligence for tungsten, lithium-6, beryllium and rare earths across EU-funded and EU-procured fusion projects, require remedy before exit, and recommend that national fusion regulators adopt the same standard.”</p>
-            <button class="copy-button">Copy</button>
           </div>
           <p><a href="#governance">Review the governance gaps</a>.</p>
           <p><strong>Limits:</strong> These are proposals, not current law. No EU fusion project is alleged to use conflict-sourced minerals.</p>
@@ -946,7 +942,6 @@
         <div class="container narrow">
           <div class="brief-header">
             <h2>Close the gap before fusion demand arrives.</h2>
-            <div class="brief-actions"><button class="copy-link">Copy link</button><button class="print-btn">Print or save as PDF</button></div>
           </div>
           <div class="brief-summary">
             <p><strong>Ask:</strong> Add fusion-relevant materials to the UN traceability and accountability agenda and embed remedy-first principles before the market scales. <span data-cite="unctad-2026,unpanel-2024"></span></p>
@@ -976,12 +971,10 @@
           <div class="copy-block">
             <h4>Scope language</h4>
             <p>“The framework should explicitly include fusion-relevant minerals, including tungsten, lithium-6, beryllium and rare earths, and should treat them as materials of concern where concentrated supply chains, traceability gaps or human-rights risk intersect with emerging energy technology demand.”</p>
-            <button class="copy-button">Copy</button>
           </div>
           <div class="copy-block">
             <h4>Remedy-first language</h4>
             <p>“The framework should require a remedy-first approach: engagement, corrective action, measurable milestones, support for affected communities and workers, and a disciplined exit only after earlier steps fail or where the abuse is most severe.”</p>
-            <button class="copy-button">Copy</button>
           </div>
           <p>Other relevant forums include UNEA, the Security Council and the UN Forum on Business and Human Rights in Geneva.</p>
           <p><strong>Limits:</strong> Risk indicators do not identify a fusion buyer. The next decision point is the UN Task Force analytical study and expert discussions in 2027.</p>
@@ -1052,6 +1045,6 @@
 
     <script src="js/data.js?v=9"></script>
     <script src="js/timeline.js?v=5"></script>
-    <script src="js/app.js?v=20"></script>
+    <script src="js/app.js?v=21"></script>
   </body>
 </html>
